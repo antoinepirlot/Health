@@ -23,7 +23,7 @@ fun Card(modifier: Modifier = Modifier, title: String, text: String, button: () 
             Text(text = title, style = MaterialTheme.typography.headlineMedium.copy(fontWeight = FontWeight.ExtraBold))
             Text(text = text, style = MaterialTheme.typography.headlineSmall.copy(fontWeight = FontWeight.Light))
         }
-        ElevatedButton(onClick = { /*TODO*/ }) {
+        ElevatedButton(onClick = { /*TODO*/ }, modifier = modifier.padding(5.dp)) {
             Text(text = "Touch here")
         }
     }
