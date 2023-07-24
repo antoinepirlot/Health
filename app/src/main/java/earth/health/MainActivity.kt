@@ -13,13 +13,8 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            val navController = rememberNavController()
             HealthTheme {
-                NavHost(navController = navController, startDestination = "/home") {
-                    composable("/home") {
-                        HomeScreen()
-                    }
-                }
+                Router()
             }
         }
     }
