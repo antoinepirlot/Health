@@ -14,8 +14,8 @@ import earth.health.router.Destination
 @Composable
 fun HomeScreen(navController: NavController) {
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
-        Card(title = stringResource(id = R.string.food), text = "1920/1950 kcal", mainAction = {navController.navigate(Destination.MEALS.link)})
-        Card(title = stringResource(id = R.string.weight), text = "80 kg", mainAction = {navController.navigate(Destination.WEIGHT.link)})
+        Card(title = stringResource(id = R.string.food), text = "1920/1950 kcal", mainAction = {navController.navigate(Destination.MEALS.link)}, fastAction = {})
+        Card(title = stringResource(id = R.string.weight), text = "80 kg", mainAction = {navController.navigate(Destination.WEIGHT.link)}, fastAction = {})
     }
 }
 
