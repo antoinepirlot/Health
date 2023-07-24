@@ -1,4 +1,4 @@
-package earth.health.data
+package earth.health.data.entity
 
 import java.time.LocalDateTime
 import java.util.Date

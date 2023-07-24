@@ -4,7 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import earth.health.data.defaultMealList
+import earth.health.data.entity.defaultMealList
 import earth.health.screens.HomeScreen
 import earth.health.screens.meal.MealHomeScreen
 import earth.health.screens.meal.MealScreen
