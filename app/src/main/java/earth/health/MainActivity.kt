@@ -6,6 +6,7 @@ import androidx.activity.compose.setContent
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import earth.health.router.Router
 import earth.health.screens.HomeScreen
 import earth.health.ui.theme.HealthTheme
 
