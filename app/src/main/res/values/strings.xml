@@ -2,4 +2,7 @@
     <string name="app_name">Health</string>
     <string name="food">Food</string>
     <string name="weight">Weight</string>
+    <string name="breakfast">Petit Déjeuner</string>
+    <string name="lunch">Dîner</string>
+    <string name="dinner">Souper</string>
 </resources>
