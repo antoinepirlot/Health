@@ -14,9 +14,9 @@ import androidx.compose.ui.unit.dp
 import earth.health.ui.theme.HealthTheme
 
 @Composable
-fun Card(modifier: Modifier = Modifier, title: String, text: String, button: () -> Unit) {
+fun Card(modifier: Modifier = Modifier, title: String, text: String, mainAction: () -> Unit) {
     Button(
-        onClick = { /*TODO*/ },
+        onClick = mainAction,
         modifier = modifier.padding(10.dp)
     ) {
         Column {
@@ -33,6 +33,6 @@ fun Card(modifier: Modifier = Modifier, title: String, text: String, button: () 
 @Composable
 fun CardPreview() {
     HealthTheme {
-        Card(title = "Nourriture", text = "1920/1950 kcal", button = {})
+        Card(title = "Nourriture", text = "1920/1950 kcal", mainAction = {})
     }
 }
