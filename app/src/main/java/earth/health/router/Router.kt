@@ -1,4 +1,4 @@
-package earth.health
+package earth.health.router
 
 import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
