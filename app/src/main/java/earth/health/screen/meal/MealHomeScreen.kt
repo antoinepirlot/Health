@@ -14,6 +14,7 @@ fun MealHomeScreen() {
         Card(title = stringResource(id = R.string.breakfast), text = "null", button = {})
         Card(title = stringResource(id = R.string.lunch), text = "null", button = {})
         Card(title = stringResource(id = R.string.dinner), text = "null", button = {})
+        Card(title = stringResource(id = R.string.extras), text = "null", button = {})
     }
 }
 
