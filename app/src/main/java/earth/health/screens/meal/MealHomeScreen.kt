@@ -13,10 +13,27 @@ import earth.health.screens.Card
 @Composable
 fun MealHomeScreen(navController: NavController) {
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
-        Card(title = stringResource(id = R.string.breakfast), text = "null", mainAction = {}, fastAction = {})
-        Card(title = stringResource(id = R.string.lunch), text = "null", mainAction = {}, fastAction = {})
-        Card(title = stringResource(id = R.string.dinner), text = "null", mainAction = {}, fastAction = {})
-        Card(title = stringResource(id = R.string.extras), text = "null", mainAction = {}, fastAction = {})
+        Card(
+            title = stringResource(id = R.string.breakfast),
+            text = "null",
+            mainAction = {},
+            fastAction = {}
+        )
+        Card(
+            title = stringResource(id = R.string.lunch),
+            text = "null",
+            mainAction = {},
+            fastAction = {})
+        Card(
+            title = stringResource(id = R.string.dinner),
+            text = "null",
+            mainAction = {},
+            fastAction = {})
+        Card(
+            title = stringResource(id = R.string.extras),
+            text = "null",
+            mainAction = {},
+            fastAction = {})
     }
 }
 
