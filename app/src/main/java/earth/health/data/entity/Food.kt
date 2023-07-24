@@ -16,8 +16,3 @@ data class Food(
     var alimentary_fiber: Double = 0.0,
     var calcium: Double = 0.0
 )
-
-val defaultFoodList = listOf<Food>(
-    Food(1, "Pain (attention, aucune autre données)"),
-    Food(2, "Pâtes (attention, aucune autre données)")
-)
