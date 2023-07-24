@@ -12,10 +12,10 @@ fun Router() {
     val navController = rememberNavController()
     NavHost(navController = navController, startDestination = "/") {
         composable("/") {
-            HomeScreen()
+            HomeScreen(navController)
         }
         composable("/meals") {
-            MealHomeScreen()
+            MealHomeScreen(navController)
         }
     }
 }
