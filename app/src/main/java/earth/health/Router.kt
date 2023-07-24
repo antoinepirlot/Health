@@ -14,5 +14,8 @@ fun Router() {
         composable("/") {
             HomeScreen()
         }
+        composable("/meals") {
+            MealHomeScreen()
+        }
     }
 }
