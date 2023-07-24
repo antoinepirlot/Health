@@ -10,6 +10,7 @@ android {
     defaultConfig {
         applicationId "earth.health"
         minSdk 33
+        resourceConfigurations += ["fr", "en"]
         targetSdk 33
         versionCode 1
         versionName "1.0"
