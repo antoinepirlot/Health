@@ -10,11 +10,11 @@ import earth.health.screens.meal.MealHomeScreen
 @Composable
 fun Router() {
     val navController = rememberNavController()
-    NavHost(navController = navController, startDestination = "/") {
-        composable("/") {
+    NavHost(navController = navController, startDestination = Destination.HOME.link) {
+        composable(Destination.HOME.link) {
             HomeScreen(navController)
         }
-        composable("/meals") {
+        composable(Destination.MEALS.link) {
             MealHomeScreen(navController)
         }
     }
