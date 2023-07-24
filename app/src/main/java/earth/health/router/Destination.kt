@@ -2,5 +2,6 @@ package earth.health.router
 
 enum class Destination(val link: String) {
     HOME("/"),
-    MEALS("/meals")
+    MEALS("/meals"),
+    WEIGHT("/weight"),
 }

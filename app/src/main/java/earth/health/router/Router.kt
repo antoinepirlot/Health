@@ -6,6 +6,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import earth.health.screens.HomeScreen
 import earth.health.screens.meal.MealHomeScreen
+import earth.health.screens.weight.WeightHomeScreen
 
 @Composable
 fun Router() {
@@ -16,6 +17,9 @@ fun Router() {
         }
         composable(Destination.MEALS.link) {
             MealHomeScreen(navController)
+        }
+        composable(Destination.WEIGHT.link) {
+            WeightHomeScreen(navController)
         }
     }
 }
