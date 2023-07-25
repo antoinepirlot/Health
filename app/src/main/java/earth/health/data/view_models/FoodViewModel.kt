@@ -6,6 +6,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import earth.health.data.HealthDatabase
 import earth.health.data.entity.Food
+import earth.health.data.entity.getDefaultFood
 import kotlinx.coroutines.launch
 
 class FoodViewModel(application: Application) : AndroidViewModel(application) {
@@ -16,7 +17,7 @@ class FoodViewModel(application: Application) : AndroidViewModel(application) {
     init {
         viewModelScope.launch {
             val dbFoodList = foodDAO.getAll()
-            foodList.addAll(dbFoodList)
+            foodList.addAll(dbFoodList.ifEmpty { getDefaultFood() })
         }
     }
 
