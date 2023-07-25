@@ -16,3 +16,9 @@ data class Food(
     var alimentary_fiber: Double = 0.0,
     var calcium: Double = 0.0
 )
+
+fun getDefaultFood() = listOf<Food>(
+    Food(name = "Banana"),
+    Food(name = "Pasta"),
+    Food(name = "Cherry Tomato"),
+)
