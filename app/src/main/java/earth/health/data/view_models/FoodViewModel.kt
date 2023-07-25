@@ -23,9 +23,10 @@ class FoodViewModel(application: Application) : AndroidViewModel(application) {
     fun readFood(id: Long) = foodList.first { it.id == id }
 
     fun createFood(food: Food) {
+        val foodToAdd = food.copy()
         viewModelScope.launch {
-            foodDAO.insert(food = food)
-            foodList.add(food)
+            foodDAO.insert(food = foodToAdd)
+            foodList.add(foodToAdd)
         }
     }
 }
