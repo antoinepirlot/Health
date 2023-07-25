@@ -14,6 +14,6 @@ data class Meal(
 //    var date: LocalDateTime = LocalDateTime.now(),
 )
 
-val defaultMeals = listOf<Meal>(
+fun getDefaultMeals() = listOf<Meal>(
     Meal(name = "Breakfast")
 )
