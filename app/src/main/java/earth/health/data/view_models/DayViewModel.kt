@@ -15,6 +15,7 @@ class DayViewModel(application: Application): AndroidViewModel(application) {
     private val dayDAO = HealthDatabase.getDatabase(application).dayDao()
 
     init {
+        // TODO logcat says it's still empty, apparently, the code is not launched here
         viewModelScope.launch {
             val dbDays = dayDAO.getAll()
             if (dbDays.isEmpty())
