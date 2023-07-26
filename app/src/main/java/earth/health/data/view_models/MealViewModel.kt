@@ -5,6 +5,7 @@ import androidx.compose.runtime.mutableStateListOf
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import earth.health.data.HealthDatabase
+import earth.health.data.entity.Day
 import earth.health.data.entity.Meal
 import earth.health.data.entity.Meals
 import earth.health.data.entity.getDefaultMeals
@@ -23,7 +24,7 @@ class MealViewModel(application: Application): AndroidViewModel(application) {
             val dbMeals = mealDAO.getAll()
             meals.addAll(dbMeals.ifEmpty {
                 listOf(
-                    Meal(name = Meals.BREAKFAST)
+                    Meal(name = Meals.BREAKFAST, day = 0)
                 )
             })
         }
@@ -40,9 +41,9 @@ class MealViewModel(application: Application): AndroidViewModel(application) {
 
     fun getLastMeal(): Meal {
         return try {
-            meals.first { it.date == LocalDate.now() }
+            meals.first { it.day == 0 }
         } catch (err: NoSuchElementException) {
-            val latestMeal = Meal(name = Meals.BREAKFAST)
+            val latestMeal = Meal(name = Meals.BREAKFAST, day = 0)
             createMeal(latestMeal)
             latestMeal
         }
