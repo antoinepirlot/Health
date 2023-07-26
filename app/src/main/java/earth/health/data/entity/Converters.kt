@@ -4,7 +4,7 @@ import androidx.room.ProvidedTypeConverter
 import androidx.room.TypeConverter
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import java.time.LocalDateTime
+import java.time.LocalDate
 
 @ProvidedTypeConverter
 class Converters {
@@ -19,12 +19,12 @@ class Converters {
     }
 
     @TypeConverter
-    fun fromJsonToLocalDateTime(json: String): LocalDateTime {
+    fun fromJsonToLocalDate(json: String): LocalDate {
         return deserialize(json)
     }
 
     @TypeConverter
-    fun fromLocalDateTimeToJson(localDateTime: LocalDateTime): String {
+    fun fromLocalDateToJson(localDateTime: LocalDate): String {
         return serialize(localDateTime)
     }
 }
