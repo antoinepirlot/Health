@@ -16,8 +16,7 @@ class DayViewModel(application: Application): AndroidViewModel(application) {
 
     init {
         viewModelScope.launch {
-            val dbDays = dayDAO.getAll()
-            days.addAll(dbDays)
+            days.addAll(dayDAO.getAll())
         }
     }
 

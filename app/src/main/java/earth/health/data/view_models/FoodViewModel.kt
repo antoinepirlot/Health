@@ -16,8 +16,7 @@ class FoodViewModel(application: Application) : AndroidViewModel(application) {
 
     init {
         viewModelScope.launch {
-            val dbFoodList = foodDAO.getAll()
-            foodList.addAll(dbFoodList.ifEmpty { getDefaultFood() })
+            foodList.addAll(foodDAO.getAll())
         }
     }
 

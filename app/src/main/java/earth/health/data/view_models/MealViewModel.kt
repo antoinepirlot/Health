@@ -21,12 +21,7 @@ class MealViewModel(application: Application): AndroidViewModel(application) {
 
     init {
         viewModelScope.launch {
-            val dbMeals = mealDAO.getAll()
-            meals.addAll(dbMeals.ifEmpty {
-                listOf(
-                    Meal(name = Meals.BREAKFAST, day = 0)
-                )
-            })
+            meals.addAll(mealDAO.getAll())
         }
     }
 
