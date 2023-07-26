@@ -3,10 +3,19 @@ package earth.health.data.entity
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.ForeignKey
+import androidx.room.Index
 import androidx.room.PrimaryKey
 import java.time.LocalDate
 
-@Entity(foreignKeys = [ForeignKey(entity = Day::class, parentColumns = ["id"], childColumns = ["day"],onDelete = ForeignKey.CASCADE)])
+@Entity(
+    indices = [Index(value = ["day"])],
+    foreignKeys = [ForeignKey(
+        entity = Day::class,
+        parentColumns = ["id"],
+        childColumns = ["day"],
+        onDelete = ForeignKey.CASCADE
+    )]
+)
 data class Meal(
     @PrimaryKey(autoGenerate = true) var id: Long = 0,
     @ColumnInfo(name = "name") var name: Meals,
