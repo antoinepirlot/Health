@@ -24,8 +24,8 @@ class Converters {
     }
 
     @TypeConverter
-    fun fromLocalDateToJson(localDateTime: LocalDate): String {
-        return serialize(localDateTime)
+    fun fromLocalDateToJson(localDate: LocalDate): String {
+        return serialize(localDate)
     }
 }
 
