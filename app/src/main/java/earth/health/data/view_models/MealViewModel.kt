@@ -28,10 +28,9 @@ class MealViewModel(application: Application): AndroidViewModel(application) {
     fun readMeal(id: Long) = meals.first { it.id == id }
 
     fun createMeal(meal: Meal) {
-        val mealToAdd = meal.copy()
         viewModelScope.launch {
-            mealDAO.insert(meal = mealToAdd)
-            meals.add(mealToAdd)
+            mealDAO.insert(meal = meal)
+            meals.add(meal)
         }
     }
 

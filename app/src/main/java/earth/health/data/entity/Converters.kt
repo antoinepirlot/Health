@@ -15,10 +15,10 @@ class Converters {
     fun fromFoodListToJson(foodList: List<Food>): String = serialize(foodList)
 
     @TypeConverter
-    fun fromJsonToLocalDate(json: String): LocalDate = deserialize(json)
+    fun fromJsonToLocalDate(localDateString: String): LocalDate = LocalDate.parse(localDateString)
 
     @TypeConverter
-    fun fromLocalDateToJson(localDate: LocalDate): String = serialize(localDate)
+    fun fromLocalDateToJson(localDate: LocalDate): String = localDate.toString()
 }
 
 fun <T> serialize(o: T): String = Gson().toJson(o)
