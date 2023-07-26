@@ -16,7 +16,6 @@ import earth.health.router.Destination
 
 @Composable
 fun HomeScreen(navController: NavController) {
-    val dayViewModel = viewModel<DayViewModel>()
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
         //val kcalText = latestMeal.totalKcal.toString() + "/1920kcal"
         Card(title = stringResource(id = R.string.food), text = "kcalText", mainAction = {navController.navigate(Destination.MEALS.link)}, fastAction = {})

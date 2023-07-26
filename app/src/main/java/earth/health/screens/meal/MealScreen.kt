@@ -9,12 +9,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.viewmodel.compose.viewModel
 import earth.health.data.entity.Meal
 import earth.health.data.entity.getDefaultFood
 import earth.health.data.entity.getDefaultMeals
+import earth.health.data.view_models.MealViewModel
 
 @Composable
-fun MealScreen(meal: Meal) {
+fun MealScreen(meal: Meal, mealViewModel: MealViewModel) {
     Column {
         Text(text = stringResource(id = meal.name.mealNameId))
         for (food in meal.foodList) {
@@ -30,5 +32,5 @@ fun MealScreen(meal: Meal) {
 @Preview
 @Composable
 fun MealScreenPreview() {
-    MealScreen(meal = getDefaultMeals()[0])
+    MealScreen(meal = getDefaultMeals()[0], mealViewModel = viewModel())
 }
