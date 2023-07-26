@@ -9,29 +9,18 @@ import java.time.LocalDate
 @ProvidedTypeConverter
 class Converters {
     @TypeConverter
-    fun fromJsonToFoodList(json: String): List<Food> {
-        return deserialize(json)
-    }
+    fun fromJsonToFoodList(json: String): List<Food> = deserialize(json)
 
     @TypeConverter
-    fun fromFoodListToJson(foodList: List<Food>): String {
-        return serialize(foodList)
-    }
+    fun fromFoodListToJson(foodList: List<Food>): String = serialize(foodList)
 
     @TypeConverter
-    fun fromJsonToLocalDate(json: String): LocalDate {
-        return deserialize(json)
-    }
+    fun fromJsonToLocalDate(json: String): LocalDate = deserialize(json)
 
     @TypeConverter
-    fun fromLocalDateToJson(localDate: LocalDate): String {
-        return serialize(localDate)
-    }
+    fun fromLocalDateToJson(localDate: LocalDate): String = serialize(localDate)
 }
 
 fun <T> serialize(o: T): String = Gson().toJson(o)
 
-fun <T> deserialize(json: String): T {
-    val type = object : TypeToken<T>() {}.type
-    return Gson().fromJson<T>(json, type)
-}
+fun <T> deserialize(json: String): T = Gson().fromJson<T>(json, object : TypeToken<T>() {}.type)
