@@ -23,4 +23,4 @@ class Converters {
 
 fun <T> serialize(o: T): String = Gson().toJson(o)
 
-fun <T> deserialize(json: String): T = Gson().fromJson<T>(json, object : TypeToken<T>() {}.type)
+fun <T> deserialize(json: String): T = Gson().fromJson(json, object : TypeToken<T>() {}.type)
