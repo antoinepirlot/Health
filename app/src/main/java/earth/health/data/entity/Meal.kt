@@ -14,5 +14,5 @@ data class Meal(
 )
 
 fun getDefaultMeals() = arrayListOf<Meal>(
-    Meal(name = Meals.BREAKFAST, foodList = getDefaultFood())
+    Meal(name = Meals.BREAKFAST)
 )

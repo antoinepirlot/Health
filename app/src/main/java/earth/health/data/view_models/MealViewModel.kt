@@ -6,8 +6,11 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import earth.health.data.HealthDatabase
 import earth.health.data.entity.Meal
+import earth.health.data.entity.Meals
 import earth.health.data.entity.getDefaultMeals
 import kotlinx.coroutines.launch
+import java.time.LocalDate
+import java.util.NoSuchElementException
 
 
 class MealViewModel(application: Application): AndroidViewModel(application) {
@@ -29,6 +32,16 @@ class MealViewModel(application: Application): AndroidViewModel(application) {
         viewModelScope.launch {
             mealDAO.insert(meal = mealToAdd)
             meals.add(mealToAdd)
+        }
+    }
+
+    fun getLastMeal(): Meal {
+        return try {
+            meals.first { it.date == LocalDate.now() }
+        } catch (err: NoSuchElementException) {
+            val latestMeal = Meal(name = Meals.BREAKFAST)
+            createMeal(latestMeal)
+            latestMeal
         }
     }
 }
