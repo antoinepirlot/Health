@@ -9,17 +9,17 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import earth.health.R
+import earth.health.data.view_models.DayViewModel
 import earth.health.data.view_models.MealViewModel
 import earth.health.ui.theme.HealthTheme
 import earth.health.router.Destination
 
 @Composable
 fun HomeScreen(navController: NavController) {
-    val mealsViewModel = viewModel<MealViewModel>()
-    val latestMeal = mealsViewModel.getLastMeal()
+    val dayViewModel = viewModel<DayViewModel>()
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
-        val kcalText = latestMeal.totalKcal.toString() + "/1920kcal"
-        Card(title = stringResource(id = R.string.food), text = kcalText, mainAction = {navController.navigate(Destination.MEALS.link)}, fastAction = {})
+        //val kcalText = latestMeal.totalKcal.toString() + "/1920kcal"
+        Card(title = stringResource(id = R.string.food), text = "kcalText", mainAction = {navController.navigate(Destination.MEALS.link)}, fastAction = {})
         Card(title = stringResource(id = R.string.weight), text = "80 kg", mainAction = {navController.navigate(Destination.WEIGHT.link)}, fastAction = {})
     }
 }

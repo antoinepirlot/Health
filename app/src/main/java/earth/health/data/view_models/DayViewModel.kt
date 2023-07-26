@@ -16,7 +16,11 @@ class DayViewModel(application: Application): AndroidViewModel(application) {
 
     init {
         viewModelScope.launch {
-            days.addAll(dayDAO.getAll())
+            val dbDays = dayDAO.getAll()
+            if (dbDays.isEmpty())
+                startNewDay()
+            else
+                days.addAll(dbDays)
         }
     }
 
@@ -25,13 +29,11 @@ class DayViewModel(application: Application): AndroidViewModel(application) {
          * Create a new day and add it to the days list
          * @return the Day of today
          */
-        if (days.isEmpty() || !days[days.lastIndex].date.isBefore(LocalDate.now())) {
-            val newDay = Day()
-            viewModelScope.launch {
-                dayDAO.insert(newDay)
-                days.add(newDay)
-            }
+        val newDay = Day()
+        viewModelScope.launch {
+            dayDAO.insert(newDay)
+            days.add(newDay)
         }
-        return days[days.lastIndex]
+        return newDay
     }
 }
