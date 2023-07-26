@@ -17,7 +17,7 @@ import earth.health.data.entity.getDefaultMeals
 fun MealScreen(meal: Meal) {
     Column {
         Text(text = stringResource(id = meal.name.mealNameId))
-        for (food in getDefaultFood()) {
+        for (food in meal.foodList) {
             TextButton(onClick = { /*TODO*/ }) {
                 //fillMaxWidth makes the button clickable on all the width even on blank
                 Text(text = food.name, modifier = Modifier.fillMaxWidth())
