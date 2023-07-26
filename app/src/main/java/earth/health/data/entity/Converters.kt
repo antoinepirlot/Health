@@ -19,6 +19,12 @@ class Converters {
 
     @TypeConverter
     fun fromLocalDateToJson(localDate: LocalDate): String = localDate.toString()
+
+    @TypeConverter
+    fun fromJsonToDay(json: String): Day = deserialize(json)
+
+    @TypeConverter
+    fun fromDayToJson(day: Day): String = serialize(day)
 }
 
 fun <T> serialize(o: T): String = Gson().toJson(o)
