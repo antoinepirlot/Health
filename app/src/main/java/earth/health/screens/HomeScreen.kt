@@ -5,9 +5,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import earth.health.R
+import earth.health.data.view_models.MealViewModel
 import earth.health.ui.theme.HealthTheme
 import earth.health.router.Destination
 
@@ -16,7 +18,8 @@ fun HomeScreen(navController: NavController) {
     val mealsViewModel = viewModel<MealViewModel>()
     val latestMeal = mealsViewModel.getLastMeal()
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
-        Card(title = stringResource(id = R.string.food), text = "1920/1950 kcal", mainAction = {navController.navigate(Destination.MEALS.link)}, fastAction = {})
+        val kcalText = latestMeal.totalKcal.toString() + "/1920kcal"
+        Card(title = stringResource(id = R.string.food), text = kcalText, mainAction = {navController.navigate(Destination.MEALS.link)}, fastAction = {})
         Card(title = stringResource(id = R.string.weight), text = "80 kg", mainAction = {navController.navigate(Destination.WEIGHT.link)}, fastAction = {})
     }
 }
