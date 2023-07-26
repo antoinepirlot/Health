@@ -15,10 +15,12 @@ import earth.health.ui.theme.HealthTheme
 import earth.health.router.Destination
 
 @Composable
-fun HomeScreen(navController: NavController) {
+fun HomeScreen(navController: NavController, dayViewModel: DayViewModel) {
+    println(message = "ERMPTY WTF: -->" + dayViewModel.days.isEmpty())
+    val latestDay = dayViewModel.days.last()
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
-        //val kcalText = latestMeal.totalKcal.toString() + "/1920kcal"
-        Card(title = stringResource(id = R.string.food), text = "kcalText", mainAction = {navController.navigate(Destination.MEALS.link)}, fastAction = {})
+        val kcalText = latestDay.totalKcal.toString() + "/1920kcal"
+        Card(title = stringResource(id = R.string.food), text = kcalText, mainAction = {navController.navigate(Destination.MEALS.link)}, fastAction = {})
         Card(title = stringResource(id = R.string.weight), text = "80 kg", mainAction = {navController.navigate(Destination.WEIGHT.link)}, fastAction = {})
     }
 }
@@ -27,6 +29,6 @@ fun HomeScreen(navController: NavController) {
 @Composable
 fun HomePreview() {
     HealthTheme {
-        HomeScreen(rememberNavController())
+        HomeScreen(rememberNavController(), viewModel())
     }
 }

@@ -18,15 +18,15 @@ import earth.health.screens.weight.WeightHomeScreen
 @Composable
 fun Router() {
     val navController = rememberNavController()
+    val dayViewModel = viewModel<DayViewModel>()
     val foodViewModel = viewModel<FoodViewModel>()
     val mealViewModel = viewModel<MealViewModel>()
     val foodMealRelViewModel = viewModel<FoodMealRelViewModel>()
-    val dayViewModel = viewModel<DayViewModel>()
     val meals = mealViewModel.meals
 
     NavHost(navController = navController, startDestination = Destination.HOME.link) {
         composable(Destination.HOME.link) {
-            HomeScreen(navController)
+            HomeScreen(navController, dayViewModel)
         }
         composable(Destination.MEALS.link) {
             MealHomeScreen(meals, mealViewModel) { meal ->

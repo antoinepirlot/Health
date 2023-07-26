@@ -10,4 +10,5 @@ import java.time.LocalDate
 data class Day(
     @PrimaryKey(autoGenerate = true) var id: Long = 0,
     @ColumnInfo(name = "date") var date: LocalDate = LocalDate.now(),
+    @ColumnInfo(name = "total_kcal") var totalKcal: Int = 0,
 )
