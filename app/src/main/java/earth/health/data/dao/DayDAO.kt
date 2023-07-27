@@ -4,6 +4,7 @@ import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
+import androidx.room.Transaction
 import androidx.room.Update
 import earth.health.data.entity.Day
 import earth.health.data.entity.Meal
@@ -14,6 +15,7 @@ interface DayDAO {
     @Query("SELECT * FROM day")
     suspend fun getAll(): List<Day>
 
+    @Transaction
     @Query("SELECT * FROM meal WHERE id = :id")
     suspend fun getDayWithMeals(id: Long): List<Meal>
 

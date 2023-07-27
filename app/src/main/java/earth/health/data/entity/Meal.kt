@@ -8,9 +8,8 @@ import androidx.room.PrimaryKey
 data class Meal(
     @PrimaryKey(autoGenerate = true) var id: Long = 0,
     @ColumnInfo(name = "name") var name: Meals,
-    @ColumnInfo(name = "foodList") var foodList: List<Food> = listOf(),
     @ColumnInfo("day_id") var dayId: Long,
-    @ColumnInfo(name = "totalKcal") var totalKcal: Int = computeTotalKcal(foodList)
+    @ColumnInfo(name = "totalKcal") var totalKcal: Int = 0
 )
 
 fun getDefaultMeals() = arrayListOf<Meal>(
