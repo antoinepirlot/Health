@@ -12,6 +12,9 @@ interface FoodDAO {
     @Insert
     suspend fun insert(food: Food): Long
 
+    @Insert
+    suspend fun insertFood(food: Food)
+
     @Delete
     suspend fun delete(food: Food)
 
@@ -20,4 +23,7 @@ interface FoodDAO {
 
     @Query("SELECT * FROM food")
     suspend fun getAll(): List<Food>
+
+    @Query("SELECT * FROM food WHERE id = :id")
+    suspend fun getMealWithFoods(id: Long): List<Food>
 }
