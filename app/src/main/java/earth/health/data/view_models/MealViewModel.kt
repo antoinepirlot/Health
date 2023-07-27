@@ -27,20 +27,20 @@ class MealViewModel(application: Application): AndroidViewModel(application) {
 
     fun readMeal(id: Long) = meals.first { it.id == id }
 
-    fun createMeal(meal: Meal) {
+    fun create(meal: Meal) {
         viewModelScope.launch {
             mealDAO.insert(meal = meal)
             meals.add(meal)
         }
     }
 
-    fun getLastMeal(): Meal {
-        return try {
-            meals.first { it.day == 0 }
-        } catch (err: NoSuchElementException) {
-            val latestMeal = Meal(name = Meals.BREAKFAST, day = 0)
-            createMeal(latestMeal)
-            latestMeal
-        }
-    }
+//    fun getLastMeal(): Meal {
+//        return try {
+//            meals.first { it.day == (0).toLong() }
+//        } catch (err: NoSuchElementException) {
+//            val latestMeal = Meal(name = Meals.BREAKFAST, day = 0)
+//            createMeal(latestMeal)
+//            latestMeal
+//        }
+//    }
 }

@@ -6,6 +6,8 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import earth.health.data.HealthDatabase
 import earth.health.data.entity.Day
+import earth.health.data.entity.Meal
+import earth.health.data.entity.Meals
 import kotlinx.coroutines.launch
 import java.time.LocalDate
 
@@ -15,7 +17,6 @@ class DayViewModel(application: Application): AndroidViewModel(application) {
     private val dayDAO = HealthDatabase.getDatabase(application).dayDao()
 
     init {
-        // TODO logcat says it's still empty, apparently, the code is not launched here
         viewModelScope.launch {
             val dbDays = dayDAO.getAll()
             if (dbDays.isEmpty())
@@ -25,16 +26,41 @@ class DayViewModel(application: Application): AndroidViewModel(application) {
         }
     }
 
-    fun startNewDay(): Day {
-        /**
-         * Create a new day and add it to the days list
-         * @return the Day of today
-         */
-        val newDay = Day()
+    /**
+     * Create a new day and add it to the days list
+     */
+    fun startNewDay() {
+        if (days.isEmpty()) {
+            create()
+            return
+        }
+        val lastDay = days.last()
+        if (lastDay.date.isBefore(LocalDate.now())) {
+            create()
+        }
+    }
+
+    private fun create() {
         viewModelScope.launch {
+            val newDay = Day()
             dayDAO.insert(newDay)
             days.add(newDay)
+            newDay.id = nextId()
+            val meals = listOf<Meal>(
+                Meal(name = Meals.BREAKFAST, dayId = newDay.id),
+                Meal(name = Meals.LUNCH, dayId = newDay.id),
+                Meal(name = Meals.DINNER, dayId = newDay.id),
+                Meal(name = Meals.EXTRAS, dayId = newDay.id),
+            )
+            for (meal in meals) {
+                dayDAO.insertMeal(meal)
+            }
         }
-        return newDay
+    }
+
+    fun nextId(): Long {
+        if(days.lastIndex == -1)
+            return 1
+        return (days.lastIndex + 1).toLong()
     }
 }
