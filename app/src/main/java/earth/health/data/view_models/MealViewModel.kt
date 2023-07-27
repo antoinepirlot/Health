@@ -5,13 +5,8 @@ import androidx.compose.runtime.mutableStateListOf
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import earth.health.data.HealthDatabase
-import earth.health.data.entity.Day
 import earth.health.data.entity.Meal
-import earth.health.data.entity.Meals
-import earth.health.data.entity.getDefaultMeals
 import kotlinx.coroutines.launch
-import java.time.LocalDate
-import java.util.NoSuchElementException
 
 
 class MealViewModel(application: Application): AndroidViewModel(application) {
