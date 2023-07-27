@@ -9,6 +9,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import earth.health.R
+import earth.health.data.entity.Day
 import earth.health.data.view_models.DayViewModel
 import earth.health.data.view_models.MealViewModel
 import earth.health.ui.theme.HealthTheme
@@ -16,8 +17,8 @@ import earth.health.router.Destination
 
 @Composable
 fun HomeScreen(navController: NavController, dayViewModel: DayViewModel) {
-    println(message = "ERMPTY WTF: -->" + dayViewModel.days.isEmpty())
-    val latestDay = dayViewModel.days.last()
+    println(message = "EMPTY WTF: -->" + dayViewModel.days.isEmpty())
+    val latestDay = Day()// dayViewModel.days.last()
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
         val kcalText = latestDay.totalKcal.toString() + "/1920kcal"
         Card(title = stringResource(id = R.string.food), text = kcalText, mainAction = {navController.navigate(Destination.MEALS.link)}, fastAction = {})

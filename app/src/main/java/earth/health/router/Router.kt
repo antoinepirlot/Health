@@ -6,6 +6,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import earth.health.data.entity.getDefaultMeals
 import earth.health.data.view_models.DayViewModel
 import earth.health.data.view_models.FoodMealRelViewModel
 import earth.health.data.view_models.FoodViewModel
@@ -21,6 +22,8 @@ fun Router() {
     val dayViewModel = viewModel<DayViewModel>()
     val foodViewModel = viewModel<FoodViewModel>()
     val mealViewModel = viewModel<MealViewModel>()
+    //todo doesn't print
+    println(message = "MEALS --> " + mealViewModel.meals.toString())
     val foodMealRelViewModel = viewModel<FoodMealRelViewModel>()
     val meals = mealViewModel.meals
 
