@@ -19,10 +19,14 @@ class DayViewModel(application: Application): AndroidViewModel(application) {
     init {
         viewModelScope.launch {
             val dbDays = dayDAO.getAll()
-            if (dbDays.isEmpty())
+            if (dbDays.isEmpty()) {
                 startNewDay()
-            else
-                days.addAll(dbDays)
+                return@launch
+            }
+            if (dbDays.last().date.isBefore(LocalDate.now())) {
+                startNewDay()
+            }
+            days.addAll(dbDays)
         }
     }
 
