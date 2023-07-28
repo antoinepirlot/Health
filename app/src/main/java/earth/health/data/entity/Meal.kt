@@ -8,7 +8,7 @@ import androidx.room.PrimaryKey
 data class Meal(
     @PrimaryKey(autoGenerate = true) var id: Long = 0,
     @ColumnInfo(name = "name") var name: Meals,
-    @ColumnInfo("day_id") var dayId: Long,
+    @ColumnInfo(name = "day_id") var dayId: Long,
     @ColumnInfo(name = "totalKcal") var totalKcal: Int = 0
 )
 
