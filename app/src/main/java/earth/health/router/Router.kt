@@ -8,7 +8,6 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import earth.health.data.entity.getDefaultMeals
 import earth.health.data.view_models.DayViewModel
-import earth.health.data.view_models.FoodMealRelViewModel
 import earth.health.data.view_models.FoodViewModel
 import earth.health.data.view_models.MealViewModel
 import earth.health.screens.HomeScreen
@@ -24,7 +23,6 @@ fun Router() {
     val mealViewModel = viewModel<MealViewModel>()
     //todo doesn't print
     println(message = "MEALS --> " + mealViewModel.meals.toString())
-    val foodMealRelViewModel = viewModel<FoodMealRelViewModel>()
     val meals = mealViewModel.meals
 
     NavHost(navController = navController, startDestination = Destination.HOME.link) {
