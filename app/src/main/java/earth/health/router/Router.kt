@@ -21,8 +21,6 @@ fun Router() {
     val dayViewModel = viewModel<DayViewModel>()
     val foodViewModel = viewModel<FoodViewModel>()
     val mealViewModel = viewModel<MealViewModel>()
-    //todo doesn't print
-    println(message = "MEALS --> " + mealViewModel.meals.toString())
     val meals = mealViewModel.meals
 
     NavHost(navController = navController, startDestination = Destination.HOME.link) {
