@@ -14,27 +14,14 @@ import earth.health.ui.Card
 @Composable
 fun MealHomeScreen(meals: List<Meal>, mealViewModel: MealViewModel, action: (Meal) -> Unit) {
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
-        Card(
-            title = stringResource(id = R.string.breakfast),
-            text = "null",
-            mainAction = { action(meals.last()) },
-            fastAction = {}
-        )
-        Card(
-            title = stringResource(id = R.string.lunch),
-            text = "null",
-            mainAction = {},
-            fastAction = {})
-        Card(
-            title = stringResource(id = R.string.dinner),
-            text = "null",
-            mainAction = {},
-            fastAction = {})
-        Card(
-            title = stringResource(id = R.string.extras),
-            text = "null",
-            mainAction = {},
-            fastAction = {})
+        for (meal in meals) {
+            Card(
+                title = stringResource(id = meal.name.mealNameId),
+                text = "null",
+                mainAction = { action(meal) },
+                fastAction = {}
+            )
+        }
     }
 }
 
