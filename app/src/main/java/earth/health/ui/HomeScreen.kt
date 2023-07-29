@@ -33,7 +33,7 @@ fun HomeScreen(navController: NavController, days: List<Day>) {
     }
 }
 
-@Preview()
+@Preview
 @Composable
 fun HomePreview() {
     HealthTheme {
