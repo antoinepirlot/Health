@@ -15,7 +15,7 @@ data class Food(
     @ColumnInfo(name = "sugar") var sugar: Double = 0.0,
     @ColumnInfo(name = "protein") var protein: Double = 0.0,
     @ColumnInfo(name = "alimentary_fiber") var alimentaryFiber: Double = 0.0,
-    @ColumnInfo(name = "calcium") var calcium: Double = 0.0
+    @ColumnInfo(name = "calcium") var calcium: Double = 0.0,
 )
 
 fun getDefaultFood() = listOf<Food>(

@@ -10,24 +10,15 @@ import earth.health.data.entity.Food
 import earth.health.data.entity.Meal
 import kotlinx.coroutines.launch
 
+class MealFoodRelViewModel(application: Application): AndroidViewModel(application) {
 
-class MealViewModel(application: Application): AndroidViewModel(application) {
-    val meals = mutableStateListOf<Meal>()
+    private val mealFoodRelDao = HealthDatabase.getDatabase(application).mealFoodRelDao()
 
-    private val mealDAO = HealthDatabase.getDatabase(application).mealDAO()
-
-    init {
+    fun getAllFoodOf(meal: Meal): SnapshotStateList<Food> {
+        val foodListOfMeal = mutableStateListOf<Food>()
         viewModelScope.launch {
-            meals.addAll(mealDAO.getAll())
+            foodListOfMeal.addAll(mealFoodRelDao.getAllFoodOf(meal.id))
         }
-    }
-
-    fun readMeal(id: Long) = meals.first { it.id == id }
-
-    fun create(meal: Meal) {
-        viewModelScope.launch {
-            mealDAO.insert(meal = meal)
-            meals.add(meal)
-        }
+        return foodListOfMeal
     }
 }
