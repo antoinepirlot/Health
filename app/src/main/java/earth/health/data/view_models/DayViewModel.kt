@@ -23,10 +23,10 @@ class DayViewModel(application: Application): AndroidViewModel(application) {
                 startNewDay()
                 return@launch
             }
+            days.addAll(dbDays)
             if (dbDays.last().date.isBefore(LocalDate.now())) {
                 startNewDay()
             }
-            days.addAll(dbDays)
         }
     }
 
@@ -62,8 +62,8 @@ class DayViewModel(application: Application): AndroidViewModel(application) {
         }
     }
 
-    fun nextId(): Long {
-        if(days.lastIndex == -1)
+    private fun nextId(): Long {
+        if (days.lastIndex == -1)
             return 1
         return (days.lastIndex + 1).toLong()
     }

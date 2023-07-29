@@ -1,11 +1,15 @@
 package earth.health.router
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.toMutableStateList
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import earth.health.data.entity.Day
 import earth.health.data.entity.getDefaultMeals
 import earth.health.data.view_models.DayViewModel
 import earth.health.data.view_models.FoodViewModel
@@ -22,10 +26,11 @@ fun Router() {
     val foodViewModel = viewModel<FoodViewModel>()
     val mealViewModel = viewModel<MealViewModel>()
     val meals = mealViewModel.meals
+    val days = dayViewModel.days
 
     NavHost(navController = navController, startDestination = Destination.HOME.link) {
         composable(Destination.HOME.link) {
-            HomeScreen(navController, dayViewModel)
+            HomeScreen(navController, days)
         }
         composable(Destination.MEALS.link) {
             MealHomeScreen(meals, mealViewModel) { meal ->

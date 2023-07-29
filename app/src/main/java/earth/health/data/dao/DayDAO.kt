@@ -1,5 +1,6 @@
 package earth.health.data.dao
 
+import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
@@ -14,6 +15,9 @@ interface DayDAO {
 
     @Query("SELECT * FROM day")
     suspend fun getAll(): List<Day>
+
+    @Query("SELECT * FROM day WHERE id = :id")
+    suspend fun getDay(id: Long): Day
 
     @Transaction
     @Query("SELECT * FROM meal WHERE id = :id")
