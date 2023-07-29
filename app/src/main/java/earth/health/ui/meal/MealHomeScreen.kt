@@ -17,7 +17,7 @@ fun MealHomeScreen(meals: List<Meal>, mealViewModel: MealViewModel, action: (Mea
         for (meal in meals) {
             Card(
                 title = stringResource(id = meal.name.mealNameId),
-                text = "null",
+                text = "${meal.totalKcal} kcal",
                 mainAction = { action(meal) },
                 fastAction = {}
             )
