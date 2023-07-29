@@ -1,23 +1,17 @@
 package earth.health.router
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateListOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.toMutableStateList
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import earth.health.data.entity.Day
-import earth.health.data.entity.getDefaultMeals
 import earth.health.data.view_models.DayViewModel
 import earth.health.data.view_models.FoodViewModel
 import earth.health.data.view_models.MealViewModel
-import earth.health.screens.HomeScreen
-import earth.health.screens.meal.MealHomeScreen
-import earth.health.screens.meal.MealScreen
-import earth.health.screens.weight.WeightHomeScreen
+import earth.health.ui.HomeScreen
+import earth.health.ui.meal.MealHomeScreen
+import earth.health.ui.meal.MealScreen
+import earth.health.ui.weight.WeightHomeScreen
 
 @Composable
 fun Router() {

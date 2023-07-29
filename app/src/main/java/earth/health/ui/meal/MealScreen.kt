@@ -1,18 +1,12 @@
-package earth.health.screens.meal
+package earth.health.ui.meal
 
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.material3.Divider
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
-import earth.health.data.entity.Day
 import earth.health.data.entity.Meal
-import earth.health.data.entity.getDefaultFood
 import earth.health.data.entity.getDefaultMeals
 import earth.health.data.view_models.MealViewModel
 

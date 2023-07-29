@@ -1,4 +1,4 @@
-package earth.health.screens.meal
+package earth.health.ui.meal
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.runtime.Composable
@@ -7,10 +7,9 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
 import earth.health.R
-import earth.health.data.entity.Day
 import earth.health.data.entity.Meal
 import earth.health.data.view_models.MealViewModel
-import earth.health.screens.Card
+import earth.health.ui.Card
 
 @Composable
 fun MealHomeScreen(meals: List<Meal>, mealViewModel: MealViewModel, action: (Meal) -> Unit) {

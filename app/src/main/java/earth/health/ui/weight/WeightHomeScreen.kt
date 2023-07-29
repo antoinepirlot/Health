@@ -1,4 +1,4 @@
-package earth.health.screens.weight
+package earth.health.ui.weight
 
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavController
