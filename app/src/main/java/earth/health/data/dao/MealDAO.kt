@@ -23,6 +23,4 @@ interface MealDAO {
     @Query("SELECT * FROM meals")
     suspend fun getAll(): List<Meal>
 
-    @Query("SELECT * FROM foods")
-    fun getMealWithFoods(): List<MealWithFoods>
 }
