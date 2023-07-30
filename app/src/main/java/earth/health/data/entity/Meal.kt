@@ -6,10 +6,19 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "meals")
 data class Meal(
-    @PrimaryKey(autoGenerate = true) var id: Long = 0,
-    @ColumnInfo(name = "name") var name: Meals,
-    @ColumnInfo(name = "day_id") var dayId: Long,
-    @ColumnInfo(name = "totalKcal") var totalKcal: Int = 0
+    @PrimaryKey(autoGenerate = true)
+    @ColumnInfo("meal_id")
+    var id: Long = 0,
+
+    @ColumnInfo(name = "name")
+    var name: Meals,
+
+    @ColumnInfo(name = "day_id")
+    var dayId: Long,
+
+    @ColumnInfo(name = "totalKcal")
+    var totalKcal: Int = 0,
+
 )
 
 fun getDefaultMeals() = arrayListOf<Meal>(

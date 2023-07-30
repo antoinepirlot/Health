@@ -8,7 +8,13 @@ import java.time.LocalDate
 
 @Entity(tableName = "days", indices = [Index(value = ["date"], unique = true)])
 data class Day(
-    @PrimaryKey(autoGenerate = true) var id: Long = 0,
-    @ColumnInfo(name = "date") var date: LocalDate = LocalDate.now(),
-    @ColumnInfo(name = "total_kcal") var totalKcal: Int = 0,
+    @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = "day_id")
+    var id: Long = 0,
+
+    @ColumnInfo(name = "date")
+    var date: LocalDate = LocalDate.now(),
+
+    @ColumnInfo(name = "total_kcal")
+    var totalKcal: Int = 0,
 )

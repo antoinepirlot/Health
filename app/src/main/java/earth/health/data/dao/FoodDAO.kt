@@ -24,6 +24,6 @@ interface FoodDAO {
     @Query("SELECT * FROM foods")
     suspend fun getAll(): List<Food>
 
-    @Query("SELECT * FROM foods WHERE id = :id")
+    @Query("SELECT * FROM foods WHERE food_id = :id")
     suspend fun getMealWithFoods(id: Long): List<Food>
 }

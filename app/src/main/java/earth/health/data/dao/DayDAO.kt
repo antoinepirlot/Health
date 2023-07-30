@@ -16,11 +16,11 @@ interface DayDAO {
     @Query("SELECT * FROM days")
     suspend fun getAll(): List<Day>
 
-    @Query("SELECT * FROM days WHERE id = :id")
+    @Query("SELECT * FROM days WHERE day_id = :id")
     suspend fun getDay(id: Long): Day
 
     @Transaction
-    @Query("SELECT * FROM meals WHERE id = :id")
+    @Query("SELECT * FROM meals WHERE meal_id = :id")
     suspend fun getDayWithMeals(id: Long): List<Meal>
 
     @Insert
