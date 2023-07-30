@@ -13,10 +13,10 @@ import earth.health.data.entity.Meal
 @Dao
 interface DayDAO {
 
-    @Query("SELECT * FROM day")
+    @Query("SELECT * FROM days")
     suspend fun getAll(): List<Day>
 
-    @Query("SELECT * FROM day WHERE id = :id")
+    @Query("SELECT * FROM days WHERE id = :id")
     suspend fun getDay(id: Long): Day
 
     @Transaction

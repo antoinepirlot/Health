@@ -11,27 +11,25 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
 import earth.health.R
-import earth.health.data.entity.Food
 import earth.health.data.entity.Meal
 import earth.health.data.entity.getDefaultMeals
-import earth.health.data.view_models.MealFoodRelViewModel
 
 @Composable
 fun MealScreen(meal: Meal) {
     Column {
         Text(text = stringResource(id = meal.name.mealNameId))
-        val foodListOfMeal = viewModel<MealFoodRelViewModel>().getAllFoodOf(meal)
-        if (foodListOfMeal.isEmpty()) {
-            Text(text = stringResource(id = R.string.nothing))
-        } else {
-            for (food in foodListOfMeal) {
-                TextButton(onClick = { /*TODO*/ }) {
-                    //fillMaxWidth makes the button clickable on all the width even on blank
-                    Text(text = food.name, modifier = Modifier.fillMaxWidth())
-                }
-                Divider()
-            }
-        }
+//        val foodListOfMeal = viewModel<MealFoodRelViewModel>().getAllFoodOf(meal)
+//        if (foodListOfMeal.isEmpty()) {
+//            Text(text = stringResource(id = R.string.nothing))
+//        } else {
+//            for (food in foodListOfMeal) {
+//                TextButton(onClick = { /*TODO*/ }) {
+//                    //fillMaxWidth makes the button clickable on all the width even on blank
+//                    Text(text = food.name, modifier = Modifier.fillMaxWidth())
+//                }
+//                Divider()
+//            }
+//        }
     }
 }
 
