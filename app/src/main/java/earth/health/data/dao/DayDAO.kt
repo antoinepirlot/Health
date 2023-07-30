@@ -20,7 +20,7 @@ interface DayDAO {
     suspend fun getDay(id: Long): Day
 
     @Transaction
-    @Query("SELECT * FROM meal WHERE id = :id")
+    @Query("SELECT * FROM meals WHERE id = :id")
     suspend fun getDayWithMeals(id: Long): List<Meal>
 
     @Insert
