@@ -12,8 +12,9 @@ import earth.health.data.entity.Converters
 import earth.health.data.entity.Day
 import earth.health.data.entity.Food
 import earth.health.data.entity.Meal
+import earth.health.data.entity.MealFoodCrossRef
 
-@Database(entities = [Food::class, Meal::class, Day::class], version = 1, exportSchema = false)
+@Database(entities = [Food::class, Meal::class, Day::class, MealFoodCrossRef::class], version = 1, exportSchema = false)
 @TypeConverters(Converters::class)
 abstract class HealthDatabase : RoomDatabase() {
     abstract fun foodDAO(): FoodDAO
