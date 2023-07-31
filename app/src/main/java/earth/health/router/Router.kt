@@ -16,8 +16,9 @@ import earth.health.ui.weight.WeightHomeScreen
 fun Router() {
     val navController = rememberNavController()
     val days = viewModel<DayViewModel>().days
+    val mealViewModel = viewModel<MealViewModel>()
     // TODO meals are not reload after creating days
-    val meals = viewModel<MealViewModel>().meals
+    val meals = mealViewModel.meals
 
     NavHost(navController = navController, startDestination = Destination.HOME.link) {
         composable(Destination.HOME.link) {
@@ -29,9 +30,9 @@ fun Router() {
             }
         }
         composable(Destination.MEALS.link + "/{id}") { navBackStackEntry ->
-            val id = navBackStackEntry.arguments!!.getString("id")!!
-            val meal = meals.first { it.id == id.toLong() }
-            MealScreen(meal = meal)
+            val id = navBackStackEntry.arguments!!.getString("id")!!.toLong()
+            val meal = meals.first { it.id == id }
+            MealScreen(mealWithFoods = mealViewModel.getMealWithFoods(id))
         }
         composable(Destination.WEIGHT.link) {
             WeightHomeScreen(navController)

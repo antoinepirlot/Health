@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import earth.health.data.HealthDatabase
 import earth.health.data.entity.Food
 import earth.health.data.entity.Meal
+import earth.health.data.entity.relations.MealWithFoods
 import kotlinx.coroutines.launch
 
 
@@ -23,6 +24,14 @@ class MealViewModel(application: Application): AndroidViewModel(application) {
     }
 
     fun readMeal(id: Long) = meals.first { it.id == id }
+
+    fun getMealWithFoods(mealId: Long): MealWithFoods {
+        var mealWithFoods: MealWithFoods? = null
+        viewModelScope.launch {
+            mealWithFoods = mealDAO.getAllMealWithFoods().first() { it.meal.id == mealId }
+        }
+        return mealWithFoods!!
+    }
 
     fun create(meal: Meal) {
         viewModelScope.launch {

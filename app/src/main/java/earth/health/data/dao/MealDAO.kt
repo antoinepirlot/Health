@@ -26,5 +26,5 @@ interface MealDAO {
 
     @Transaction
     @Query("SELECT * FROM meals JOIN foods")
-    fun getMealWithFoods(): List<MealWithFoods>
+    fun getAllMealWithFoods(): List<MealWithFoods>
 }
