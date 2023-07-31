@@ -6,7 +6,6 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import earth.health.data.view_models.DayViewModel
-import earth.health.data.view_models.FoodViewModel
 import earth.health.data.view_models.MealViewModel
 import earth.health.ui.HomeScreen
 import earth.health.ui.meal.MealHomeScreen
@@ -16,11 +15,8 @@ import earth.health.ui.weight.WeightHomeScreen
 @Composable
 fun Router() {
     val navController = rememberNavController()
-    val dayViewModel = viewModel<DayViewModel>()
-    val foodViewModel = viewModel<FoodViewModel>()
-    val mealViewModel = viewModel<MealViewModel>()
-    val meals = mealViewModel.meals
-    val days = dayViewModel.days
+    val meals = viewModel<MealViewModel>().meals
+    val days = viewModel<DayViewModel>().days
 
     NavHost(navController = navController, startDestination = Destination.HOME.link) {
         composable(Destination.HOME.link) {
