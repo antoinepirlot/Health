@@ -5,6 +5,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import earth.health.data.entity.relations.MealWithFoods
 import earth.health.data.view_models.DayViewModel
 import earth.health.data.view_models.MealViewModel
 import earth.health.ui.HomeScreen
@@ -17,8 +18,8 @@ fun Router() {
     val navController = rememberNavController()
     val days = viewModel<DayViewModel>().days
     val mealViewModel = viewModel<MealViewModel>()
-    // TODO meals are not reload after creating days
     val meals = mealViewModel.meals
+    val mealWithFoods = mealViewModel.mealWithFoods
 
     NavHost(navController = navController, startDestination = Destination.HOME.link) {
         composable(Destination.HOME.link) {
@@ -30,9 +31,8 @@ fun Router() {
             }
         }
         composable(Destination.MEALS.link + "/{id}") { navBackStackEntry ->
-            val id = navBackStackEntry.arguments!!.getString("id")!!.toLong()
-            val meal = meals.first { it.id == id }
-            MealScreen(mealWithFoods = mealViewModel.getMealWithFoods(id))
+            val mealId = navBackStackEntry.arguments!!.getString("id")!!.toLong()
+            MealScreen(mealWithFoods = mealWithFoods.first() { it.meal.id == mealId })
         }
         composable(Destination.WEIGHT.link) {
             WeightHomeScreen(navController)

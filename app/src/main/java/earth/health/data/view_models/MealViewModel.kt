@@ -14,24 +14,20 @@ import kotlinx.coroutines.launch
 
 class MealViewModel(application: Application): AndroidViewModel(application) {
     val meals = mutableStateListOf<Meal>()
+    val mealWithFoods = mutableStateListOf<MealWithFoods>()
 
     private val mealDAO = HealthDatabase.getDatabase(application).mealDAO()
 
     init {
         viewModelScope.launch {
             meals.addAll(mealDAO.getAll())
+            //mealWithFoods.addAll(mealDAO.getAllMealWithFoods())
         }
     }
 
     fun readMeal(id: Long) = meals.first { it.id == id }
 
-    fun getMealWithFoods(mealId: Long): MealWithFoods {
-        var mealWithFoods: MealWithFoods? = null
-        viewModelScope.launch {
-            mealWithFoods = mealDAO.getAllMealWithFoods().first() { it.meal.id == mealId }
-        }
-        return mealWithFoods!!
-    }
+    fun readMealWithFoods(mealId: Long) = mealWithFoods.first() { it.meal.id == mealId }
 
     fun create(meal: Meal) {
         viewModelScope.launch {
