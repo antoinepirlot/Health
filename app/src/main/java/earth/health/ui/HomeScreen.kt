@@ -1,6 +1,7 @@
 package earth.health.ui
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.res.stringResource
@@ -17,21 +18,38 @@ import earth.health.router.Destination
 fun HomeScreen(navController: NavController, days: List<Day>) {
     if (days.isNotEmpty()) {
         val latestDay = days.last()
-        Column(horizontalAlignment = Alignment.CenterHorizontally) {
-            val kcalText = latestDay.totalKcal.toString() + "/1920kcal"
-            Card(
-                title = stringResource(id = R.string.food),
-                text = kcalText,
-                mainAction = { navController.navigate(Destination.MEALS.link) },
-                fastAction = {})
-            Card(
-                title = stringResource(id = R.string.weight),
-                text = "80 kg",
-                mainAction = { navController.navigate(Destination.WEIGHT.link) },
-                fastAction = {})
-        }
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            content = function(latestDay, navController)
+        )
     }
 }
+
+@Composable
+private fun function(
+    latestDay: Day,
+    navController: NavController
+): @Composable() (ColumnScope.() -> Unit) =
+    {
+        val kcalText = latestDay.totalKcal.toString() + "/1920kcal"
+        Card(
+            title = stringResource(id = R.string.food),
+            text = kcalText,
+            mainAction = { navController.navigate(Destination.MEALS.link) },
+            fastAction = {})
+        Card(
+            title = stringResource(id = R.string.weight),
+            text = "80 kg",
+            mainAction = { navController.navigate(Destination.WEIGHT.link) },
+            fastAction = {})
+        Card(
+            title = stringResource(id = R.string.add_food_screen),
+            text = "",
+            mainAction = { navController.navigate(Destination.ADD_FOOD_SCREEN.link) }
+        ) {
+
+        }
+    }
 
 @Preview
 @Composable

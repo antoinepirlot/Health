@@ -9,6 +9,7 @@ import earth.health.data.entity.relations.MealWithFoods
 import earth.health.data.view_models.DayViewModel
 import earth.health.data.view_models.MealViewModel
 import earth.health.ui.HomeScreen
+import earth.health.ui.food.AddFoodScreen
 import earth.health.ui.meal.MealHomeScreen
 import earth.health.ui.meal.MealScreen
 import earth.health.ui.weight.WeightHomeScreen
@@ -36,6 +37,9 @@ fun Router() {
         }
         composable(Destination.WEIGHT.link) {
             WeightHomeScreen(navController)
+        }
+        composable(Destination.ADD_FOOD_SCREEN.link) {
+            AddFoodScreen()
         }
     }
 }

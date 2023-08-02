@@ -5,4 +5,5 @@ enum class Destination(val link: String) {
     MEALS("/meals"),
     CURRENT_MEAL("/current_meal"),
     WEIGHT("/weight"),
+    ADD_FOOD_SCREEN("/add_food_screen")
 }

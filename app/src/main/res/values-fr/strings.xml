@@ -8,4 +8,5 @@
     <string name="dinner">Souper</string>
     <string name="extras">Les petits plaisirs :)</string>
     <string name="nothing">Désolé, il n\'y a rien à montrer :\'(</string>
+    <string name="add_food_screen">Ajout d\'une nourriture</string>
 </resources>
