@@ -8,4 +8,14 @@
     <string name="extras">Les petits plaisirs :)</string>
     <string name="nothing">Désolé, il n\'y a rien à montrer :\'(</string>
     <string name="add_food_screen">Ajout d\'une nourriture</string>
+    <string name="food_name_form">Nom</string>
+    <string name="lipids">Lipides</string>
+    <string name="saturated_lipids">Lipides Saturés</string>
+    <string name="carbohydrates">Glucides</string>
+    <string name="sugar">Sucre</string>
+    <string name="protein">Protéine</string>
+    <string name="alimentary_fiber">Fibres</string>
+    <string name="calcium">Calcium</string>
+    <string name="add">Ajouter</string>
+    <string name="add_food_succeed">Ajout réussi</string>
 </resources>

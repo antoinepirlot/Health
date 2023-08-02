@@ -7,6 +7,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import earth.health.data.entity.relations.MealWithFoods
 import earth.health.data.view_models.DayViewModel
+import earth.health.data.view_models.FoodViewModel
 import earth.health.data.view_models.MealViewModel
 import earth.health.ui.HomeScreen
 import earth.health.ui.food.AddFoodScreen
