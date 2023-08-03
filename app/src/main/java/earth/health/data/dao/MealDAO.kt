@@ -21,10 +21,7 @@ interface MealDAO {
     @Update
     suspend fun update(meal: Meal)
 
-    @Query("SELECT * FROM meals")
-    suspend fun getAll(): List<Meal>
-
     @Transaction
-    @Query("SELECT * FROM meals JOIN foods")
-    fun getAllMealWithFoods(): List<MealWithFoods>
+    @Query("SELECT * FROM meals")
+    suspend fun getAll(): List<MealWithFoods>
 }

@@ -6,16 +6,17 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import earth.health.data.entity.Meal
+import earth.health.data.entity.relations.MealWithFoods
 import earth.health.ui.Card
 
 @Composable
-fun MealHomeScreen(meals: List<Meal>, action: (Meal) -> Unit) {
+fun MealHomeScreen(mealsWithFoods: List<MealWithFoods>, action: (Meal) -> Unit) {
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
-        for (meal in meals) {
+        for (mealWithFoods in mealsWithFoods) {
             Card(
-                title = stringResource(id = meal.name.mealNameId),
-                text = "${meal.totalKcal} kcal",
-                mainAction = { action(meal) },
+                title = stringResource(id = mealWithFoods.meal.name.mealNameId),
+                text = "${mealWithFoods.meal.totalKcal} kcal",
+                mainAction = { action(mealWithFoods.meal) },
                 fastAction = {}
             )
         }

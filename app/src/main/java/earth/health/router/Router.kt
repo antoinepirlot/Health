@@ -20,7 +20,6 @@ fun Router() {
     val navController = rememberNavController()
     val days = viewModel<DayViewModel>().days
     val mealViewModel = viewModel<MealViewModel>()
-    val meals = mealViewModel.meals
     val mealWithFoods = mealViewModel.mealWithFoods
 
     NavHost(navController = navController, startDestination = Destination.HOME.link) {
@@ -28,7 +27,7 @@ fun Router() {
             HomeScreen(navController, days)
         }
         composable(Destination.MEALS.link) {
-            MealHomeScreen(meals) { meal ->
+            MealHomeScreen(mealWithFoods) { meal ->
                 navController.navigate(Destination.MEALS.link + "/${meal.id}")
             }
         }
