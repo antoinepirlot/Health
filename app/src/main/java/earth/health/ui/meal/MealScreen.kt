@@ -12,6 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import earth.health.R
+import earth.health.data.entity.Food
 import earth.health.data.entity.Meal
 import earth.health.data.entity.Meals
 import earth.health.data.entity.relations.MealWithFoods
@@ -21,7 +22,7 @@ fun MealScreen(
     modifier: Modifier = Modifier,
     mealWithFoods: MealWithFoods,
     addAction: () -> Unit,
-    textAction: () -> Unit
+    textAction: (Food) -> Unit
 ) {
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
         Text(text = stringResource(id = mealWithFoods.meal.name.mealNameId))
@@ -33,7 +34,7 @@ fun MealScreen(
         } else {
             val meal = mealWithFoods.meal
             for (food in mealWithFoods.foods) {
-                TextButton(onClick = textAction) {
+                TextButton(onClick = { textAction(food) }) {
                     //fillMaxWidth makes the button clickable on all the width even on blank
                     Text(
                         text = stringResource(id = meal.name.mealNameId),

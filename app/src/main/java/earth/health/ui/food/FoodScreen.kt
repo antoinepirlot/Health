@@ -1,4 +1,9 @@
 package earth.health.ui.food
 
-class FoodScreen {
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+
+@Composable
+fun FoodScreen() {
+    Text(text = "FOOD SCREEN IN PROGRESS")
 }
