@@ -33,7 +33,11 @@ fun Router() {
         }
         composable(Destination.MEALS.link + "/{id}") { navBackStackEntry ->
             val mealId = navBackStackEntry.arguments!!.getString("id")!!.toLong()
-            MealScreen(mealWithFoods = mealWithFoods.first() { it.meal.id == mealId })
+            MealScreen(
+                mealWithFoods = mealWithFoods.first() { it.meal.id == mealId },
+                addAction = { /*TODO*/ },
+                textAction = { /*TODO*/ }
+            )
         }
         composable(Destination.WEIGHT.link) {
             WeightHomeScreen(navController)

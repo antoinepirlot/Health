@@ -2,6 +2,7 @@ package earth.health.ui.meal
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.material3.Button
 import androidx.compose.material3.Divider
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -16,15 +17,23 @@ import earth.health.data.entity.Meals
 import earth.health.data.entity.relations.MealWithFoods
 
 @Composable
-fun MealScreen(modifier: Modifier = Modifier, mealWithFoods: MealWithFoods) {
+fun MealScreen(
+    modifier: Modifier = Modifier,
+    mealWithFoods: MealWithFoods,
+    addAction: () -> Unit,
+    textAction: () -> Unit
+) {
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
         Text(text = stringResource(id = mealWithFoods.meal.name.mealNameId))
         if (mealWithFoods.foods.isEmpty()) {
             Text(text = stringResource(id = R.string.nothing))
+            Button(onClick = addAction) {
+                Text(text = stringResource(id = R.string.add))
+            }
         } else {
             val meal = mealWithFoods.meal
             for (food in mealWithFoods.foods) {
-                TextButton(onClick = { /*TODO*/ }) {
+                TextButton(onClick = textAction) {
                     //fillMaxWidth makes the button clickable on all the width even on blank
                     Text(
                         text = stringResource(id = meal.name.mealNameId),
@@ -40,5 +49,8 @@ fun MealScreen(modifier: Modifier = Modifier, mealWithFoods: MealWithFoods) {
 @Preview
 @Composable
 fun MealScreenPreview() {
-    MealScreen(mealWithFoods = MealWithFoods(Meal(name = Meals.BREAKFAST, dayId = 0), listOf()))
+    MealScreen(
+        mealWithFoods = MealWithFoods(Meal(name = Meals.BREAKFAST, dayId = 0), listOf()),
+        addAction = {},
+        textAction = {})
 }
