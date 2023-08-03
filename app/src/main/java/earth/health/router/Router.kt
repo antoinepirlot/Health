@@ -11,6 +11,7 @@ import earth.health.data.view_models.FoodViewModel
 import earth.health.data.view_models.MealViewModel
 import earth.health.ui.HomeScreen
 import earth.health.ui.food.AddFoodScreen
+import earth.health.ui.food.AllFoodsScreen
 import earth.health.ui.food.FoodScreen
 import earth.health.ui.meal.MealHomeScreen
 import earth.health.ui.meal.MealScreen
@@ -36,9 +37,12 @@ fun Router() {
             val mealId = navBackStackEntry.arguments!!.getString("id")!!.toLong()
             MealScreen(
                 mealWithFoods = mealWithFoods.first() { it.meal.id == mealId },
-                addAction = { /*TODO*/ },
+                addAction = { navController.navigate(Destination.FOODS.link) },
                 textAction = { navController.navigate(Destination.FOODS.link + "/${it.id}") }
             )
+        }
+        composable(Destination.FOODS.link) {
+            AllFoodsScreen()
         }
         composable(Destination.FOODS.link + "/{id}") {
             FoodScreen()
