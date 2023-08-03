@@ -4,8 +4,10 @@ import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
+import androidx.room.Transaction
 import androidx.room.Update
 import earth.health.data.entity.Food
+import earth.health.data.entity.relations.FoodWithMeals
 
 @Dao
 interface FoodDAO {
@@ -21,9 +23,7 @@ interface FoodDAO {
     @Update
     suspend fun update(food: Food)
 
+    @Transaction
     @Query("SELECT * FROM foods")
-    suspend fun getAll(): List<Food>
-
-    @Query("SELECT * FROM foods WHERE food_id = :id")
-    suspend fun getMealWithFoods(id: Long): List<Food>
+    suspend fun getAll(): List<FoodWithMeals>
 }
