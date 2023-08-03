@@ -11,7 +11,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import earth.health.R
-import earth.health.data.entity.Food
 import earth.health.data.entity.Meal
 import earth.health.data.entity.Meals
 import earth.health.data.entity.relations.MealWithFoods
