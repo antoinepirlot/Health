@@ -3,9 +3,7 @@ package earth.health.ui.meal
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Button
-import androidx.compose.material3.Divider
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -36,8 +34,7 @@ fun MealScreen(
                 Text(text = stringResource(id = R.string.add))
             }
         } else {
-            val meal = mealWithFoods.meal
-            //FoodListScreen(foodList = mealWithFoods.foods, actionClickOnFood = )
+            FoodListScreen(foodList = mealWithFoods.foods, actionClickOnFood = textAction)
         }
     }
 }
