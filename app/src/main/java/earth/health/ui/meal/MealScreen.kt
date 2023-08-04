@@ -53,9 +53,20 @@ fun MealScreen(
 
 @Preview
 @Composable
-fun MealScreenPreview() {
+fun MealScreenWithoutFoodPreview() {
     MealScreen(
         mealWithFoods = MealWithFoods(Meal(name = Meals.BREAKFAST, dayId = 0), listOf()),
+        addAction = {},
+        textAction = {})
+}
+
+@Preview
+@Composable
+fun MealScreenWithFoodPreview() {
+    MealScreen(
+        mealWithFoods = MealWithFoods(Meal(name = Meals.BREAKFAST, dayId = 0), listOf(
+            Food(name = "Banana")
+        )),
         addAction = {},
         textAction = {})
 }
