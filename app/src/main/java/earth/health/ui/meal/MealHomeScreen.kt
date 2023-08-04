@@ -9,7 +9,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import earth.health.data.entity.Meal
 import earth.health.data.entity.relations.MealWithFoods
-import earth.health.ui.Card
+import earth.health.ui.utils.Card
 
 @Composable
 fun MealHomeScreen(modifier: Modifier = Modifier, mealsWithFoods: List<MealWithFoods>, action: (Meal) -> Unit) {

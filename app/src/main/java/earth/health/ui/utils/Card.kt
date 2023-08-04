@@ -1,4 +1,4 @@
-package earth.health.ui
+package earth.health.ui.utils
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding

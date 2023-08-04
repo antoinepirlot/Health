@@ -1,20 +1,19 @@
 package earth.health.ui
 
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import earth.health.R
 import earth.health.data.entity.Day
 import earth.health.ui.theme.HealthTheme
 import earth.health.router.Destination
+import earth.health.ui.utils.Card
 
 @Composable
 fun HomeScreen(modifier: Modifier = Modifier, navController: NavController, days: List<Day>) {
