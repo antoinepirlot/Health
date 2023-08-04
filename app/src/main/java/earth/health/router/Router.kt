@@ -53,7 +53,7 @@ fun Router() {
         }
         composable(Destination.FOODS.link + "/{id}") {navBackStackEntry ->
             val foodId = navBackStackEntry.arguments!!.getString("id")!!.toLong()
-            FoodScreen()
+            FoodScreen(foodList.first() { it.food.id == foodId })
         }
         composable(Destination.WEIGHT.link) {
             WeightHomeScreen(navController)
