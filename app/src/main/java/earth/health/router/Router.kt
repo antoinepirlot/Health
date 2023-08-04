@@ -47,11 +47,12 @@ fun Router() {
             AllFoodsScreen(
                 foodList = foodList,
                 actionOpenFood =  { food ->
-
+                    navController.navigate(Destination.FOODS.link + "/${food.food.id}")
                 }
             )
         }
-        composable(Destination.FOODS.link + "/{id}") {
+        composable(Destination.FOODS.link + "/{id}") {navBackStackEntry ->
+            val foodId = navBackStackEntry.arguments!!.getString("id")!!.toLong()
             FoodScreen()
         }
         composable(Destination.WEIGHT.link) {
