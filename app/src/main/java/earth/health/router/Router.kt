@@ -12,6 +12,7 @@ import earth.health.ui.HomeScreen
 import earth.health.ui.food.AddFoodScreen
 import earth.health.ui.food.AllFoodsScreen
 import earth.health.ui.food.FoodScreen
+import earth.health.ui.meal.AddSelectedFoodToMeal
 import earth.health.ui.meal.MealHomeScreen
 import earth.health.ui.meal.MealScreen
 import earth.health.ui.weight.WeightHomeScreen
@@ -37,16 +38,33 @@ fun Router() {
             val mealId = navBackStackEntry.arguments!!.getString("id")!!.toLong()
             MealScreen(
                 mealWithFoods = mealWithFoods.first() { it.meal.id == mealId },
-                addAction = { navController.navigate(Destination.FOODS.link) },
+                addAction = { navController.navigate(Destination.FOODS.link + "/meal/${mealId}") },
                 textAction = { navController.navigate(Destination.FOODS.link + "/${it.id}") }
             )
         }
-        composable(Destination.FOODS.link) {
-            AllFoodsScreen(
-                actionOpenFood =  { food ->
-                    navController.navigate(Destination.FOODS.link + "/${food.id}")
-                }
+        composable(Destination.MEALS.link + "/{meal_id}/{food_id}") {
+            val mealId = it.arguments!!.getString("meal_id")!!.toLong()
+            val foodId = it.arguments!!.getString("food_id")!!.toLong()
+            AddSelectedFoodToMeal(
+                food = foodViewModel.readFood(foodId).food,
+                meal = mealViewModel.readMeal(mealId).meal
             )
+        }
+        composable(Destination.FOODS.link + "/meal/{mealId}") {
+            val mealId = it.arguments!!.getString("mealId")!!.toLong()
+            if (mealId > 0) {
+                AllFoodsScreen(
+                    actionOpenFood = { food ->
+                        navController.navigate(Destination.MEALS.link + "/${mealId}/${food.id}")
+                    }
+                )
+            } else {
+                AllFoodsScreen(
+                    actionOpenFood = { food ->
+                        navController.navigate(Destination.FOODS.link + "/${food.id}")
+                    }
+                )
+            }
         }
         composable(Destination.FOODS.link + "/{id}") {navBackStackEntry ->
             val foodId = navBackStackEntry.arguments!!.getString("id")!!.toLong()
