@@ -2,6 +2,7 @@ package earth.health.ui
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -16,11 +17,12 @@ import earth.health.ui.theme.HealthTheme
 import earth.health.router.Destination
 
 @Composable
-fun HomeScreen(navController: NavController, days: List<Day>) {
+fun HomeScreen(modifier: Modifier = Modifier, navController: NavController, days: List<Day>) {
     if (days.isNotEmpty()) {
         val latestDay = days.last()
         val kcalText = latestDay.totalKcal.toString() + "/1920kcal"
         Column(
+            modifier = modifier.fillMaxSize(),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Card(
@@ -48,6 +50,6 @@ fun HomeScreen(navController: NavController, days: List<Day>) {
 @Composable
 fun HomePreview() {
     HealthTheme {
-        HomeScreen(rememberNavController(), listOf())
+        HomeScreen(navController = rememberNavController(), days = listOf())
     }
 }

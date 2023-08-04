@@ -1,8 +1,10 @@
 package earth.health.ui.meal
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import earth.health.data.entity.Meal
@@ -10,8 +12,11 @@ import earth.health.data.entity.relations.MealWithFoods
 import earth.health.ui.Card
 
 @Composable
-fun MealHomeScreen(mealsWithFoods: List<MealWithFoods>, action: (Meal) -> Unit) {
-    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+fun MealHomeScreen(modifier: Modifier = Modifier, mealsWithFoods: List<MealWithFoods>, action: (Meal) -> Unit) {
+    Column(
+        modifier = modifier.fillMaxSize(),
+        horizontalAlignment = Alignment.CenterHorizontally,
+    ) {
         for (mealWithFoods in mealsWithFoods) {
             Card(
                 title = stringResource(id = mealWithFoods.meal.name.mealNameId),
@@ -26,5 +31,5 @@ fun MealHomeScreen(mealsWithFoods: List<MealWithFoods>, action: (Meal) -> Unit) 
 @Preview
 @Composable
 fun MealHomeScreenPreview() {
-    MealHomeScreen(listOf()) {}
+    MealHomeScreen(mealsWithFoods = listOf(), action = {})
 }

@@ -1,6 +1,7 @@
 package earth.health.ui.meal
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.Button
 import androidx.compose.material3.Divider
@@ -24,7 +25,10 @@ fun MealScreen(
     addAction: () -> Unit,
     textAction: (Food) -> Unit
 ) {
-    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+    Column(
+        modifier = modifier.fillMaxSize(),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
         Text(text = stringResource(id = mealWithFoods.meal.name.mealNameId))
         if (mealWithFoods.foods.isEmpty()) {
             Text(text = stringResource(id = R.string.nothing))

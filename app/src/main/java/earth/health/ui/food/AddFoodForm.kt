@@ -2,6 +2,7 @@ package earth.health.ui.food
 
 import android.widget.Toast
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
@@ -42,7 +43,11 @@ fun AddFoodForm(
         Toast.LENGTH_SHORT
     )
 
-    Column(modifier = modifier.verticalScroll(rememberScrollState())) {
+    Column(
+        modifier = modifier
+            .fillMaxSize()
+            .verticalScroll(rememberScrollState()),
+    ) {
         // todo try to simplify
         OutlinedTextField(
             label = { Text(text = stringResource(id = R.string.food_name_form)) },

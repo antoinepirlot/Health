@@ -28,10 +28,10 @@ fun Router() {
 
     NavHost(navController = navController, startDestination = Destination.HOME.link) {
         composable(Destination.HOME.link) {
-            HomeScreen(navController, days)
+            HomeScreen(navController = navController, days = days)
         }
         composable(Destination.MEALS.link) {
-            MealHomeScreen(mealWithFoods) { meal ->
+            MealHomeScreen(mealsWithFoods = mealWithFoods) { meal ->
                 navController.navigate(Destination.MEALS.link + "/${meal.id}")
             }
         }
@@ -53,7 +53,7 @@ fun Router() {
         }
         composable(Destination.FOODS.link + "/{id}") {navBackStackEntry ->
             val foodId = navBackStackEntry.arguments!!.getString("id")!!.toLong()
-            FoodScreen(foodList.first() { it.food.id == foodId })
+            FoodScreen(food = foodList.first() { it.food.id == foodId })
         }
         composable(Destination.WEIGHT.link) {
             WeightHomeScreen(navController)
