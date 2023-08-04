@@ -2,7 +2,6 @@ package earth.health.ui.meal
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.Button
 import androidx.compose.material3.Divider
 import androidx.compose.material3.Text
@@ -39,10 +38,8 @@ fun MealScreen(
             val meal = mealWithFoods.meal
             for (food in mealWithFoods.foods) {
                 TextButton(onClick = { textAction(food) }) {
-                    //fillMaxWidth makes the button clickable on all the width even on blank
                     Text(
-                        text = stringResource(id = meal.name.mealNameId),
-                        modifier = Modifier.fillMaxWidth()
+                        text = food.name,
                     )
                 }
                 Divider()
