@@ -25,14 +25,10 @@ fun AllFoodsScreen(modifier: Modifier = Modifier, foodList: List<FoodWithMeals>,
             Text(text = stringResource(id = R.string.nothing))
         } else {
             Text(text = stringResource(id = R.string.food_list))
-            LazyColumn {
-                items(foodList) { food ->
-                    TextButton(onClick = { actionOpenFood(food) }) {
-                        Text(text = food.food.name)
-                    }
-                    Divider()
-                }
-            }
+            FoodListScreen(
+                foodList = foodList,
+                actionClickOnFood = actionOpenFood
+            )
         }
     }
 }
