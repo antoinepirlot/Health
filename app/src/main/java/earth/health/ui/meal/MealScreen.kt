@@ -16,6 +16,7 @@ import earth.health.data.entity.Food
 import earth.health.data.entity.Meal
 import earth.health.data.entity.Meals
 import earth.health.data.entity.relations.MealWithFoods
+import earth.health.ui.food.FoodListScreen
 
 @Composable
 fun MealScreen(
@@ -36,14 +37,7 @@ fun MealScreen(
             }
         } else {
             val meal = mealWithFoods.meal
-            for (food in mealWithFoods.foods) {
-                TextButton(onClick = { textAction(food) }) {
-                    Text(
-                        text = food.name,
-                    )
-                }
-                Divider()
-            }
+            //FoodListScreen(foodList = mealWithFoods.foods, actionClickOnFood = )
         }
     }
 }

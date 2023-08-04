@@ -11,11 +11,11 @@ import earth.health.data.entity.Food
 import earth.health.data.entity.relations.FoodWithMeals
 
 @Composable
-fun FoodListScreen(foodList: List<FoodWithMeals>, actionClickOnFood: (FoodWithMeals) -> Unit) {
+fun FoodListScreen(foodList: List<Food>, actionClickOnFood: (Food) -> Unit) {
     LazyColumn {
         items(foodList) { food ->
             TextButton(onClick = { actionClickOnFood(food) }) {
-                Text(text = food.food.name)
+                Text(text = food.name)
             }
             Divider()
         }
@@ -26,7 +26,7 @@ fun FoodListScreen(foodList: List<FoodWithMeals>, actionClickOnFood: (FoodWithMe
 @Composable
 fun FoodListScreenPreview() {
     FoodListScreen(
-        foodList = listOf(FoodWithMeals(Food(name = "Banana"), listOf())),
+        foodList = listOf(Food(name = "Banana")),
         actionClickOnFood = {}
     )
 }

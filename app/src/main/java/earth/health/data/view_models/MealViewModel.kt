@@ -12,11 +12,16 @@ import kotlinx.coroutines.launch
 
 class MealViewModel(application: Application): AndroidViewModel(application) {
     val mealWithFoods = mutableStateListOf<MealWithFoods>()
+    val mealList = mutableStateListOf<Meal>()
 
     private val mealDAO = HealthDatabase.getDatabase(application).mealDAO()
 
     init {
         viewModelScope.launch {
+            val dbMealList = mealDAO.getAll()
+            for (mealWithFoods in dbMealList) {
+                mealList.add(mealWithFoods.meal)
+            }
             mealWithFoods.addAll(mealDAO.getAll())
         }
     }
@@ -27,7 +32,8 @@ class MealViewModel(application: Application): AndroidViewModel(application) {
     fun create(meal: Meal) {
         viewModelScope.launch {
             mealDAO.insert(meal = meal)
-            mealWithFoods.add(MealWithFoods(meal, listOf()))
+            mealWithFoods.add(MealWithFoods(meal, mutableStateListOf()))
+            mealList.add(meal)
         }
     }
 }
