@@ -20,7 +20,9 @@ class MealViewModel(application: Application): AndroidViewModel(application) {
         reloadAll()
     }
 
-    fun readMeal(id: Long) = mealWithFoods.first { it.meal.id == id }
+    fun readMealWithFoods(id: Long) = mealWithFoods.first { it.meal.id == id }
+    
+    fun readMeal(mealId: Long) = mealList.first { it.id == mealId }
 
     fun reloadAll() {
         viewModelScope.launch {

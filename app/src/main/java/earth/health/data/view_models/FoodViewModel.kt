@@ -25,12 +25,14 @@ class FoodViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
-    fun readFood(id: Long) = foodWithMealsList.first { it.food.id == id }
+    fun readFoodWithMeals(foodId: Long) = foodWithMealsList.first { it.food.id == foodId }
+
+    fun readFood(foodId: Long) = foodList.first { it.id == foodId }
 
     fun createFood(food: Food) {
         viewModelScope.launch {
             foodDAO.insert(food = food)
-            foodWithMealsList.add(FoodWithMeals(food, listOf()))
+            foodWithMealsList.add(FoodWithMeals(food, mutableStateListOf()))
             foodList.add(food)
         }
     }

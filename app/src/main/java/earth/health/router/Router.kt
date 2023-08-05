@@ -5,6 +5,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import earth.health.data.entity.Food
 import earth.health.data.view_models.DayViewModel
 import earth.health.data.view_models.FoodViewModel
 import earth.health.data.view_models.MealViewModel
@@ -49,8 +50,8 @@ fun Router() {
             val mealId = it.arguments!!.getString("meal_id")!!.toLong()
             val foodId = it.arguments!!.getString("food_id")!!.toLong()
             AddSelectedFoodToMeal(
-                food = foodViewModel.readFood(foodId).food,
-                meal = mealViewModel.readMeal(mealId).meal
+                food = foodViewModel.readFood(foodId),
+                meal = mealViewModel.readMeal(mealId)
             )
         }
         composable(Destination.FOODS.link + "/meal/{mealId}") {
@@ -69,7 +70,7 @@ fun Router() {
                 )
             }
         }
-        composable(Destination.FOODS.link + "/{id}") {navBackStackEntry ->
+        composable(Destination.FOODS.link + "/{id}") { navBackStackEntry ->
             val foodId = navBackStackEntry.arguments!!.getString("id")!!.toLong()
             FoodScreen(food = foodViewModel.foodWithMealsList.first() { it.food.id == foodId })
         }
