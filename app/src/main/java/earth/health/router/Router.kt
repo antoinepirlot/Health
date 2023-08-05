@@ -8,6 +8,7 @@ import androidx.navigation.compose.rememberNavController
 import earth.health.data.entity.Food
 import earth.health.data.view_models.DayViewModel
 import earth.health.data.view_models.FoodViewModel
+import earth.health.data.view_models.MealFoodCrossRefViewModel
 import earth.health.data.view_models.MealViewModel
 import earth.health.ui.HomeScreen
 import earth.health.ui.food.AddFoodScreen
@@ -28,6 +29,7 @@ fun Router() {
     if (mealWithFoods.isEmpty()) { // This is usefull for the really first launch to do not have meals blank page
         mealViewModel.reloadAll()
     }
+    val mealFoodCrossRefViewModel = viewModel<MealFoodCrossRefViewModel>()
 
     NavHost(navController = navController, startDestination = Destination.HOME.link) {
         composable(Destination.HOME.link) {
@@ -49,9 +51,16 @@ fun Router() {
         composable(Destination.MEALS.link + "/{meal_id}/{food_id}") {
             val mealId = it.arguments!!.getString("meal_id")!!.toLong()
             val foodId = it.arguments!!.getString("food_id")!!.toLong()
+            val food = foodViewModel.foodList.first { it.id == foodId}
+            val meal = mealViewModel.mealList.first { it.id == mealId}
             AddSelectedFoodToMeal(
-                food = foodViewModel.readFood(foodId),
-                meal = mealViewModel.readMeal(mealId)
+                food = food,
+                meal = meal,
+                addAction = {
+                    navController.popBackStack()
+                    navController.popBackStack() //back to the meal screen
+                    mealFoodCrossRefViewModel.insert(meal, food)
+                }
             )
         }
         composable(Destination.FOODS.link + "/meal/{mealId}") {

@@ -8,6 +8,7 @@ import androidx.room.TypeConverters
 import earth.health.data.dao.DayDAO
 import earth.health.data.dao.FoodDAO
 import earth.health.data.dao.MealDAO
+import earth.health.data.dao.MealFoodCrossRefDao
 import earth.health.data.entity.Converters
 import earth.health.data.entity.Day
 import earth.health.data.entity.Food
@@ -20,6 +21,7 @@ abstract class HealthDatabase : RoomDatabase() {
     abstract fun foodDAO(): FoodDAO
     abstract fun mealDAO(): MealDAO
     abstract fun dayDao(): DayDAO
+    abstract fun mealFoodCrossRefDao(): MealFoodCrossRefDao
 
     companion object {
         @Volatile private var INSTANCE : HealthDatabase? = null

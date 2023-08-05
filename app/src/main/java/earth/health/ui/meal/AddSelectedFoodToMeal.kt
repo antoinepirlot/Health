@@ -2,6 +2,7 @@ package earth.health.ui.meal
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
@@ -18,18 +19,21 @@ import earth.health.data.entity.Meal
 import earth.health.data.entity.Meals
 
 @Composable
-fun AddSelectedFoodToMeal(modifier: Modifier = Modifier, food: Food, meal: Meal) {
+fun AddSelectedFoodToMeal(modifier: Modifier = Modifier, food: Food, meal: Meal, addAction: () -> Unit) {
     var quantity by rememberSaveable { mutableStateOf("1.0") }
     Column(
         modifier = modifier.fillMaxSize(),
     ) {
         Text(text = stringResource(id = R.string.add_selected_food_to_meal_screen))
         TextField(value = quantity, onValueChange = { quantity = it })
+        Button(onClick = addAction) {
+            Text(text = stringResource(id = R.string.add))
+        }
     }
 }
 
 @Preview
 @Composable
 fun AddSelectedFoodToMealPreview() {
-    AddSelectedFoodToMeal(food = Food(name = "Hello"), meal = Meal(name = Meals.BREAKFAST, dayId = 0))
+    AddSelectedFoodToMeal(food = Food(name = "Hello"), meal = Meal(name = Meals.BREAKFAST, dayId = 0), addAction = {})
 }
