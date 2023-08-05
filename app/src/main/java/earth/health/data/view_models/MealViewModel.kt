@@ -17,16 +17,22 @@ class MealViewModel(application: Application): AndroidViewModel(application) {
     private val mealDAO = HealthDatabase.getDatabase(application).mealDAO()
 
     init {
+        reloadAll()
+    }
+
+    fun readMeal(id: Long) = mealWithFoods.first { it.meal.id == id }
+
+    fun reloadAll() {
         viewModelScope.launch {
             val dbMealList = mealDAO.getAll()
+            mealWithFoods.clear()
+            mealList.clear()
             for (mealWithFoods in dbMealList) {
                 mealList.add(mealWithFoods.meal)
             }
             mealWithFoods.addAll(mealDAO.getAll())
         }
     }
-
-    fun readMeal(id: Long) = mealWithFoods.first { it.meal.id == id }
 
 
     fun create(meal: Meal) {

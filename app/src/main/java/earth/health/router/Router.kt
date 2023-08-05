@@ -24,6 +24,9 @@ fun Router() {
     val mealViewModel = viewModel<MealViewModel>()
     val mealWithFoods = mealViewModel.mealWithFoods
     val foodViewModel = viewModel<FoodViewModel>()
+    if (mealWithFoods.isEmpty()) { // This is usefull for the really first launch to do not have meals blank page
+        mealViewModel.reloadAll()
+    }
 
     NavHost(navController = navController, startDestination = Destination.HOME.link) {
         composable(Destination.HOME.link) {
