@@ -12,8 +12,8 @@ import kotlinx.coroutines.launch
 class MealFoodCrossRefViewModel(application: Application): AndroidViewModel(application) {
     private val mealFoodCrossRefDao = HealthDatabase.getDatabase(application).mealFoodCrossRefDao()
 
-    fun insert(meal: Meal, food: Food) {
-        val mealFoodCrossRef = MealFoodCrossRef(mealId = meal.id, foodId = food.id)
+    fun insert(meal: Meal, food: Food, quantity: Double) {
+        val mealFoodCrossRef = MealFoodCrossRef(mealId = meal.id, foodId = food.id, quantity)
         viewModelScope.launch {
             mealFoodCrossRefDao.insert(mealFoodCrossRef)
         }

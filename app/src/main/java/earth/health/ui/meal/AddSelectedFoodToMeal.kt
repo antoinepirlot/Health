@@ -19,13 +19,12 @@ import earth.health.data.entity.Meal
 import earth.health.data.entity.Meals
 
 @Composable
-fun AddSelectedFoodToMeal(modifier: Modifier = Modifier, food: Food, meal: Meal, addAction: () -> Unit) {
-    var quantity by rememberSaveable { mutableStateOf("1.0") }
+fun AddSelectedFoodToMeal(modifier: Modifier = Modifier, food: Food, meal: Meal, quantity: String, onChangeQuantity: (String) -> Unit, addAction: () -> Unit) {
     Column(
         modifier = modifier.fillMaxSize(),
     ) {
         Text(text = stringResource(id = R.string.add_selected_food_to_meal_screen))
-        TextField(value = quantity, onValueChange = { quantity = it })
+        TextField(value = quantity, onValueChange = { onChangeQuantity })
         Button(onClick = addAction) {
             Text(text = stringResource(id = R.string.add))
         }
@@ -35,5 +34,5 @@ fun AddSelectedFoodToMeal(modifier: Modifier = Modifier, food: Food, meal: Meal,
 @Preview
 @Composable
 fun AddSelectedFoodToMealPreview() {
-    AddSelectedFoodToMeal(food = Food(name = "Hello"), meal = Meal(name = Meals.BREAKFAST, dayId = 0), addAction = {})
+    AddSelectedFoodToMeal(food = Food(name = "Hello"), meal = Meal(name = Meals.BREAKFAST, dayId = 0), quantity = "0.0", onChangeQuantity = {}, addAction = {})
 }

@@ -1,6 +1,10 @@
 package earth.health.router
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -51,15 +55,18 @@ fun Router() {
         composable(Destination.MEALS.link + "/{meal_id}/{food_id}") {
             val mealId = it.arguments!!.getString("meal_id")!!.toLong()
             val foodId = it.arguments!!.getString("food_id")!!.toLong()
+            var quantity by rememberSaveable { mutableStateOf("1.0") }
             val food = foodViewModel.foodList.first { it.id == foodId}
             val meal = mealViewModel.mealList.first { it.id == mealId}
             AddSelectedFoodToMeal(
                 food = food,
                 meal = meal,
+                quantity = quantity,
+                onChangeQuantity = { quantity = it },
                 addAction = {
                     navController.popBackStack()
                     navController.popBackStack() //back to the meal screen
-                    mealFoodCrossRefViewModel.insert(meal, food)
+                    mealFoodCrossRefViewModel.insert(meal, food, quantity.toDouble())
                 }
             )
         }

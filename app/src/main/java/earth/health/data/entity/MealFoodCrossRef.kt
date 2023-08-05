@@ -12,4 +12,6 @@ data class MealFoodCrossRef(
     var mealId: Long,
     @ColumnInfo(name = "food_id")
     var foodId: Long,
+    @ColumnInfo(name = "quantity")
+    var quantity: Double
 )
