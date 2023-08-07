@@ -13,5 +13,5 @@ data class MealFoodCrossRef(
     @ColumnInfo(name = "food_id")
     var foodId: Long,
     @ColumnInfo(name = "quantity")
-    var quantity: Double
+    var quantity: Double = 0.0
 )
