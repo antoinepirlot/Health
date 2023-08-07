@@ -54,9 +54,9 @@ fun Router() {
         composable(Destination.MEALS.link + "/{meal_id}/{food_id}") {
             val mealId = it.arguments!!.getString("meal_id")!!.toLong()
             val foodId = it.arguments!!.getString("food_id")!!.toLong()
-            var quantity by rememberSaveable { mutableStateOf("1.0") }
             val food = foodViewModel.foodList.first { it.id == foodId}
             val meal = mealViewModel.mealList.first { it.id == mealId}
+            var quantity by rememberSaveable { mealFoodCrossRefViewModel.getQuantity(meal = meal, food = food) }
             AddSelectedFoodToMeal(
                 food = food,
                 meal = meal,
