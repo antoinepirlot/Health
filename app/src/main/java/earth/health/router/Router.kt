@@ -9,7 +9,6 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import earth.health.data.entity.Food
 import earth.health.data.view_models.DayViewModel
 import earth.health.data.view_models.FoodViewModel
 import earth.health.data.view_models.MealFoodCrossRefViewModel
@@ -28,9 +27,9 @@ fun Router() {
     val navController = rememberNavController()
     val days = viewModel<DayViewModel>().days
     val mealViewModel = viewModel<MealViewModel>()
-    val mealWithFoods = mealViewModel.mealWithFoods
+    val mealWithFoodsList = mealViewModel.mealWithFoodsList
     val foodViewModel = viewModel<FoodViewModel>()
-    if (mealWithFoods.isEmpty()) { // This is usefull for the really first launch to do not have meals blank page
+    if (mealWithFoodsList.isEmpty()) { // This is usefull for the really first launch to do not have meals blank page
         mealViewModel.reloadAll()
     }
     val mealFoodCrossRefViewModel = viewModel<MealFoodCrossRefViewModel>()
@@ -40,14 +39,14 @@ fun Router() {
             HomeScreen(navController = navController, days = days)
         }
         composable(Destination.MEALS.link) {
-            MealHomeScreen(mealsWithFoods = mealWithFoods) { meal ->
+            MealHomeScreen(mealsWithFoods = mealWithFoodsList) { meal ->
                 navController.navigate(Destination.MEALS.link + "/${meal.id}")
             }
         }
         composable(Destination.MEALS.link + "/{id}") { navBackStackEntry ->
             val mealId = navBackStackEntry.arguments!!.getString("id")!!.toLong()
             MealScreen(
-                mealWithFoods = mealWithFoods.first() { it.meal.id == mealId },
+                mealWithFoods = mealWithFoodsList.first() { it.meal.id == mealId },
                 addAction = { navController.navigate(Destination.FOODS.link + "/meal/${mealId}") },
                 textAction = { navController.navigate(Destination.FOODS.link + "/${it.id}") }
             )
