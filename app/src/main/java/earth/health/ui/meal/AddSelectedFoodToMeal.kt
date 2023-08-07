@@ -24,7 +24,7 @@ fun AddSelectedFoodToMeal(modifier: Modifier = Modifier, food: Food, meal: Meal,
         modifier = modifier.fillMaxSize(),
     ) {
         Text(text = stringResource(id = R.string.add_selected_food_to_meal_screen))
-        TextField(value = quantity, onValueChange = { onChangeQuantity })
+        TextField(value = quantity, onValueChange = { onChangeQuantity(it) })
         Button(onClick = addAction) {
             Text(text = stringResource(id = R.string.add))
         }
