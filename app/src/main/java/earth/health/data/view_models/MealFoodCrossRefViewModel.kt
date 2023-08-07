@@ -26,7 +26,7 @@ class MealFoodCrossRefViewModel(application: Application): AndroidViewModel(appl
     fun insert(meal: Meal, food: Food, quantity: Double) {
         val mealFoodCrossRef = MealFoodCrossRef(mealId = meal.id, foodId = food.id, quantity)
         viewModelScope.launch {
-            mealFoodCrossRefDao.insert(mealFoodCrossRef)
+            mealFoodCrossRefDao.upsert(mealFoodCrossRef)
         }
     }
 }
