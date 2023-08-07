@@ -30,11 +30,11 @@ fun MealScreen(
         Text(text = stringResource(id = mealWithFoods.meal.name.mealNameId))
         if (mealWithFoods.foods.isEmpty()) {
             Text(text = stringResource(id = R.string.nothing))
-            Button(onClick = addAction) {
-                Text(text = stringResource(id = R.string.add))
-            }
         } else {
             FoodListScreen(foodList = mealWithFoods.foods, actionClickOnFood = textAction)
+        }
+        Button(onClick = addAction) {
+            Text(text = stringResource(id = R.string.add))
         }
     }
 }
