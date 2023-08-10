@@ -16,9 +16,13 @@ class MealFoodCrossRefViewModel(application: Application): AndroidViewModel(appl
     private val mealFoodCrossRefDao = HealthDatabase.getDatabase(application).mealFoodCrossRefDao()
 
     fun getQuantity(meal: Meal, food: Food): MutableState<String> {
-        var quantity = mutableStateOf("0.0")
+        val quantity = mutableStateOf("0.0")
         viewModelScope.launch {
-            quantity.value = mealFoodCrossRefDao.getQuantity(mealId = meal.id, foodId = food.id).toString()
+            try {
+                quantity.value = mealFoodCrossRefDao.getQuantity(mealId = meal.id, foodId = food.id).toString()
+            } catch (_: Throwable) { //TODO find the right exception to avoid catching anything
+
+            }
         }
         return quantity
     }
