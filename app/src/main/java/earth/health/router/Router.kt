@@ -2,7 +2,6 @@ package earth.health.router
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -48,7 +47,7 @@ fun Router() {
         composable(Destination.MEALS.link + "/{id}") { navBackStackEntry ->
             val mealId = navBackStackEntry.arguments!!.getString("id")!!.toLong()
             MealScreen(
-                mealWithFoods = mealWithFoodsList.first() { it.meal.id == mealId },
+                mealWithFoods = mealWithFoodsList.first { it.meal.id == mealId },
                 addAction = { navController.navigate(Destination.FOODS.link + "/meal/${mealId}") },
                 textAction = { navController.navigate(Destination.FOODS.link + "/${it.id}") }
             )
@@ -95,7 +94,7 @@ fun Router() {
         }
         composable(Destination.FOODS.link + "/{id}") { navBackStackEntry ->
             val foodId = navBackStackEntry.arguments!!.getString("id")!!.toLong()
-            FoodScreen(food = foodViewModel.foodWithMealsList.first() { it.food.id == foodId })
+            FoodScreen(food = foodViewModel.foodWithMealsList.first { it.food.id == foodId })
         }
         composable(Destination.WEIGHT.link) {
             WeightHomeScreen(navController)
