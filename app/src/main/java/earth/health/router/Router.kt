@@ -9,6 +9,8 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import earth.health.data.entity.Food
+import earth.health.data.entity.Meal
 import earth.health.data.view_models.DayViewModel
 import earth.health.data.view_models.FoodViewModel
 import earth.health.data.view_models.MealFoodCrossRefViewModel
@@ -51,12 +53,17 @@ fun Router() {
                 textAction = { navController.navigate(Destination.FOODS.link + "/${it.id}") }
             )
         }
-        composable(Destination.MEALS.link + "/{meal_id}/{food_id}") {
-            val mealId = it.arguments!!.getString("meal_id")!!.toLong()
-            val foodId = it.arguments!!.getString("food_id")!!.toLong()
-            val food = foodViewModel.foodList.first { it.id == foodId}
-            val meal = mealViewModel.mealList.first { it.id == mealId}
-            var quantity by rememberSaveable { mealFoodCrossRefViewModel.getQuantity(meal = meal, food = food) }
+        composable(Destination.MEALS.link + "/{meal_id}/{food_id}") { navBackStackEntry ->
+            val mealId = navBackStackEntry.arguments!!.getString("meal_id")!!.toLong()
+            val foodId = navBackStackEntry.arguments!!.getString("food_id")!!.toLong()
+            val food = foodViewModel.foodList.first { food: Food -> food.id == foodId }
+            val meal = mealViewModel.mealList.first { meal: Meal -> meal.id == mealId }
+            var quantity by rememberSaveable {
+                mealFoodCrossRefViewModel.getQuantity(
+                    meal = meal,
+                    food = food
+                )
+            }
             AddSelectedFoodToMeal(
                 food = food,
                 meal = meal,
