@@ -18,7 +18,7 @@ import earth.health.ui.HomeScreen
 import earth.health.ui.food.AddFoodScreen
 import earth.health.ui.food.AllFoodsScreen
 import earth.health.ui.food.FoodScreen
-import earth.health.ui.meal.AddSelectedFoodToMeal
+import earth.health.ui.meal.AddSelectedFoodToMealScreen
 import earth.health.ui.meal.MealHomeScreen
 import earth.health.ui.meal.MealScreen
 import earth.health.ui.weight.WeightHomeScreen
@@ -63,7 +63,7 @@ fun Router() {
                     food = food
                 )
             }
-            AddSelectedFoodToMeal(
+            AddSelectedFoodToMealScreen(
                 food = food,
                 meal = meal,
                 quantity = quantity,

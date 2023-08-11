@@ -15,7 +15,7 @@ import earth.health.data.entity.Meal
 import earth.health.data.entity.Meals
 
 @Composable
-fun AddSelectedFoodToMeal(modifier: Modifier = Modifier, food: Food, meal: Meal, quantity: String, onChangeQuantity: (String) -> Unit, addAction: () -> Unit) {
+fun AddSelectedFoodToMealScreen(modifier: Modifier = Modifier, food: Food, meal: Meal, quantity: String, onChangeQuantity: (String) -> Unit, addAction: () -> Unit) {
     Column(
         modifier = modifier.fillMaxSize(),
     ) {
@@ -30,5 +30,5 @@ fun AddSelectedFoodToMeal(modifier: Modifier = Modifier, food: Food, meal: Meal,
 @Preview
 @Composable
 fun AddSelectedFoodToMealPreview() {
-    AddSelectedFoodToMeal(food = Food(name = "Hello"), meal = Meal(name = Meals.BREAKFAST, dayId = 0), quantity = "0.0", onChangeQuantity = {}, addAction = {})
+    AddSelectedFoodToMealScreen(food = Food(name = "Hello"), meal = Meal(name = Meals.BREAKFAST, dayId = 0), quantity = "0.0", onChangeQuantity = {}, addAction = {})
 }
