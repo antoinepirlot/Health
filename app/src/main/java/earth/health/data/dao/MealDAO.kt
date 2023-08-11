@@ -24,4 +24,7 @@ interface MealDAO {
     @Transaction
     @Query("SELECT * FROM meals")
     suspend fun getAll(): List<MealWithFoods>
+
+    @Query("SELECT * FROM meals WHERE meal_id = :mealId")
+    suspend fun getOne(mealId: Long): MealWithFoods
 }

@@ -36,6 +36,13 @@ class MealViewModel(application: Application): AndroidViewModel(application) {
         }
     }
 
+    fun reloadMeal(meal: Meal) {
+        viewModelScope.launch {
+            val dbMeal = mealDAO.getOne(meal.id)
+            mealWithFoodsList.first { it.meal.id == meal.id }.foods = dbMeal.foods
+        }
+    }
+
 
     fun create(meal: Meal) {
         viewModelScope.launch {

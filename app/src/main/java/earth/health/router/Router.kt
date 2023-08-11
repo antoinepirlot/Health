@@ -65,7 +65,8 @@ fun Router() {
                 addAction = {
                     navController.popBackStack()
                     navController.popBackStack() //back to the meal screen
-                    mealFoodCrossRefViewModel.insert(meal, food, quantity.toDouble())
+                    suspend { mealFoodCrossRefViewModel.insert(meal, food, quantity.toDouble()) }
+                    mealViewModel.reloadMeal(meal = meal)
                 }
             )
         }
