@@ -26,10 +26,14 @@ import earth.health.ui.weight.WeightHomeScreen
 @Composable
 fun Router() {
     val navController = rememberNavController()
-    val days = viewModel<DayViewModel>().days
+    val dayViewModel = viewModel<DayViewModel>()
+    val days = dayViewModel.days
     val mealViewModel = viewModel<MealViewModel>()
     val mealWithFoodsList = mealViewModel.mealWithFoodsList
+    val mealList = mealViewModel.mealList
     val foodViewModel = viewModel<FoodViewModel>()
+    val foodWithMealsList = foodViewModel.foodWithMealsList
+    val foodList = foodViewModel.foodList
     if (mealWithFoodsList.isEmpty()) { // This is usefull for the really first launch to do not have meals blank page
         mealViewModel.reloadAll()
     }
@@ -55,8 +59,8 @@ fun Router() {
         composable(Destination.MEALS.link + "/{meal_id}/{food_id}") { navBackStackEntry ->
             val mealId = navBackStackEntry.arguments!!.getString("meal_id")!!.toLong()
             val foodId = navBackStackEntry.arguments!!.getString("food_id")!!.toLong()
-            val food = foodViewModel.foodList.first { food: Food -> food.id == foodId }
-            val meal = mealViewModel.mealList.first { meal: Meal -> meal.id == mealId }
+            val food = foodList.first { food: Food -> food.id == foodId }
+            val meal = mealList.first { meal: Meal -> meal.id == mealId }
             var quantity by rememberSaveable {
                 mealFoodCrossRefViewModel.getQuantity(
                     meal = meal,
