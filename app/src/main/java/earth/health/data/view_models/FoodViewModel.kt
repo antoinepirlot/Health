@@ -31,7 +31,7 @@ class FoodViewModel(application: Application) : AndroidViewModel(application) {
 
     fun createFood(food: Food) {
         viewModelScope.launch {
-            foodDAO.insert(food = food)
+            food.id = foodDAO.insert(food = food)
             foodWithMealsList.add(FoodWithMeals(food, mutableStateListOf()))
             foodList.add(food)
         }
