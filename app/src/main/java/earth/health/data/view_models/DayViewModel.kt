@@ -17,16 +17,11 @@ class DayViewModel(application: Application): AndroidViewModel(application) {
     private val dayDAO = HealthDatabase.getDatabase(application).dayDao()
 
     init {
+        days.clear()
         viewModelScope.launch {
             val dbDays = dayDAO.getAll()
-            if (dbDays.isEmpty()) {
-                create()
-                return@launch
-            }
             days.addAll(dbDays)
-            if (dbDays.last().date.isBefore(LocalDate.now())) {
-                create()
-            }
+            startNewDay()
         }
     }
 

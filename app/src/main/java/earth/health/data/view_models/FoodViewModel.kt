@@ -16,6 +16,8 @@ class FoodViewModel(application: Application) : AndroidViewModel(application) {
     private val foodDAO = HealthDatabase.getDatabase(application).foodDAO()
 
     init {
+        foodWithMealsList.clear()
+        foodList.clear()
         viewModelScope.launch {
             val dbFoodWithMeals = foodDAO.getAll()
             for (foodWithMeals in dbFoodWithMeals) {
