@@ -41,14 +41,23 @@ fun Router() {
 
     NavHost(navController = navController, startDestination = Destination.HOME.link) {
         composable(Destination.HOME.link) {
+            /**
+             * HOME PAGE
+             */
             HomeScreen(navController = navController, days = days)
         }
         composable(Destination.MEALS.link) {
+            /**
+             * All Meals Screens
+             */
             MealHomeScreen(mealsWithFoods = mealWithFoodsList) { meal ->
                 navController.navigate(Destination.MEALS.link + "/${meal.id}")
             }
         }
         composable(Destination.MEALS.link + "/{id}") { navBackStackEntry ->
+            /**
+             * 1 Meal Screen
+             */
             val mealId = navBackStackEntry.arguments!!.getString("id")!!.toLong()
             MealScreen(
                 mealWithFoods = mealWithFoodsList.first { it.meal.id == mealId },
@@ -57,6 +66,9 @@ fun Router() {
             )
         }
         composable(Destination.MEALS.link + "/{meal_id}/{food_id}") { navBackStackEntry ->
+            /**
+             * ADD FOOD TO MEAL
+             */
             val mealId = navBackStackEntry.arguments!!.getString("meal_id")!!.toLong()
             val foodId = navBackStackEntry.arguments!!.getString("food_id")!!.toLong()
             val food = foodList.first { food: Food -> food.id == foodId }
@@ -81,6 +93,9 @@ fun Router() {
             )
         }
         composable(Destination.FOODS.link + "/meal/{mealId}") {
+            /**
+             * LIST OF FOOD SCREEN
+             */
             val mealId = it.arguments!!.getString("mealId")!!.toLong()
             if (mealId > 0) {
                 AllFoodsScreen(
@@ -97,13 +112,22 @@ fun Router() {
             }
         }
         composable(Destination.FOODS.link + "/{id}") { navBackStackEntry ->
+            /**
+             * 1 FOOD SCREEN
+             */
             val foodId = navBackStackEntry.arguments!!.getString("id")!!.toLong()
             FoodScreen(food = foodViewModel.foodWithMealsList.first { it.food.id == foodId })
         }
         composable(Destination.WEIGHT.link) {
+            /**
+             * WEIGHT SCREEN
+             */
             WeightHomeScreen(navController)
         }
         composable(Destination.ADD_FOOD_SCREEN.link) {
+            /**
+             * ADD FOOD SCREEN
+             */
             AddFoodScreen()
         }
     }
