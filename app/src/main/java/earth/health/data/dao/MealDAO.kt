@@ -6,14 +6,15 @@ import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Transaction
 import androidx.room.Update
+import androidx.room.Upsert
 import earth.health.data.entity.Meal
 import earth.health.data.entity.relations.MealWithFoods
 
 @Dao
 interface MealDAO {
 
-    @Insert
-    suspend fun insert(meal: Meal): Long
+    @Upsert
+    suspend fun upsert(meal: Meal): Long
 
     @Delete
     suspend fun delete(meal: Meal)

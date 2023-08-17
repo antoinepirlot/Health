@@ -6,21 +6,28 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import earth.health.data.HealthDatabase
 import earth.health.data.entity.Day
+import earth.health.data.entity.Food
 import earth.health.data.entity.Meal
 import earth.health.data.entity.Meals
+import earth.health.data.entity.relations.DayWithMeals
 import kotlinx.coroutines.launch
+import java.lang.IllegalStateException
 import java.time.LocalDate
 
 class DayViewModel(application: Application): AndroidViewModel(application) {
     val days = mutableStateListOf<Day>()
+    val daysWithMeals = mutableStateListOf<DayWithMeals>()
 
     private val dayDAO = HealthDatabase.getDatabase(application).dayDao()
 
     init {
         days.clear()
         viewModelScope.launch {
-            val dbDays = dayDAO.getAll()
-            days.addAll(dbDays)
+            val dbDaysWithMeals = dayDAO.getAll()
+            for (dayWithMeals in dbDaysWithMeals) {
+                days.add(dayWithMeals.day)
+            }
+            daysWithMeals.addAll(dbDaysWithMeals)
         }
     }
 
@@ -41,7 +48,7 @@ class DayViewModel(application: Application): AndroidViewModel(application) {
     private fun create() {
         viewModelScope.launch {
             val newDay = Day()
-            dayDAO.insert(newDay)
+            dayDAO.upsert(newDay)
             days.add(newDay)
             newDay.id = nextId()
             val meals = listOf<Meal>(
@@ -56,9 +63,28 @@ class DayViewModel(application: Application): AndroidViewModel(application) {
         }
     }
 
+    fun getDayOfMeal(meal: Meal): Day {
+        for (dayWithMeals in daysWithMeals) {
+            for (tempMeal in dayWithMeals.meals) {
+                if (tempMeal.id == meal.id) {
+                    return dayWithMeals.day
+                }
+            }
+        }
+        throw IllegalStateException("Technically, the meal must have a day")
+    }
+
     private fun nextId(): Long {
         if (days.lastIndex == -1)
             return 1
         return (days.lastIndex + 1).toLong()
+    }
+
+    fun updateKcal(meal: Meal, food: Food, quantity: String) {
+        viewModelScope.launch {
+            val day = getDayOfMeal(meal)
+            day.totalKcal += (food.kcal.toDouble() * quantity.toDouble()).toInt()
+            dayDAO.upsert(day)
+        }
     }
 }

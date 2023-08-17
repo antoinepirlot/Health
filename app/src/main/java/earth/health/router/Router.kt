@@ -91,11 +91,14 @@ fun Router() {
                 food = food,
                 meal = meal,
                 quantity = quantity,
-                onChangeQuantity = { quantity = it },
+                onChangeQuantity = {quantity = it },
                 addAction = {
                     navController.popBackStack()
                     navController.popBackStack() //back to the meal screen
-                    suspend { mealFoodCrossRefViewModel.insert(meal, food, quantity.toDouble()) }
+                    mealFoodCrossRefViewModel.insert(meal, food, quantity.toDouble())
+                    // TODO fix to update the right kcal number (and not adding indefinitly
+                    mealViewModel.updateKcal(meal, food, quantity)
+                    dayViewModel.updateKcal(meal, food, quantity)
                     mealViewModel.reloadMeal(meal = meal)
                 }
             )

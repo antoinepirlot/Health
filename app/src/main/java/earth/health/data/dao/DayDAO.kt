@@ -7,30 +7,29 @@ import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Transaction
 import androidx.room.Update
+import androidx.room.Upsert
 import earth.health.data.entity.Day
 import earth.health.data.entity.Meal
+import earth.health.data.entity.relations.DayWithMeals
 
 @Dao
 interface DayDAO {
 
     @Query("SELECT * FROM days")
-    suspend fun getAll(): List<Day>
+    suspend fun getAll(): List<DayWithMeals>
 
     @Query("SELECT * FROM days WHERE day_id = :id")
-    suspend fun getDay(id: Long): Day
+    suspend fun getDay(id: Long): DayWithMeals
 
     @Transaction
     @Query("SELECT * FROM meals WHERE meal_id = :id")
     suspend fun getDayWithMeals(id: Long): List<Meal>
 
-    @Insert
-    suspend fun insert(day: Day)
+    @Upsert
+    suspend fun upsert(day: Day)
 
     @Insert
     suspend fun insertMeal(meal: Meal)
-
-    @Update
-    suspend fun update(day: Day)
 
     @Delete
     suspend fun delete(day: Day)
