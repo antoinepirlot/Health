@@ -24,18 +24,19 @@ import earth.health.data.view_models.FoodViewModel
 
 @Composable
 fun AddFoodScreen(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    foodViewModel: FoodViewModel
 ) {
     Column(
         modifier = modifier.fillMaxSize(),
     ) {
         Text(text = stringResource(id = R.string.add_food_screen))
-        AddFoodForm()
+        AddFoodForm(foodViewModel = foodViewModel)
     }
 }
 
 @Preview
 @Composable
 fun AddFoodScreenPreview() {
-    AddFoodScreen()
+    AddFoodScreen(foodViewModel = viewModel())
 }

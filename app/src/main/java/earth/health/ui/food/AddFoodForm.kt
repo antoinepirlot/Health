@@ -25,8 +25,8 @@ import earth.health.data.view_models.FoodViewModel
 @Composable
 fun AddFoodForm(
     modifier: Modifier = Modifier,
+    foodViewModel: FoodViewModel
 ) {
-    val foodViewModel = viewModel<FoodViewModel>()
     var foodName by rememberSaveable { mutableStateOf("") }
     var kcal by rememberSaveable { mutableStateOf("0") }
     var lipids by rememberSaveable { mutableStateOf("0.0") }
@@ -134,5 +134,5 @@ fun AddFoodForm(
 @Preview
 @Composable
 fun AddFoodFormPreview() {
-    AddFoodForm()
+    AddFoodForm(foodViewModel = viewModel())
 }

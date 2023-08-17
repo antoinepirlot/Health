@@ -12,7 +12,7 @@ import earth.health.data.entity.relations.MealWithFoods
 import earth.health.ui.utils.Card
 
 @Composable
-fun MealHomeScreen(modifier: Modifier = Modifier, mealsWithFoods: List<MealWithFoods>, action: (Meal) -> Unit) {
+fun MealHomeScreen(modifier: Modifier = Modifier, mealsWithFoods: List<MealWithFoods>, goToMealAction: (Meal) -> Unit) {
     Column(
         modifier = modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -21,7 +21,7 @@ fun MealHomeScreen(modifier: Modifier = Modifier, mealsWithFoods: List<MealWithF
             Card(
                 title = stringResource(id = mealWithFoods.meal.name.mealNameId),
                 text = "${mealWithFoods.meal.totalKcal} kcal",
-                mainAction = { action(mealWithFoods.meal) },
+                mainAction = { goToMealAction(mealWithFoods.meal) },
                 fastAction = {}
             )
         }
@@ -31,5 +31,5 @@ fun MealHomeScreen(modifier: Modifier = Modifier, mealsWithFoods: List<MealWithF
 @Preview
 @Composable
 fun MealHomeScreenPreview() {
-    MealHomeScreen(mealsWithFoods = listOf(), action = {})
+    MealHomeScreen(mealsWithFoods = listOf(), goToMealAction = {})
 }

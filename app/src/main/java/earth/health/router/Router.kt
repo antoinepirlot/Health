@@ -130,7 +130,7 @@ fun Router() {
             /**
              * ADD FOOD SCREEN
              */
-            AddFoodScreen()
+            AddFoodScreen(foodViewModel = foodViewModel)
         }
     }
 }
