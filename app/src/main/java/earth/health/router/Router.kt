@@ -62,9 +62,15 @@ fun Router() {
              */
             val mealId = navBackStackEntry.arguments!!.getString("id")!!.toLong()
             MealScreen(
-                mealWithFoods = mealWithFoodsList.first { it.meal.id == mealId },
-                addAction = { navController.navigate(Destination.FOODS.link + "/meal/${mealId}") },
-                textAction = { navController.navigate(Destination.FOODS.link + "/${it.id}") }
+                mealWithFoods = mealWithFoodsList.first { mealWithFoods ->
+                    mealWithFoods.meal.id == mealId
+                },
+                addAction = {
+                    navController.navigate(Destination.FOODS.link + "/meal/${mealId}")
+                },
+                textAction = { food ->
+                    navController.navigate(Destination.FOODS.link + "/${food.id}")
+                }
             )
         }
         composable(Destination.MEALS.link + "/{meal_id}/{food_id}") { navBackStackEntry ->
@@ -94,12 +100,12 @@ fun Router() {
                 }
             )
         }
-        composable(Destination.FOODS.link + "/meal/{mealId}") {
+        composable(Destination.FOODS.link + "/meal/{mealId}") { navBackStackEntry ->
             /**
              * LIST OF FOOD SCREEN
              */
-            val mealId = it.arguments!!.getString("mealId")!!.toLong()
-            if (mealId > 0) {
+            val mealId = navBackStackEntry.arguments!!.getString("mealId")!!.toLong()
+            if (mealId > 0) { // It means adding food to meal
                 AllFoodsScreen(
                     actionOpenFood = { food ->
                         navController.navigate(Destination.MEALS.link + "/${mealId}/${food.id}")
@@ -107,7 +113,7 @@ fun Router() {
                 )
             } else {
                 AllFoodsScreen(
-                    actionOpenFood = { food ->
+                    actionOpenFood = {food ->
                         navController.navigate(Destination.FOODS.link + "/${food.id}")
                     }
                 )
@@ -126,7 +132,7 @@ fun Router() {
              */
             WeightHomeScreen(navController)
         }
-        composable(Destination.ADD_FOOD_SCREEN.link) {
+        composable(Destination.ADD_FOOD_SCREEN.link) { navBackStackEntry ->
             /**
              * ADD FOOD SCREEN
              */
