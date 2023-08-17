@@ -38,10 +38,9 @@ fun HomeScreen(modifier: Modifier = Modifier, navController: NavController, days
         Card(
             title = stringResource(id = R.string.add_food_screen),
             text = "",
-            mainAction = { navController.navigate(Destination.ADD_FOOD_SCREEN.link) }
-        ) {
-
-        }
+            mainAction = { navController.navigate(Destination.ADD_FOOD_SCREEN.link) },
+            fastAction = {}
+        )
     }
 }
 
