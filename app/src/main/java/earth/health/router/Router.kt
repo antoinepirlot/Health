@@ -35,9 +35,6 @@ fun Router() {
     val foodViewModel = viewModel<FoodViewModel>()
     val foodWithMealsList = foodViewModel.foodWithMealsList
     val foodList = foodViewModel.foodList
-    if (mealWithFoodsList.isEmpty()) { // This is usefull for the really first launch to do not have meals blank page
-        mealViewModel.reloadAll()
-    }
     val mealFoodCrossRefViewModel = viewModel<MealFoodCrossRefViewModel>()
 
     NavHost(navController = navController, startDestination = Destination.HOME.link) {
