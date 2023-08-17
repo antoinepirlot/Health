@@ -22,6 +22,7 @@ import earth.health.ui.meal.AddSelectedFoodToMealScreen
 import earth.health.ui.meal.MealHomeScreen
 import earth.health.ui.meal.MealScreen
 import earth.health.ui.weight.WeightHomeScreen
+import earth.health.ui.InitialiseHomeScreen
 
 @Composable
 fun Router() {
@@ -44,7 +45,11 @@ fun Router() {
             /**
              * HOME PAGE
              */
-            HomeScreen(navController = navController, days = days)
+            if (days.isEmpty()) {
+                InitialiseHomeScreen(startNewDay = { dayViewModel.startNewDay() })
+            } else {
+                HomeScreen(navController = navController, days = days)
+            }
         }
         composable(Destination.MEALS.link) {
             /**
