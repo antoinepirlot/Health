@@ -80,14 +80,6 @@ class DayViewModel(application: Application): AndroidViewModel(application) {
         return (days.lastIndex + 1).toLong()
     }
 
-    fun updateKcal(meal: Meal, food: Food, quantity: String) {
-        viewModelScope.launch {
-            val day = getDayOfMeal(meal)
-            day.totalKcal += (food.kcal.toDouble() * quantity.toDouble()).toInt()
-            dayDAO.upsert(day)
-        }
-    }
-
     fun reloadDay(dayId: Long) {
         viewModelScope.launch {
             val dbDay = dayDAO.getDay(dayId)

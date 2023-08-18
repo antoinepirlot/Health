@@ -52,11 +52,4 @@ class MealViewModel(application: Application): AndroidViewModel(application) {
             mealList.add(meal)
         }
     }
-
-    fun updateKcal(meal: Meal, food: Food, quantity: String) {
-        viewModelScope.launch {
-            meal.totalKcal += (food.kcal.toDouble() * quantity.toDouble()).toInt()
-            mealDAO.upsert(meal)
-        }
-    }
 }
