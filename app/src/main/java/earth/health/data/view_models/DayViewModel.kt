@@ -87,4 +87,12 @@ class DayViewModel(application: Application): AndroidViewModel(application) {
             dayDAO.upsert(day)
         }
     }
+
+    fun reloadDay(dayId: Long) {
+        viewModelScope.launch {
+            val dbDay = dayDAO.getDay(dayId)
+            daysWithMeals.first { it.day.id == dayId }.day.totalKcal = dbDay.day.totalKcal
+            days.first { it.id == dayId }.totalKcal = dbDay.day.totalKcal
+        }
+    }
 }
