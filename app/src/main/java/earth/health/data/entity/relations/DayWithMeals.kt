@@ -8,6 +8,6 @@ import earth.health.data.entity.Meal
 data class DayWithMeals (
     @Embedded
     val day: Day,
-    @Relation(parentColumn = "day_id", entityColumn = "meal_id")
+    @Relation(parentColumn = "day_id", entityColumn = "day_id")
     val meals: List<Meal>,
 )
