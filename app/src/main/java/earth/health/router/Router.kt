@@ -10,6 +10,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import earth.health.data.entity.Food
 import earth.health.data.entity.Meal
+import earth.health.data.entity.relations.MealWithFoods
 import earth.health.data.view_models.DayViewModel
 import earth.health.data.view_models.FoodViewModel
 import earth.health.data.view_models.MealFoodCrossRefViewModel
@@ -80,26 +81,25 @@ fun Router() {
             val mealId = navBackStackEntry.arguments!!.getString("meal_id")!!.toLong()
             val foodId = navBackStackEntry.arguments!!.getString("food_id")!!.toLong()
             val food = foodList.first { food: Food -> food.id == foodId }
-            val meal = mealList.first { meal: Meal -> meal.id == mealId }
+            val mealWithFoods = mealWithFoodsList.first { mealWithFoods: MealWithFoods ->
+                mealWithFoods.meal.id == mealId
+            }
             var quantity by rememberSaveable {
                 mealFoodCrossRefViewModel.getQuantity(
-                    meal = meal,
+                    meal = mealWithFoods.meal,
                     food = food
                 )
             }
             AddSelectedFoodToMealScreen(
                 food = food,
-                meal = meal,
+                meal = mealWithFoods.meal,
                 quantity = quantity,
                 onChangeQuantity = {quantity = it },
                 addAction = {
                     navController.popBackStack()
                     navController.popBackStack() //back to the meal screen
-                    mealFoodCrossRefViewModel.insert(meal, food, quantity.toDouble())
-                    // TODO fix to update the right kcal number (and not adding indefinitly
-                    mealViewModel.updateKcal(meal, food, quantity)
-                    dayViewModel.updateKcal(meal, food, quantity)
-                    mealViewModel.reloadMeal(meal = meal)
+                    mealFoodCrossRefViewModel.insert(mealWithFoods = mealWithFoods, food, quantity.toDouble())
+                    mealViewModel.reloadMeal(meal = mealWithFoods.meal)
                 }
             )
         }

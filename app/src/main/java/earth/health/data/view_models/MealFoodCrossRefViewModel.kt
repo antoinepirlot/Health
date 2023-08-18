@@ -9,6 +9,8 @@ import earth.health.data.HealthDatabase
 import earth.health.data.entity.Food
 import earth.health.data.entity.Meal
 import earth.health.data.entity.MealFoodCrossRef
+import earth.health.data.entity.relations.MealWithFoods
+import earth.health.data.utils.getTotalKcal
 import kotlinx.coroutines.launch
 
 class MealFoodCrossRefViewModel(application: Application): AndroidViewModel(application) {
@@ -26,10 +28,25 @@ class MealFoodCrossRefViewModel(application: Application): AndroidViewModel(appl
         return quantity
     }
 
-    fun insert(meal: Meal, food: Food, quantity: Double) {
-        val mealFoodCrossRef = MealFoodCrossRef(mealId = meal.id, foodId = food.id, quantity)
+    fun insert(mealWithFoods: MealWithFoods, food: Food, quantity: Double) {
         viewModelScope.launch {
+            val mealFoodCrossRef = MealFoodCrossRef(mealId = mealWithFoods.meal.id, foodId = food.id, quantity)
             mealFoodCrossRefDao.upsert(mealFoodCrossRef)
+            updateKcal(mealWithFoods = mealWithFoods)
+        }
+    }
+
+    private fun updateKcal(mealWithFoods: MealWithFoods) {
+        viewModelScope.launch {
+            val meal = mealWithFoods.meal
+            val oldKcal = meal.totalKcal
+            meal.totalKcal = getTotalKcal(
+                mealWithFoods = mealWithFoods,
+                mealFoodCrossRef = mealFoodCrossRefDao.getAll()
+            )
+            mealFoodCrossRefDao.updateMealTotalKcal(mealId = meal.id, totalKcal = meal.totalKcal)
+            val dayTotalKcalToUpdate = meal.totalKcal - oldKcal
+            mealFoodCrossRefDao.updateDayTotalKcal(dayId = meal.dayId, totalKcalToUpdate = dayTotalKcalToUpdate)
         }
     }
 }
