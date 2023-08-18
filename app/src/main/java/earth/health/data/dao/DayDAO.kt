@@ -15,13 +15,14 @@ import earth.health.data.entity.relations.DayWithMeals
 @Dao
 interface DayDAO {
 
+    @Transaction
     @Query("SELECT * FROM days")
     suspend fun getAll(): List<DayWithMeals>
 
+    @Transaction
     @Query("SELECT * FROM days WHERE day_id = :id")
     suspend fun getDay(id: Long): DayWithMeals
 
-    @Transaction
     @Query("SELECT * FROM meals WHERE meal_id = :id")
     suspend fun getDayWithMeals(id: Long): List<Meal>
 
