@@ -63,7 +63,7 @@ class DayViewModel(application: Application): AndroidViewModel(application) {
         }
     }
 
-    fun getDayOfMeal(meal: Meal): Day {
+    fun getOne(meal: Meal): Day {
         for (dayWithMeals in daysWithMeals) {
             for (tempMeal in dayWithMeals.meals) {
                 if (tempMeal.id == meal.id) {

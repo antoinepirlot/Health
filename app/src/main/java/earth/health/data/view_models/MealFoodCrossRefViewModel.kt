@@ -6,6 +6,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import earth.health.data.HealthDatabase
+import earth.health.data.entity.Day
 import earth.health.data.entity.Food
 import earth.health.data.entity.Meal
 import earth.health.data.entity.MealFoodCrossRef
@@ -28,15 +29,15 @@ class MealFoodCrossRefViewModel(application: Application): AndroidViewModel(appl
         return quantity
     }
 
-    fun insert(mealWithFoods: MealWithFoods, food: Food, quantity: Double) {
+    fun insert(mealWithFoods: MealWithFoods, day: Day, food: Food, quantity: Double) {
         viewModelScope.launch {
             val mealFoodCrossRef = MealFoodCrossRef(mealId = mealWithFoods.meal.id, foodId = food.id, quantity)
             mealFoodCrossRefDao.upsert(mealFoodCrossRef)
-            updateKcal(mealWithFoods = mealWithFoods)
+            updateKcal(mealWithFoods = mealWithFoods, day = day)
         }
     }
 
-    private fun updateKcal(mealWithFoods: MealWithFoods) {
+    private fun updateKcal(mealWithFoods: MealWithFoods, day: Day) {
         viewModelScope.launch {
             val meal = mealWithFoods.meal
             val oldKcal = meal.totalKcal
@@ -47,6 +48,7 @@ class MealFoodCrossRefViewModel(application: Application): AndroidViewModel(appl
             mealFoodCrossRefDao.updateMealTotalKcal(mealId = meal.id, totalKcal = meal.totalKcal)
             val dayTotalKcalToUpdate = meal.totalKcal - oldKcal
             mealFoodCrossRefDao.updateDayTotalKcal(dayId = meal.dayId, totalKcalToUpdate = dayTotalKcalToUpdate)
+            day.totalKcal += dayTotalKcalToUpdate
         }
     }
 }
