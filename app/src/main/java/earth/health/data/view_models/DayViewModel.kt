@@ -47,7 +47,6 @@ class DayViewModel(application: Application): AndroidViewModel(application) {
     private fun create() {
         viewModelScope.launch {
             val newDay = Day()
-            dayDAO.upsert(newDay)
             days.add(newDay)
             newDay.id = nextId()
             val meals = listOf<Meal>(
@@ -56,6 +55,8 @@ class DayViewModel(application: Application): AndroidViewModel(application) {
                 Meal(name = Meals.DINNER, dayId = newDay.id),
                 Meal(name = Meals.EXTRAS, dayId = newDay.id),
             )
+            daysWithMeals.add(DayWithMeals(day = newDay, meals = meals))
+            dayDAO.upsert(newDay)
             for (meal in meals) {
                 dayDAO.insertMeal(meal)
             }
