@@ -1,4 +1,4 @@
-package earth.health.ui.food
+package earth.health.ui.utils
 
 import android.widget.Toast
 import androidx.compose.foundation.layout.Column
