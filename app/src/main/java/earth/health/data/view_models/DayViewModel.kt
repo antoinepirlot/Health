@@ -21,7 +21,6 @@ class DayViewModel(application: Application): AndroidViewModel(application) {
     private val dayDAO = HealthDatabase.getDatabase(application).dayDao()
 
     init {
-        days.clear()
         viewModelScope.launch {
             val dbDaysWithMeals = dayDAO.getAll()
             for (dayWithMeals in dbDaysWithMeals) {
