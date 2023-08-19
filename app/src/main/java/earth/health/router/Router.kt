@@ -30,13 +30,17 @@ fun Router() {
     val navController = rememberNavController()
     val dayViewModel = viewModel<DayViewModel>()
     val days = dayViewModel.days
+    val daysWithMeals = dayViewModel.daysWithMeals
+
     val mealViewModel = viewModel<MealViewModel>()
     val mealWithFoodsList = mealViewModel.mealWithFoodsList
     val mealList = mealViewModel.mealList
+
+    val mealFoodCrossRefViewModel = viewModel<MealFoodCrossRefViewModel>()
+
     val foodViewModel = viewModel<FoodViewModel>()
     val foodWithMealsList = foodViewModel.foodWithMealsList
     val foodList = foodViewModel.foodList
-    val mealFoodCrossRefViewModel = viewModel<MealFoodCrossRefViewModel>()
 
     NavHost(navController = navController, startDestination = Destination.HOME.link) {
         composable(Destination.HOME.link) {
