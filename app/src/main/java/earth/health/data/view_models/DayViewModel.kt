@@ -36,7 +36,6 @@ class DayViewModel(application: Application): AndroidViewModel(application) {
     fun startNewDay() {
         if (days.isEmpty() || days.last().date.isBefore(LocalDate.now())) {
             create()
-            return
         }
     }
 
