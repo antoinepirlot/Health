@@ -9,17 +9,23 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import earth.health.R
 import earth.health.data.entity.Day
+import earth.health.data.view_models.DayViewModel
 import earth.health.ui.theme.HealthTheme
 import earth.health.router.Destination
 import earth.health.ui.utils.Card
 
 @Composable
-fun HomeScreen(modifier: Modifier = Modifier, navController: NavController, days: List<Day>) {
-    val latestDay = days.last()
+fun HomeScreen(
+    modifier: Modifier = Modifier,
+    navController: NavController,
+    dayViewModel: DayViewModel
+) {
+    val latestDay = dayViewModel.days.last()
     val kcalText = latestDay.totalKcal.toString() + "/1920kcal"
     Column(
         modifier = modifier.fillMaxSize(),
@@ -48,7 +54,7 @@ fun HomeScreen(modifier: Modifier = Modifier, navController: NavController, days
 @Composable
 fun HomePreview() {
     HealthTheme {
-        HomeScreen(navController = rememberNavController(), days = listOf())
+        HomeScreen(navController = rememberNavController(), dayViewModel = viewModel())
     }
 }
 

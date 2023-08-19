@@ -29,28 +29,19 @@ import earth.health.ui.InitialiseHomeScreen
 fun Router() {
     val navController = rememberNavController()
     val dayViewModel = viewModel<DayViewModel>()
-    val days = dayViewModel.days
-    val daysWithMeals = dayViewModel.daysWithMeals
-
     val mealViewModel = viewModel<MealViewModel>()
-    val mealWithFoodsList = mealViewModel.mealWithFoodsList
-    val mealList = mealViewModel.mealList
-
     val mealFoodCrossRefViewModel = viewModel<MealFoodCrossRefViewModel>()
-
     val foodViewModel = viewModel<FoodViewModel>()
-    val foodWithMealsList = foodViewModel.foodWithMealsList
-    val foodList = foodViewModel.foodList
 
     NavHost(navController = navController, startDestination = Destination.HOME.link) {
         composable(Destination.HOME.link) {
             /**
              * HOME PAGE
              */
-            if (days.isEmpty()) {
+            if (dayViewModel.days.isEmpty()) {
                 InitialiseHomeScreen(startNewDay = { dayViewModel.startNewDay() })
             } else {
-                HomeScreen(navController = navController, days = days)
+                HomeScreen(navController = navController, dayViewModel = dayViewModel)
             }
         }
         composable(Destination.MEALS.link) {
@@ -83,9 +74,6 @@ fun Router() {
              */
             val mealId = navBackStackEntry.arguments!!.getString("meal_id")!!.toLong()
             val foodId = navBackStackEntry.arguments!!.getString("food_id")!!.toLong()
-            val mealWithFoods = mealWithFoodsList.first { mealWithFoods: MealWithFoods ->
-                mealWithFoods.meal.id == mealId
-            }
             AddSelectedFoodToMealScreen(
                 foodId = foodId,
                 mealId = mealId,
