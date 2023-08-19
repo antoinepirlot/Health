@@ -21,7 +21,7 @@ class MealViewModel(application: Application): AndroidViewModel(application) {
         reloadAll()
     }
 
-    fun readMealWithFoods(id: Long) = mealWithFoodsList.first { it.meal.id == id }
+    fun readMealWithFoods(mealId: Long) = mealWithFoodsList.first { it.meal.id == mealId }
     
     fun readMeal(mealId: Long) = mealList.first { it.id == mealId }
 

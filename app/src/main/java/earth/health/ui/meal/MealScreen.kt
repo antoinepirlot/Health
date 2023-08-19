@@ -9,20 +9,23 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.viewmodel.compose.viewModel
 import earth.health.R
 import earth.health.data.entity.Food
-import earth.health.data.entity.Meal
-import earth.health.data.entity.Meals
-import earth.health.data.entity.relations.MealWithFoods
+import earth.health.data.view_models.MealViewModel
 import earth.health.ui.food.FoodListScreen
 
 @Composable
 fun MealScreen(
     modifier: Modifier = Modifier,
-    mealWithFoods: MealWithFoods,
+    mealId: Long,
+    mealViewModel: MealViewModel,
     addAction: () -> Unit,
     textAction: (Food) -> Unit
 ) {
+    val mealWithFoods = mealViewModel.mealWithFoodsList.first { mealWithFoods ->
+        mealWithFoods.meal.id == mealId
+    }
     Column(
         modifier = modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally
@@ -43,18 +46,8 @@ fun MealScreen(
 @Composable
 fun MealScreenWithoutFoodPreview() {
     MealScreen(
-        mealWithFoods = MealWithFoods(Meal(name = Meals.BREAKFAST, dayId = 0), listOf()),
-        addAction = {},
-        textAction = {})
-}
-
-@Preview
-@Composable
-fun MealScreenWithFoodPreview() {
-    MealScreen(
-        mealWithFoods = MealWithFoods(Meal(name = Meals.BREAKFAST, dayId = 0), listOf(
-            Food(name = "Banana")
-        )),
+        mealId = 0,
+        mealViewModel = viewModel(),
         addAction = {},
         textAction = {})
 }

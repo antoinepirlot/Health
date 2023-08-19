@@ -7,21 +7,24 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.viewmodel.compose.viewModel
 import earth.health.data.entity.Meal
 import earth.health.data.entity.relations.MealWithFoods
+import earth.health.data.view_models.MealViewModel
 import earth.health.ui.utils.Card
 
 @Composable
-fun MealHomeScreen(modifier: Modifier = Modifier, mealsWithFoods: List<MealWithFoods>, goToMealAction: (Meal) -> Unit) {
+fun MealHomeScreen(modifier: Modifier = Modifier, mealViewModel: MealViewModel, goToMealAction: (Meal) -> Unit) {
+    val meals = mealViewModel.mealList
     Column(
         modifier = modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        for (mealWithFoods in mealsWithFoods) {
+        for (meal in meals) {
             Card(
-                title = stringResource(id = mealWithFoods.meal.name.mealNameId),
-                text = "${mealWithFoods.meal.totalKcal} kcal",
-                mainAction = { goToMealAction(mealWithFoods.meal) },
+                title = stringResource(id = meal.name.mealNameId),
+                text = "${meal.totalKcal} kcal",
+                mainAction = { goToMealAction(meal) },
                 fastAction = {}
             )
         }
@@ -31,5 +34,5 @@ fun MealHomeScreen(modifier: Modifier = Modifier, mealsWithFoods: List<MealWithF
 @Preview
 @Composable
 fun MealHomeScreenPreview() {
-    MealHomeScreen(mealsWithFoods = listOf(), goToMealAction = {})
+    MealHomeScreen(mealViewModel = viewModel(), goToMealAction = {})
 }

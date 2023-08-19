@@ -6,12 +6,18 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import earth.health.data.entity.relations.FoodWithMeals
+import earth.health.data.view_models.FoodViewModel
 
 @Composable
-fun FoodScreen(modifier: Modifier = Modifier, food: FoodWithMeals) {
+fun FoodScreen(
+    modifier: Modifier = Modifier,
+    foodViewModel: FoodViewModel,
+    foodId: Long
+) {
+    val food = foodViewModel.readFood(foodId = foodId)
     Column(
         modifier = modifier.fillMaxSize()
     ) {
-        Text(text = food.food.name)
+        Text(text = food.name)
     }
 }

@@ -57,7 +57,7 @@ fun Router() {
             /**
              * All Meals Screens
              */
-            MealHomeScreen(mealsWithFoods = mealWithFoodsList) { meal ->
+            MealHomeScreen(mealViewModel = mealViewModel) { meal ->
                 navController.navigate(Destination.MEALS.link + "/${meal.id}")
             }
         }
@@ -67,9 +67,8 @@ fun Router() {
              */
             val mealId = navBackStackEntry.arguments!!.getString("id")!!.toLong()
             MealScreen(
-                mealWithFoods = mealWithFoodsList.first { mealWithFoods ->
-                    mealWithFoods.meal.id == mealId
-                },
+                mealId = mealId,
+                mealViewModel = mealViewModel,
                 addAction = {
                     navController.navigate(Destination.FOODS.link + "/meal/${mealId}")
                 },
@@ -84,31 +83,19 @@ fun Router() {
              */
             val mealId = navBackStackEntry.arguments!!.getString("meal_id")!!.toLong()
             val foodId = navBackStackEntry.arguments!!.getString("food_id")!!.toLong()
-            val food = foodList.first { food: Food -> food.id == foodId }
             val mealWithFoods = mealWithFoodsList.first { mealWithFoods: MealWithFoods ->
                 mealWithFoods.meal.id == mealId
             }
-            var quantity by rememberSaveable {
-                mealFoodCrossRefViewModel.getQuantity(
-                    meal = mealWithFoods.meal,
-                    food = food
-                )
-            }
             AddSelectedFoodToMealScreen(
-                food = food,
-                meal = mealWithFoods.meal,
-                quantity = quantity,
-                onChangeQuantity = {quantity = it },
+                foodId = foodId,
+                mealId = mealId,
+                foodViewModel = foodViewModel,
+                mealViewModel = mealViewModel,
+                mealFoodCrossRefViewModel = mealFoodCrossRefViewModel,
+                dayViewModel = dayViewModel,
                 addAction = {
                     navController.popBackStack()
                     navController.popBackStack() //back to the meal screen
-                    val mealDay = dayViewModel.getOne(meal = mealWithFoods.meal)
-                    mealFoodCrossRefViewModel.insert(
-                        mealWithFoods = mealWithFoods,
-                        day = mealDay,
-                        food = food,
-                        quantity = quantity.toDouble()
-                    )
                 }
             )
         }
@@ -136,7 +123,7 @@ fun Router() {
              * 1 FOOD SCREEN
              */
             val foodId = navBackStackEntry.arguments!!.getString("id")!!.toLong()
-            FoodScreen(food = foodViewModel.foodWithMealsList.first { it.food.id == foodId })
+            FoodScreen(foodViewModel = foodViewModel, foodId = foodId)
         }
         composable(Destination.WEIGHT.link) {
             /**
