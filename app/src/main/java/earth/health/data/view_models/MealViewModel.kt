@@ -1,12 +1,16 @@
 package earth.health.data.view_models
 
 import android.app.Application
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import earth.health.data.HealthDatabase
 import earth.health.data.entity.Meal
+import earth.health.data.entity.getBlankMeal
 import earth.health.data.entity.relations.MealWithFoods
+import earth.health.data.entity.relations.getBlankMealsWithFoods
 import kotlinx.coroutines.launch
 
 
@@ -20,9 +24,21 @@ class MealViewModel(application: Application): AndroidViewModel(application) {
         reloadAll()
     }
 
-    fun readMealWithFoods(mealId: Long) = mealWithFoodsList.first { it.meal.id == mealId }
+    fun readMealWithFoods(mealId: Long): MutableState<MealWithFoods> {
+        val mealWithFood = mutableStateOf(getBlankMealsWithFoods())
+        viewModelScope.launch {
+            mealWithFood.value = mealDAO.getOneWithFoods(mealId = mealId)
+        }
+        return mealWithFood
+    }
     
-    fun readMeal(mealId: Long) = mealList.first { it.id == mealId }
+    fun readMeal(mealId: Long): MutableState<Meal> {
+        val meal = mutableStateOf(getBlankMeal())
+        viewModelScope.launch {
+            meal.value = mealDAO.getOne(mealId = mealId)
+        }
+        return meal
+    }
 
     fun reloadAll() {
         viewModelScope.launch {
@@ -33,13 +49,6 @@ class MealViewModel(application: Application): AndroidViewModel(application) {
                 mealList.add(mealWithFoods.meal)
             }
             mealWithFoodsList.addAll(mealDAO.getAll())
-        }
-    }
-
-    fun reloadMeal(meal: Meal) {
-        viewModelScope.launch {
-            val dbMeal = mealDAO.getOne(meal.id)
-            mealWithFoodsList.first { it.meal.id == meal.id }.foods = dbMeal.foods
         }
     }
 
