@@ -23,33 +23,39 @@ import earth.health.ui.utils.Card
 @Composable
 fun HomeScreen(
     modifier: Modifier = Modifier,
+    isVeryFirstLaunch: Boolean,
     navController: NavController,
     dayViewModel: DayViewModel
 ) {
-    val latestDay by remember {
-        dayViewModel.getLastDay()
-    }
-    val kcalText = latestDay.totalKcal.toString() + "/1920kcal"
-    Column(
-        modifier = modifier.fillMaxSize(),
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        Card(
-            title = stringResource(id = R.string.food),
-            text = kcalText,
-            mainAction = { navController.navigate(Destination.MEALS.link) },
-            fastAction = {})
-        Card(
-            title = stringResource(id = R.string.weight),
-            text = "80 kg",
-            mainAction = { navController.navigate(Destination.WEIGHT.link) },
-            fastAction = {})
-        Card(
-            title = stringResource(id = R.string.add_food_screen),
-            text = "",
-            mainAction = { navController.navigate(Destination.ADD_FOOD_SCREEN.link) },
-            fastAction = {}
-        )
+    if (isVeryFirstLaunch) {
+        InitialiseHomeScreen {
+        }
+    } else {
+        val latestDay by remember {
+            dayViewModel.getLastDay()
+        }
+        val kcalText = latestDay.totalKcal.toString() + "/1920kcal"
+        Column(
+            modifier = modifier.fillMaxSize(),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Card(
+                title = stringResource(id = R.string.food),
+                text = kcalText,
+                mainAction = { navController.navigate(Destination.MEALS.link) },
+                fastAction = {})
+            Card(
+                title = stringResource(id = R.string.weight),
+                text = "80 kg",
+                mainAction = { navController.navigate(Destination.WEIGHT.link) },
+                fastAction = {})
+            Card(
+                title = stringResource(id = R.string.add_food_screen),
+                text = "",
+                mainAction = { navController.navigate(Destination.ADD_FOOD_SCREEN.link) },
+                fastAction = {}
+            )
+        }
     }
 }
 
@@ -57,7 +63,7 @@ fun HomeScreen(
 @Composable
 fun HomePreview() {
     HealthTheme {
-        HomeScreen(navController = rememberNavController(), dayViewModel = viewModel())
+        HomeScreen(navController = rememberNavController(), isVeryFirstLaunch = true, dayViewModel = viewModel())
     }
 }
 

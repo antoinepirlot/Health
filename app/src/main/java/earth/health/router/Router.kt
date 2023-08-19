@@ -1,5 +1,6 @@
 package earth.health.router
 
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
@@ -37,12 +38,7 @@ fun Router() {
             val isVeryFirstLaunch by remember {
                 dayViewModel.isEmpty()
             }
-
-            if (isVeryFirstLaunch) {
-                InitialiseHomeScreen(startNewDay = { dayViewModel.startNewDay() })
-            } else {
-                HomeScreen(navController = navController, dayViewModel = dayViewModel)
-            }
+            HomeScreen(navController = navController, isVeryFirstLaunch = isVeryFirstLaunch, dayViewModel = dayViewModel)
         }
         composable(Destination.MEALS.link) {
             /**
@@ -94,12 +90,14 @@ fun Router() {
             val mealId = navBackStackEntry.arguments!!.getString("mealId")!!.toLong()
             if (mealId > 0) { // It means adding food to meal
                 AllFoodsScreen(
+                    foodViewModel = foodViewModel,
                     actionOpenFood = { food ->
                         navController.navigate(Destination.MEALS.link + "/${mealId}/${food.id}")
                     }
                 )
             } else {
                 AllFoodsScreen(
+                    foodViewModel = foodViewModel,
                     actionOpenFood = {food ->
                         navController.navigate(Destination.FOODS.link + "/${food.id}")
                     }

@@ -14,8 +14,12 @@ import earth.health.data.entity.Food
 import earth.health.data.view_models.FoodViewModel
 
 @Composable
-fun AllFoodsScreen(modifier: Modifier = Modifier, actionOpenFood: (Food) -> Unit) {
-    val foodList = viewModel<FoodViewModel>().foodList
+fun AllFoodsScreen(
+    modifier: Modifier = Modifier,
+    foodViewModel: FoodViewModel,
+    actionOpenFood: (Food) -> Unit
+) {
+    val foodList = foodViewModel.getAll()
     Column(
         modifier = modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally
@@ -35,5 +39,5 @@ fun AllFoodsScreen(modifier: Modifier = Modifier, actionOpenFood: (Food) -> Unit
 @Preview
 @Composable
 fun AllFoodScreenPreview() {
-    AllFoodsScreen(actionOpenFood = {})
+    AllFoodsScreen(foodViewModel = viewModel(), actionOpenFood = {})
 }

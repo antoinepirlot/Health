@@ -1,6 +1,8 @@
 package earth.health.data.view_models
 
 import android.app.Application
+import android.database.sqlite.SQLiteConstraintException
+import android.database.sqlite.SQLiteException
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.AndroidViewModel
@@ -13,10 +15,19 @@ import earth.health.data.entity.getBlankDay
 import earth.health.data.entity.relations.DayWithMeals
 import kotlinx.coroutines.launch
 import java.lang.Exception
+import java.lang.IllegalStateException
+import java.sql.SQLException
+import java.time.LocalDate
 
 class DayViewModel(application: Application): AndroidViewModel(application) {
 
     private val dayDAO = HealthDatabase.getDatabase(application).dayDao()
+
+    init {
+        viewModelScope.launch {
+            startNewDay()
+        }
+     }
 
     /**
      * Create a new day and add it to the days list
@@ -24,13 +35,11 @@ class DayViewModel(application: Application): AndroidViewModel(application) {
     fun startNewDay(): MutableState<Day> {
         val dayToReturn = mutableStateOf(getBlankDay())
         viewModelScope.launch {
-            try {
-                dayDAO.getOne((1).toLong())
-            } catch (_: Exception) {
-                throw IllegalStateException("You can't create concurrent days for the same date")
+            if (dayDAO.count() > (0).toLong() && dayDAO.getLastDay().date.isEqual(LocalDate.now())) {
+                return@launch
             }
             val newDay = Day()
-            newDay.id = dayDAO.lastId()
+            newDay.id = dayDAO.nextId()
             dayToReturn.value = newDay
             dayDAO.upsert(newDay)
             val meals = listOf(
@@ -50,9 +59,10 @@ class DayViewModel(application: Application): AndroidViewModel(application) {
         val isEmpty = mutableStateOf(true)
         viewModelScope.launch {
             try {
-                dayDAO.getLastDay()
+                dayDAO.getLastDay().id
                 isEmpty.value = false
-            } catch (_: Exception) {
+            } catch (_: Throwable) {
+
             }
         }
         return isEmpty

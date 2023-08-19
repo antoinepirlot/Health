@@ -4,6 +4,7 @@ import android.app.Application
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import earth.health.data.HealthDatabase
@@ -14,21 +15,24 @@ import earth.health.data.entity.relations.getBlankFoodWithMeals
 import kotlinx.coroutines.launch
 
 class FoodViewModel(application: Application) : AndroidViewModel(application) {
-    val foodWithMealsList = mutableStateListOf<FoodWithMeals>()
-    val foodList = mutableStateListOf<Food>()
 
     private val foodDAO = HealthDatabase.getDatabase(application).foodDAO()
 
-    init {
-        foodWithMealsList.clear()
-        foodList.clear()
+    fun getAll(): SnapshotStateList<Food> {
+        val foodList = mutableStateListOf<Food>()
         viewModelScope.launch {
-            val dbFoodWithMeals = foodDAO.getAll()
-            for (foodWithMeals in dbFoodWithMeals) {
-                foodList.add(foodWithMeals.food)
-            }
-            foodWithMealsList.addAll(dbFoodWithMeals)
+            foodList.addAll(foodDAO.getAll())
         }
+        return foodList
+    }
+
+    fun getAllWithMeals(): SnapshotStateList<FoodWithMeals> {
+        val foodList = mutableStateListOf<FoodWithMeals>()
+        viewModelScope.launch {
+            foodList.addAll(foodDAO.getAllWithMeals()
+            )
+        }
+        return foodList
     }
 
     fun readFoodWithMeals(foodId: Long): MutableState<FoodWithMeals> {
@@ -47,11 +51,9 @@ class FoodViewModel(application: Application) : AndroidViewModel(application) {
         return food
     }
 
-    fun createFood(food: Food) {
+    fun upsert(food: Food) {
         viewModelScope.launch {
-            food.id = foodDAO.insert(food = food)
-            foodWithMealsList.add(FoodWithMeals(food, mutableStateListOf()))
-            foodList.add(food)
+            food.id = foodDAO.upsert(food = food)
         }
     }
 }

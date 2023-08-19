@@ -113,7 +113,7 @@ fun AddFoodForm(
                     alimentaryFiber = alimentaryFiber.toDouble(),
                     calcium = calcium.toDouble()
                 )
-                foodViewModel.createFood(food)
+                foodViewModel.upsert(food)
                 foodName = ""
                 kcal = "0"
                 lipids = "0.0"
