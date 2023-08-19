@@ -20,4 +20,4 @@ data class FoodWithMeals(
     var meals: List<Meal>
 )
 
-fun getDefaultFoodWithMeals() = FoodWithMeals(getBlankFood(), listOf())
+fun getBlanktFoodWithMeals() = FoodWithMeals(getBlankFood(), listOf())
