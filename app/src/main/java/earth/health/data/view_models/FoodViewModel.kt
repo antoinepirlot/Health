@@ -33,13 +33,17 @@ class FoodViewModel(application: Application) : AndroidViewModel(application) {
 
     fun readFoodWithMeals(foodId: Long): MutableState<FoodWithMeals> {
         val foodWithMeals = mutableStateOf(getBlankFoodWithMeals())
-        foodWithMeals.value = foodWithMealsList.first { it.food.id == foodId }
+        viewModelScope.launch {
+            foodWithMeals.value = foodDAO.getOneWithMeals(foodId = foodId)
+        }
         return foodWithMeals
     }
 
     fun readFood(foodId: Long): MutableState<Food> {
         val food = mutableStateOf(getBlankFood())
-        food.value = foodList.first { it.id == foodId }
+        viewModelScope.launch {
+            food.value = foodDAO.getOne(foodId = foodId)
+        }
         return food
     }
 
