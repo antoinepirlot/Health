@@ -1,6 +1,8 @@
 package earth.health.router
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -32,7 +34,11 @@ fun Router() {
             /**
              * HOME PAGE
              */
-            if (dayViewModel.days.isEmpty()) {
+            val isVeryFirstLaunch by remember {
+                dayViewModel.isEmpty()
+            }
+
+            if (isVeryFirstLaunch) {
                 InitialiseHomeScreen(startNewDay = { dayViewModel.startNewDay() })
             } else {
                 HomeScreen(navController = navController, dayViewModel = dayViewModel)

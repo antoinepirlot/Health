@@ -15,8 +15,7 @@ import earth.health.data.entity.relations.DayWithMeals
 import earth.health.data.entity.relations.getBlankDayWithMeals
 import earth.health.data.entity.relations.getBlankFoodWithMeals
 import kotlinx.coroutines.launch
-import java.lang.IllegalStateException
-import java.time.LocalDate
+import java.lang.Exception
 
 class DayViewModel(application: Application): AndroidViewModel(application) {
     val days = mutableStateListOf<Day>()
@@ -60,6 +59,18 @@ class DayViewModel(application: Application): AndroidViewModel(application) {
             }
         }
         return dayToReturn
+    }
+
+    fun isEmpty(): MutableState<Boolean> {
+        val isEmpty = mutableStateOf(true)
+        viewModelScope.launch {
+            try {
+                dayDAO.getLastDay()
+                isEmpty.value = false
+            } catch (_: Exception) {
+            }
+        }
+        return isEmpty
     }
 
     fun getOne(meal: Meal): MutableState<Day> {
