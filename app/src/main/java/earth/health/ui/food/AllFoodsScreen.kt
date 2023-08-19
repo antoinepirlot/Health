@@ -11,7 +11,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
 import earth.health.R
 import earth.health.data.entity.Food
-import earth.health.data.entity.relations.FoodWithMeals
 import earth.health.data.view_models.FoodViewModel
 
 @Composable

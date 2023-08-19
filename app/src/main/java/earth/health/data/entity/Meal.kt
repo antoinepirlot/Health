@@ -21,7 +21,7 @@ data class Meal(
 
 )
 
-fun getDefaultMeals() = arrayListOf<Meal>(
+fun getDefaultMeals() = arrayListOf(
     Meal(name = Meals.BREAKFAST, dayId = (0).toLong())
 )
 

@@ -9,7 +9,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
 import earth.health.data.entity.Meal
-import earth.health.data.entity.relations.MealWithFoods
 import earth.health.data.view_models.MealViewModel
 import earth.health.ui.utils.Card
 

@@ -5,7 +5,6 @@ import androidx.compose.runtime.mutableStateListOf
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import earth.health.data.HealthDatabase
-import earth.health.data.entity.Food
 import earth.health.data.entity.Meal
 import earth.health.data.entity.relations.MealWithFoods
 import kotlinx.coroutines.launch

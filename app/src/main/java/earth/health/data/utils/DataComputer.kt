@@ -1,6 +1,5 @@
 package earth.health.data.utils
 
-import earth.health.data.entity.Food
 import earth.health.data.entity.MealFoodCrossRef
 import earth.health.data.entity.relations.MealWithFoods
 

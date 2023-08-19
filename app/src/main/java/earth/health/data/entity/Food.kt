@@ -39,6 +39,6 @@ data class Food(
 
 )
 
-fun getDefaultFood() = listOf<Food>(
+fun getDefaultFood() = listOf(
     Food(name = "Banana", kcal = 105, lipids = 0.3, saturatedLipids = 0.1, calcium = 6.0, alimentaryFiber = 3.1, protein = 1.2, sugar = 14.4, carbohydrates = 26.9),
 )

@@ -1,12 +1,10 @@
 package earth.health.data.dao
 
-import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Transaction
-import androidx.room.Update
 import androidx.room.Upsert
 import earth.health.data.entity.Day
 import earth.health.data.entity.Meal
