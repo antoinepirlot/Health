@@ -7,6 +7,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
@@ -30,7 +31,9 @@ fun AddSelectedFoodToMealScreen(
     mealId: Long,
     addAction: () -> Unit
 ) {
-    val food = foodViewModel.readFood(foodId = foodId)
+    val food by remember {
+        foodViewModel.readFood(foodId = foodId)
+    }
     val mealWithFoods = mealViewModel.readMealWithFoods(mealId = mealId)
     var quantity by rememberSaveable {
         mealFoodCrossRefViewModel.getQuantity(
@@ -49,7 +52,7 @@ fun AddSelectedFoodToMealScreen(
             mealFoodCrossRefViewModel.insert(
                 mealWithFoods = mealWithFoods,
                 day = mealDay,
-                food = foodViewModel.readFood(foodId = foodId),
+                food = food,
                 quantity = quantity.toDouble()
             )
         }) {

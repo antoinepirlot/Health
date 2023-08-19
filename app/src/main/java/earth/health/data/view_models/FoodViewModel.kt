@@ -1,11 +1,14 @@
 package earth.health.data.view_models
 
 import android.app.Application
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import earth.health.data.HealthDatabase
 import earth.health.data.entity.Food
+import earth.health.data.entity.getBlankFood
 import earth.health.data.entity.relations.FoodWithMeals
 import kotlinx.coroutines.launch
 
@@ -29,7 +32,11 @@ class FoodViewModel(application: Application) : AndroidViewModel(application) {
 
     fun readFoodWithMeals(foodId: Long) = foodWithMealsList.first { it.food.id == foodId }
 
-    fun readFood(foodId: Long) = foodList.first { it.id == foodId }
+    fun readFood(foodId: Long): MutableState<Food> {
+        val food = mutableStateOf(getBlankFood())
+        food.value = foodList.first { it.id == foodId }
+        return food
+    }
 
     fun createFood(food: Food) {
         viewModelScope.launch {
