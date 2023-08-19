@@ -18,3 +18,5 @@ data class Day(
     @ColumnInfo(name = "total_kcal")
     var totalKcal: Int = 0,
 )
+
+fun getBlankDay() = Day()

@@ -15,3 +15,5 @@ data class MealFoodCrossRef(
     @ColumnInfo(name = "quantity")
     var quantity: Double = 0.0
 )
+
+fun getBlankMealFoodCrossRef() = MealFoodCrossRef(mealId = 0, foodId = 0)

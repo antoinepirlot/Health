@@ -32,3 +32,5 @@ private fun computeTotalKcal(foodList: List<Food>): Int {
     }
     return totalKcal
 }
+
+fun getBlankMeal() = Meal(name = Meals.BREAKFAST, dayId = 0)
