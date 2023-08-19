@@ -10,6 +10,7 @@ import earth.health.data.HealthDatabase
 import earth.health.data.entity.Food
 import earth.health.data.entity.getBlankFood
 import earth.health.data.entity.relations.FoodWithMeals
+import earth.health.data.entity.relations.getBlankFoodWithMeals
 import kotlinx.coroutines.launch
 
 class FoodViewModel(application: Application) : AndroidViewModel(application) {
@@ -30,7 +31,11 @@ class FoodViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
-    fun readFoodWithMeals(foodId: Long) = foodWithMealsList.first { it.food.id == foodId }
+    fun readFoodWithMeals(foodId: Long): MutableState<FoodWithMeals> {
+        val foodWithMeals = mutableStateOf(getBlankFoodWithMeals())
+        foodWithMeals.value = foodWithMealsList.first { it.food.id == foodId }
+        return foodWithMeals
+    }
 
     fun readFood(foodId: Long): MutableState<Food> {
         val food = mutableStateOf(getBlankFood())
