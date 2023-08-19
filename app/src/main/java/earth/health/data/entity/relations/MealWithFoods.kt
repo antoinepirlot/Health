@@ -6,6 +6,7 @@ import androidx.room.Relation
 import earth.health.data.entity.Food
 import earth.health.data.entity.Meal
 import earth.health.data.entity.MealFoodCrossRef
+import earth.health.data.entity.getBlankMeal
 
 data class MealWithFoods(
     @Embedded
@@ -18,3 +19,5 @@ data class MealWithFoods(
     )
     var foods: List<Food>
 )
+
+fun getDefaultMealsWithFoods() = MealWithFoods(getBlankMeal(), listOf())
