@@ -34,12 +34,9 @@ class DayViewModel(application: Application): AndroidViewModel(application) {
      * Create a new day and add it to the days list
      */
     fun startNewDay() {
-        if (days.isEmpty() || days.last().date.isBefore(LocalDate.now())) {
-            create()
+        if (days.isNotEmpty() && days.last().date.isEqual(LocalDate.now())) {
+            return
         }
-    }
-
-    private fun create() {
         viewModelScope.launch {
             val newDay = Day()
             days.add(newDay)
