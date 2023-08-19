@@ -32,4 +32,10 @@ interface DayDAO {
 
     @Delete
     suspend fun delete(day: Day)
+
+    @Query("SELECT day_id FROM days ORDER BY day_id DESC LIMIT 1")
+    suspend fun lastId(): Long
+
+    @Query("SELECT * FROM days ORDER BY day_id DESC LIMIT 1")
+    suspend fun getLastDay(): Day
 }
