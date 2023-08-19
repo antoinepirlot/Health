@@ -48,7 +48,7 @@ fun AddSelectedFoodToMealScreen(
         TextField(value = quantity, onValueChange = { quantity = it })
         Button(onClick = {
             addAction()
-            val mealDay = dayViewModel.getOne(meal = mealWithFoods.meal)
+            val mealDay = dayViewModel.getOne(meal = mealWithFoods.meal).value
             mealFoodCrossRefViewModel.insert(
                 mealWithFoods = mealWithFoods,
                 day = mealDay,

@@ -12,6 +12,8 @@ import earth.health.data.entity.Meal
 import earth.health.data.entity.Meals
 import earth.health.data.entity.getBlankDay
 import earth.health.data.entity.relations.DayWithMeals
+import earth.health.data.entity.relations.getBlankDayWithMeals
+import earth.health.data.entity.relations.getBlankFoodWithMeals
 import kotlinx.coroutines.launch
 import java.lang.IllegalStateException
 import java.time.LocalDate
@@ -60,28 +62,17 @@ class DayViewModel(application: Application): AndroidViewModel(application) {
         return dayToReturn
     }
 
-    fun getOne(meal: Meal): Day {
-        for (dayWithMeals in daysWithMeals) {
-            for (tempMeal in dayWithMeals.meals) {
-                if (tempMeal.id == meal.id) {
-                    return dayWithMeals.day
-                }
-            }
+    fun getOne(meal: Meal): MutableState<Day> {
+        val day = mutableStateOf(getBlankDay())
+        viewModelScope.launch {
+            day.value = dayDAO.getDay(meal.dayId).day
         }
-        throw IllegalStateException("Technically, the meal must have a day")
+        return day
     }
 
     private fun nextId(): Long {
         if (days.lastIndex == -1)
             return 1
         return (days.lastIndex + 1).toLong()
-    }
-
-    fun reloadDay(dayId: Long) {
-        viewModelScope.launch {
-            val dbDay = dayDAO.getDay(dayId)
-            daysWithMeals.first { it.day.id == dayId }.day.totalKcal = dbDay.day.totalKcal
-            days.first { it.id == dayId }.totalKcal = dbDay.day.totalKcal
-        }
     }
 }
