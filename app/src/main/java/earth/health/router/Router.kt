@@ -3,6 +3,7 @@ package earth.health.router
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -12,6 +13,7 @@ import earth.health.data.view_models.FoodViewModel
 import earth.health.data.view_models.MealFoodCrossRefViewModel
 import earth.health.data.view_models.MealWithFoodsViewModel
 import earth.health.ui.HomeScreen
+import earth.health.ui.InitialiseHomeScreen
 import earth.health.ui.food.AddFoodScreen
 import earth.health.ui.food.AllFoodsScreen
 import earth.health.ui.food.FoodScreen
@@ -33,7 +35,16 @@ fun Router() {
             /**
              * HOME PAGE
              */
-            HomeScreen(navController = navController, dayViewModel = dayViewModel)
+            val isLoaded by rememberSaveable {
+                dayViewModel.isLoaded
+            }
+            if (isLoaded) {
+                HomeScreen(navController = navController, dayViewModel = dayViewModel)
+            } else {
+                InitialiseHomeScreen {
+
+                }
+            }
         }
         composable(Destination.MEALS.link) {
             /**
