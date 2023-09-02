@@ -30,6 +30,7 @@ class FoodViewModel(application: Application) : AndroidViewModel(application) {
     fun upsert(food: Food) {
         viewModelScope.launch {
             food.id = foodDAO.upsert(food = food)
+            foodList.add(food)
         }
     }
 }
