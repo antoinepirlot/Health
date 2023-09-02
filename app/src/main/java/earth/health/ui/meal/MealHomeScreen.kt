@@ -19,8 +19,8 @@ fun MealHomeScreen(modifier: Modifier = Modifier, mealWithFoodsViewModel: MealWi
         modifier = modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        for (mealWithFoodsList in mealWithFoodsList) {
-            val meal = mealWithFoodsList.meal
+        for (mealWithFoods in mealWithFoodsList) {
+            val meal = mealWithFoods.meal
             Card(
                 title = stringResource(id = meal.name.mealNameId),
                 text = "${meal.totalKcal} kcal",
