@@ -15,10 +15,6 @@ import earth.health.ui.utils.Card
 @Composable
 fun MealHomeScreen(modifier: Modifier = Modifier, mealWithFoodsViewModel: MealWithFoodsViewModel, goToMealAction: (Meal) -> Unit) {
     val mealWithFoodsList = mealWithFoodsViewModel.mealWithFoodsList
-    if (mealWithFoodsList.isEmpty()) {
-        //this condition is required for the very firt launch otherrwise this page is blank
-        mealWithFoodsViewModel.reloadAll()
-    }
     Column(
         modifier = modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
