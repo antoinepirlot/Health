@@ -18,15 +18,16 @@ import java.time.LocalDate
 class DayViewModel(application: Application): AndroidViewModel(application) {
 
     val days = mutableStateListOf<Day>()
-    val isVeryFirstLaunch = mutableStateOf(true)
+    val isLoaded = mutableStateOf(false)
 
     private val dayDAO = HealthDatabase.getDatabase(application).dayDao()
 
     init {
         viewModelScope.launch {
             val dbDays = dayDAO.getAll()
+            days.addAll(dbDays)
             if (dbDays.isNotEmpty() && dayDAO.getLastDay().date.isEqual(LocalDate.now())) {
-                isVeryFirstLaunch.value = false
+                isLoaded.value = true
                 return@launch
             }
             val newDay = Day()
@@ -41,6 +42,7 @@ class DayViewModel(application: Application): AndroidViewModel(application) {
             for (meal in meals) {
                 dayDAO.insertMeal(meal)
             }
+            isLoaded.value = true
         }
      }
 
@@ -79,5 +81,5 @@ class DayViewModel(application: Application): AndroidViewModel(application) {
         return dayToReturn
     }
 
-    fun getLastDay() = days.last()
+    fun getLastDay(): Day = days.last()
 }

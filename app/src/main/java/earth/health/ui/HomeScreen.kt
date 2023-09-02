@@ -27,16 +27,16 @@ fun HomeScreen(
     navController: NavController,
     dayViewModel: DayViewModel
 ) {
-    val isVeryFirstLaunch by rememberSaveable {
-        dayViewModel.isVeryFirstLaunch
+    val isLoaded by rememberSaveable {
+        dayViewModel.isLoaded
     }
 
-    if (isVeryFirstLaunch) {
+    if (!isLoaded) {
         InitialiseHomeScreen {
         }
     } else {
         val latestDay = dayViewModel.getLastDay()
-        val kcalText = latestDay.totalKcal.toString() + "/1920kcal"
+        val kcalText = latestDay!!.totalKcal.toString() + "/1920kcal"
         Column(
             modifier = modifier.fillMaxSize(),
             horizontalAlignment = Alignment.CenterHorizontally

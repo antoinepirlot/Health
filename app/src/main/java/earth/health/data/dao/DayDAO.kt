@@ -15,7 +15,7 @@ interface DayDAO {
 
     @Transaction
     @Query("SELECT * FROM days")
-    suspend fun getAll(): List<DayWithMeals>
+    suspend fun getAll(): List<Day>
 
     @Query("SELECT * FROM days WHERE day_id = :dayId")
     suspend fun getOne(dayId: Long): Day
