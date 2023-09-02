@@ -11,15 +11,15 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
 import earth.health.R
 import earth.health.data.entity.Food
+import earth.health.data.entity.getDefaultFood
 import earth.health.data.view_models.FoodViewModel
 
 @Composable
 fun AllFoodsScreen(
     modifier: Modifier = Modifier,
-    foodViewModel: FoodViewModel,
+    foodList: List<Food>,
     actionOpenFood: (Food) -> Unit
 ) {
-    val foodList = foodViewModel.foodList
     Column(
         modifier = modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally
@@ -39,5 +39,5 @@ fun AllFoodsScreen(
 @Preview
 @Composable
 fun AllFoodScreenPreview() {
-    AllFoodsScreen(foodViewModel = viewModel(), actionOpenFood = {})
+    AllFoodsScreen(foodList = getDefaultFood(), actionOpenFood = {})
 }

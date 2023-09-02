@@ -96,14 +96,14 @@ fun Router() {
             val mealId = navBackStackEntry.arguments!!.getString("mealId")!!.toLong()
             if (mealId > 0) { // It means adding food to meal
                 AllFoodsScreen(
-                    foodViewModel = foodViewModel,
+                    foodList = foodViewModel.foodList,
                     actionOpenFood = { food ->
                         navController.navigate(Destination.MEALS.link + "/${mealId}/${food.id}")
                     }
                 )
             } else {
                 AllFoodsScreen(
-                    foodViewModel = foodViewModel,
+                    foodList = foodViewModel.foodList,
                     actionOpenFood = {food ->
                         navController.navigate(Destination.FOODS.link + "/${food.id}")
                     }
