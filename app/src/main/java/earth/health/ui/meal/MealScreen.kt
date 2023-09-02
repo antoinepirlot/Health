@@ -23,9 +23,7 @@ fun MealScreen(
     addAction: () -> Unit,
     textAction: (Food) -> Unit
 ) {
-    val mealWithFoods = mealWithFoodsViewModel.mealWithFoodsList.first { mealWithFoods ->
-        mealWithFoods.meal.id == mealId
-    }
+    val mealWithFoods = mealWithFoodsViewModel.readMealWithFoods(mealId = mealId)
     Column(
         modifier = modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally

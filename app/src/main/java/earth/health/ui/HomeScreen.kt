@@ -7,6 +7,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -23,10 +24,13 @@ import earth.health.ui.utils.Card
 @Composable
 fun HomeScreen(
     modifier: Modifier = Modifier,
-    isVeryFirstLaunch: Boolean,
     navController: NavController,
     dayViewModel: DayViewModel
 ) {
+    val isVeryFirstLaunch by rememberSaveable {
+        dayViewModel.isVeryFirstLaunch
+    }
+
     if (isVeryFirstLaunch) {
         InitialiseHomeScreen {
         }
@@ -61,7 +65,7 @@ fun HomeScreen(
 @Composable
 fun HomePreview() {
     HealthTheme {
-        HomeScreen(navController = rememberNavController(), isVeryFirstLaunch = true, dayViewModel = viewModel())
+        HomeScreen(navController = rememberNavController(), dayViewModel = viewModel())
     }
 }
 

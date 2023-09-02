@@ -33,10 +33,7 @@ fun Router() {
             /**
              * HOME PAGE
              */
-            val isVeryFirstLaunch by remember {
-                dayViewModel.isVeryFirstLaunch()
-            }
-            HomeScreen(navController = navController, isVeryFirstLaunch = isVeryFirstLaunch, dayViewModel = dayViewModel)
+            HomeScreen(navController = navController, dayViewModel = dayViewModel)
         }
         composable(Destination.MEALS.link) {
             /**

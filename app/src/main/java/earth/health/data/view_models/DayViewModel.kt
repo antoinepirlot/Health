@@ -4,6 +4,7 @@ import android.app.Application
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import earth.health.data.HealthDatabase
@@ -17,6 +18,7 @@ import java.time.LocalDate
 class DayViewModel(application: Application): AndroidViewModel(application) {
 
     val days = mutableStateListOf<Day>()
+    val isVeryFirstLaunch = mutableStateOf(true)
 
     private val dayDAO = HealthDatabase.getDatabase(application).dayDao()
 
@@ -24,6 +26,7 @@ class DayViewModel(application: Application): AndroidViewModel(application) {
         viewModelScope.launch {
             val dbDays = dayDAO.getAll()
             if (dbDays.isNotEmpty() && dayDAO.getLastDay().date.isEqual(LocalDate.now())) {
+                isVeryFirstLaunch.value = false
                 return@launch
             }
             val newDay = Day()
@@ -75,20 +78,6 @@ class DayViewModel(application: Application): AndroidViewModel(application) {
         }
         return dayToReturn
     }
-
-    fun isVeryFirstLaunch(): MutableState<Boolean> {
-        val isEmpty = mutableStateOf(true)
-        viewModelScope.launch {
-            try {
-                dayDAO.getLastDay().id
-                isEmpty.value = false
-            } catch (_: Throwable) {
-
-            }
-        }
-        return isEmpty
-    }
-
 
     fun getLastDay() = days.last()
 }
