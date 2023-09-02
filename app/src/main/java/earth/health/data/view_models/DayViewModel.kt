@@ -1,9 +1,8 @@
 package earth.health.data.view_models
 
 import android.app.Application
-import android.database.sqlite.SQLiteConstraintException
-import android.database.sqlite.SQLiteException
 import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
@@ -12,22 +11,44 @@ import earth.health.data.entity.Day
 import earth.health.data.entity.Meal
 import earth.health.data.entity.Meals
 import earth.health.data.entity.getBlankDay
-import earth.health.data.entity.relations.DayWithMeals
 import kotlinx.coroutines.launch
-import java.lang.Exception
-import java.lang.IllegalStateException
-import java.sql.SQLException
 import java.time.LocalDate
 
 class DayViewModel(application: Application): AndroidViewModel(application) {
+
+    val days = mutableStateListOf<Day>()
 
     private val dayDAO = HealthDatabase.getDatabase(application).dayDao()
 
     init {
         viewModelScope.launch {
-            startNewDay()
+            val dbDays = dayDAO.getAll()
+            if (dbDays.isNotEmpty() && dayDAO.getLastDay().date.isEqual(LocalDate.now())) {
+                return@launch
+            }
+            val newDay = Day()
+            newDay.id = dayDAO.nextId()
+            dayDAO.upsert(newDay)
+            val meals = listOf(
+                Meal(name = Meals.BREAKFAST, dayId = newDay.id),
+                Meal(name = Meals.LUNCH, dayId = newDay.id),
+                Meal(name = Meals.DINNER, dayId = newDay.id),
+                Meal(name = Meals.EXTRAS, dayId = newDay.id),
+            )
+            for (meal in meals) {
+                dayDAO.insertMeal(meal)
+            }
         }
      }
+
+    fun getOne(meal: Meal): MutableState<Day> {
+        val day = mutableStateOf(getBlankDay())
+        viewModelScope.launch {
+            day.value = dayDAO.getOneWithMeals(meal.dayId).day
+        }
+        return day
+    }
+
 
     /**
      * Create a new day and add it to the days list
@@ -55,7 +76,7 @@ class DayViewModel(application: Application): AndroidViewModel(application) {
         return dayToReturn
     }
 
-    fun isEmpty(): MutableState<Boolean> {
+    fun isVeryFirstLaunch(): MutableState<Boolean> {
         val isEmpty = mutableStateOf(true)
         viewModelScope.launch {
             try {
@@ -68,19 +89,6 @@ class DayViewModel(application: Application): AndroidViewModel(application) {
         return isEmpty
     }
 
-    fun getOne(meal: Meal): MutableState<Day> {
-        val day = mutableStateOf(getBlankDay())
-        viewModelScope.launch {
-            day.value = dayDAO.getOneWithMeals(meal.dayId).day
-        }
-        return day
-    }
 
-    fun getLastDay(): MutableState<Day> {
-        val day = mutableStateOf(getBlankDay())
-        viewModelScope.launch {
-            day.value = dayDAO.getLastDay()
-        }
-        return day
-    }
+    fun getLastDay() = days.last()
 }

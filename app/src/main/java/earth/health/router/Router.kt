@@ -1,6 +1,5 @@
 package earth.health.router
 
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
@@ -20,7 +19,6 @@ import earth.health.ui.meal.AddSelectedFoodToMealScreen
 import earth.health.ui.meal.MealHomeScreen
 import earth.health.ui.meal.MealScreen
 import earth.health.ui.weight.WeightHomeScreen
-import earth.health.ui.InitialiseHomeScreen
 
 @Composable
 fun Router() {
@@ -36,7 +34,7 @@ fun Router() {
              * HOME PAGE
              */
             val isVeryFirstLaunch by remember {
-                dayViewModel.isEmpty()
+                dayViewModel.isVeryFirstLaunch()
             }
             HomeScreen(navController = navController, isVeryFirstLaunch = isVeryFirstLaunch, dayViewModel = dayViewModel)
         }
