@@ -16,9 +16,7 @@ fun FoodScreen(
     foodViewModel: FoodViewModel,
     foodId: Long
 ) {
-    val food by remember {
-        foodViewModel.readFood(foodId = foodId)
-    }
+    val food = foodViewModel.readFood(foodId)
     Column(
         modifier = modifier.fillMaxSize()
     ) {

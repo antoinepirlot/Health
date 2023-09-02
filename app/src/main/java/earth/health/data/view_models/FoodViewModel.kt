@@ -11,7 +11,6 @@ import earth.health.data.HealthDatabase
 import earth.health.data.entity.Food
 import earth.health.data.entity.getBlankFood
 import earth.health.data.entity.relations.FoodWithMeals
-import earth.health.data.entity.relations.getBlankFoodWithMeals
 import kotlinx.coroutines.launch
 
 class FoodViewModel(application: Application) : AndroidViewModel(application) {
@@ -43,21 +42,7 @@ class FoodViewModel(application: Application) : AndroidViewModel(application) {
         return foodList
     }
 
-    fun readFoodWithMeals(foodId: Long): MutableState<FoodWithMeals> {
-        val foodWithMeals = mutableStateOf(getBlankFoodWithMeals())
-        viewModelScope.launch {
-            foodWithMeals.value = foodDAO.getOneWithMeals(foodId = foodId)
-        }
-        return foodWithMeals
-    }
-
-    fun readFood(foodId: Long): MutableState<Food> {
-        val food = mutableStateOf(getBlankFood())
-        viewModelScope.launch {
-            food.value = foodDAO.getOne(foodId = foodId)
-        }
-        return food
-    }
+    fun readFood(foodId: Long) = foodList.first { it.id == foodId }
 
     fun upsert(food: Food) {
         viewModelScope.launch {

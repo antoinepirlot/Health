@@ -31,9 +31,7 @@ fun AddSelectedFoodToMealScreen(
     mealId: Long,
     addAction: () -> Unit
 ) {
-    val food by remember {
-        foodViewModel.readFood(foodId = foodId)
-    }
+    val food = foodViewModel.readFood(foodId)
     val mealWithFoods by remember {
         mealViewModel.readMealWithFoods(mealId = mealId)
     }
