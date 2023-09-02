@@ -16,7 +16,15 @@ import kotlinx.coroutines.launch
 
 class FoodViewModel(application: Application) : AndroidViewModel(application) {
 
+    val foodList = mutableStateListOf<Food>()
+
     private val foodDAO = HealthDatabase.getDatabase(application).foodDAO()
+
+    init {
+        viewModelScope.launch {
+            foodList.addAll(foodDAO.getAll())
+        }
+    }
 
     fun getAll(): SnapshotStateList<Food> {
         val foodList = mutableStateListOf<Food>()

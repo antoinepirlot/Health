@@ -14,8 +14,8 @@ import earth.health.ui.utils.Card
 
 @Composable
 fun MealHomeScreen(modifier: Modifier = Modifier, mealViewModel: MealViewModel, goToMealAction: (Meal) -> Unit) {
-    val meals = mealViewModel.mealList
-    if (meals.isEmpty()) {
+    val mealWithFoodsList = mealViewModel.mealWithFoodsList
+    if (mealWithFoodsList.isEmpty()) {
         //this condition is required for the very firt launch otherrwise this page is blank
         mealViewModel.reloadAll()
     }
@@ -23,7 +23,8 @@ fun MealHomeScreen(modifier: Modifier = Modifier, mealViewModel: MealViewModel, 
         modifier = modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        for (meal in meals) {
+        for (mealWithFoodsList in mealWithFoodsList) {
+            val meal = mealWithFoodsList.meal
             Card(
                 title = stringResource(id = meal.name.mealNameId),
                 text = "${meal.totalKcal} kcal",
