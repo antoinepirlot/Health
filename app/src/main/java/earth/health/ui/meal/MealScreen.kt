@@ -12,18 +12,18 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
 import earth.health.R
 import earth.health.data.entity.Food
-import earth.health.data.view_models.MealViewModel
+import earth.health.data.view_models.MealWithFoodsViewModel
 import earth.health.ui.food.FoodListScreen
 
 @Composable
 fun MealScreen(
     modifier: Modifier = Modifier,
     mealId: Long,
-    mealViewModel: MealViewModel,
+    mealWithFoodsViewModel: MealWithFoodsViewModel,
     addAction: () -> Unit,
     textAction: (Food) -> Unit
 ) {
-    val mealWithFoods = mealViewModel.mealWithFoodsList.first { mealWithFoods ->
+    val mealWithFoods = mealWithFoodsViewModel.mealWithFoodsList.first { mealWithFoods ->
         mealWithFoods.meal.id == mealId
     }
     Column(
@@ -47,7 +47,7 @@ fun MealScreen(
 fun MealScreenWithoutFoodPreview() {
     MealScreen(
         mealId = 0,
-        mealViewModel = viewModel(),
+        mealWithFoodsViewModel = viewModel(),
         addAction = {},
         textAction = {})
 }

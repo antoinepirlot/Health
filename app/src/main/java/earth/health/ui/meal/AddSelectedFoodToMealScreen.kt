@@ -7,7 +7,6 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
@@ -18,21 +17,21 @@ import earth.health.R
 import earth.health.data.view_models.DayViewModel
 import earth.health.data.view_models.FoodViewModel
 import earth.health.data.view_models.MealFoodCrossRefViewModel
-import earth.health.data.view_models.MealViewModel
+import earth.health.data.view_models.MealWithFoodsViewModel
 
 @Composable
 fun AddSelectedFoodToMealScreen(
     modifier: Modifier = Modifier,
     dayViewModel: DayViewModel,
     foodViewModel: FoodViewModel,
-    mealViewModel: MealViewModel,
+    mealWithFoodsViewModel: MealWithFoodsViewModel,
     mealFoodCrossRefViewModel: MealFoodCrossRefViewModel,
     foodId: Long,
     mealId: Long,
     addAction: () -> Unit
 ) {
     val food = foodViewModel.readFood(foodId)
-    val mealWithFoods = mealViewModel.readMealWithFoods(foodId)
+    val mealWithFoods = mealWithFoodsViewModel.readMealWithFoods(foodId)
     var quantity by rememberSaveable {
         mealFoodCrossRefViewModel.getQuantity(
             meal = mealWithFoods.meal,
@@ -65,7 +64,7 @@ fun AddSelectedFoodToMealPreview() {
     AddSelectedFoodToMealScreen(
         foodId = 1,
         mealId = 1,
-        mealViewModel = viewModel(),
+        mealWithFoodsViewModel = viewModel(),
         foodViewModel = viewModel(),
         mealFoodCrossRefViewModel = viewModel(),
         dayViewModel = viewModel(),

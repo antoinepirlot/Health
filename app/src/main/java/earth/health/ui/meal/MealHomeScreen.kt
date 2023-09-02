@@ -9,15 +9,15 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
 import earth.health.data.entity.Meal
-import earth.health.data.view_models.MealViewModel
+import earth.health.data.view_models.MealWithFoodsViewModel
 import earth.health.ui.utils.Card
 
 @Composable
-fun MealHomeScreen(modifier: Modifier = Modifier, mealViewModel: MealViewModel, goToMealAction: (Meal) -> Unit) {
-    val mealWithFoodsList = mealViewModel.mealWithFoodsList
+fun MealHomeScreen(modifier: Modifier = Modifier, mealWithFoodsViewModel: MealWithFoodsViewModel, goToMealAction: (Meal) -> Unit) {
+    val mealWithFoodsList = mealWithFoodsViewModel.mealWithFoodsList
     if (mealWithFoodsList.isEmpty()) {
         //this condition is required for the very firt launch otherrwise this page is blank
-        mealViewModel.reloadAll()
+        mealWithFoodsViewModel.reloadAll()
     }
     Column(
         modifier = modifier.fillMaxSize(),
@@ -38,5 +38,5 @@ fun MealHomeScreen(modifier: Modifier = Modifier, mealViewModel: MealViewModel, 
 @Preview
 @Composable
 fun MealHomeScreenPreview() {
-    MealHomeScreen(mealViewModel = viewModel(), goToMealAction = {})
+    MealHomeScreen(mealWithFoodsViewModel = viewModel(), goToMealAction = {})
 }

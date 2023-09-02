@@ -10,7 +10,7 @@ import androidx.navigation.compose.rememberNavController
 import earth.health.data.view_models.DayViewModel
 import earth.health.data.view_models.FoodViewModel
 import earth.health.data.view_models.MealFoodCrossRefViewModel
-import earth.health.data.view_models.MealViewModel
+import earth.health.data.view_models.MealWithFoodsViewModel
 import earth.health.ui.HomeScreen
 import earth.health.ui.food.AddFoodScreen
 import earth.health.ui.food.AllFoodsScreen
@@ -24,7 +24,7 @@ import earth.health.ui.weight.WeightHomeScreen
 fun Router() {
     val navController = rememberNavController()
     val dayViewModel = viewModel<DayViewModel>()
-    val mealViewModel = viewModel<MealViewModel>()
+    val mealWithFoodsViewModel = viewModel<MealWithFoodsViewModel>()
     val mealFoodCrossRefViewModel = viewModel<MealFoodCrossRefViewModel>()
     val foodViewModel = viewModel<FoodViewModel>()
 
@@ -42,7 +42,7 @@ fun Router() {
             /**
              * All Meals Screens
              */
-            MealHomeScreen(mealViewModel = mealViewModel) { meal ->
+            MealHomeScreen(mealWithFoodsViewModel = mealWithFoodsViewModel) { meal ->
                 navController.navigate(Destination.MEALS.link + "/${meal.id}")
             }
         }
@@ -53,7 +53,7 @@ fun Router() {
             val mealId = navBackStackEntry.arguments!!.getString("id")!!.toLong()
             MealScreen(
                 mealId = mealId,
-                mealViewModel = mealViewModel,
+                mealWithFoodsViewModel = mealWithFoodsViewModel,
                 addAction = {
                     navController.navigate(Destination.FOODS.link + "/meal/${mealId}")
                 },
@@ -72,7 +72,7 @@ fun Router() {
                 foodId = foodId,
                 mealId = mealId,
                 foodViewModel = foodViewModel,
-                mealViewModel = mealViewModel,
+                mealWithFoodsViewModel = mealWithFoodsViewModel,
                 mealFoodCrossRefViewModel = mealFoodCrossRefViewModel,
                 dayViewModel = dayViewModel,
                 addAction = {
