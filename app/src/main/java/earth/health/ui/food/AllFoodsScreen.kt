@@ -19,7 +19,7 @@ fun AllFoodsScreen(
     foodViewModel: FoodViewModel,
     actionOpenFood: (Food) -> Unit
 ) {
-    val foodList = foodViewModel.getAll()
+    val foodList = foodViewModel.foodList
     Column(
         modifier = modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally

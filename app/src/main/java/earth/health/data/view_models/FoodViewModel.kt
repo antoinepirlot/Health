@@ -25,23 +25,6 @@ class FoodViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
-    fun getAll(): SnapshotStateList<Food> {
-        val foodList = mutableStateListOf<Food>()
-        viewModelScope.launch {
-            foodList.addAll(foodDAO.getAll())
-        }
-        return foodList
-    }
-
-    fun getAllWithMeals(): SnapshotStateList<FoodWithMeals> {
-        val foodList = mutableStateListOf<FoodWithMeals>()
-        viewModelScope.launch {
-            foodList.addAll(foodDAO.getAllWithMeals()
-            )
-        }
-        return foodList
-    }
-
     fun readFood(foodId: Long) = foodList.first { it.id == foodId }
 
     fun upsert(food: Food) {
