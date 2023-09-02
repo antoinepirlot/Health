@@ -32,9 +32,7 @@ fun AddSelectedFoodToMealScreen(
     addAction: () -> Unit
 ) {
     val food = foodViewModel.readFood(foodId)
-    val mealWithFoods by remember {
-        mealViewModel.readMealWithFoods(mealId = mealId)
-    }
+    val mealWithFoods = mealViewModel.readMealWithFoods(foodId)
     var quantity by rememberSaveable {
         mealFoodCrossRefViewModel.getQuantity(
             meal = mealWithFoods.meal,

@@ -25,21 +25,7 @@ class MealViewModel(application: Application): AndroidViewModel(application) {
         }
     }
 
-    fun readMealWithFoods(mealId: Long): MutableState<MealWithFoods> {
-        val mealWithFood = mutableStateOf(getBlankMealsWithFoods())
-        viewModelScope.launch {
-            mealWithFood.value = mealDAO.getOneWithFoods(mealId = mealId)
-        }
-        return mealWithFood
-    }
-    
-    fun readMeal(mealId: Long): MutableState<Meal> {
-        val meal = mutableStateOf(getBlankMeal())
-        viewModelScope.launch {
-            meal.value = mealDAO.getOne(mealId = mealId)
-        }
-        return meal
-    }
+    fun readMealWithFoods(mealId: Long) = mealWithFoodsList.first { it.meal.id == mealId }
 
     fun reloadAll() {
         viewModelScope.launch {
