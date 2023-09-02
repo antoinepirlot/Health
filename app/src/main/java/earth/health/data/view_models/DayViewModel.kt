@@ -31,6 +31,7 @@ class DayViewModel(application: Application): AndroidViewModel(application) {
                 return@launch
             }
             val newDay = Day()
+            days.add(newDay)
             newDay.id = dayDAO.nextId()
             dayDAO.upsert(newDay)
             val meals = listOf(

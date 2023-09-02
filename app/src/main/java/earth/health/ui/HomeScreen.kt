@@ -28,7 +28,7 @@ fun HomeScreen(
     dayViewModel: DayViewModel
 ) {
     val latestDay = dayViewModel.getLastDay()
-    val kcalText = latestDay!!.totalKcal.toString() + "/1920kcal"
+    val kcalText = latestDay.totalKcal.toString() + "/1920kcal"
     Column(
         modifier = modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally
