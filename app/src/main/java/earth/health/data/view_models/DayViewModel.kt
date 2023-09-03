@@ -4,7 +4,6 @@ import android.app.Application
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import earth.health.data.HealthDatabase
@@ -47,13 +46,7 @@ class DayViewModel(application: Application): AndroidViewModel(application) {
         }
      }
 
-    fun getOne(meal: Meal): MutableState<Day> {
-        val day = mutableStateOf(getBlankDay())
-        viewModelScope.launch {
-            day.value = dayDAO.getOneWithMeals(meal.dayId).day
-        }
-        return day
-    }
+    fun readOneByMeal(meal: Meal): Day = days.first { it.id == meal.dayId }
 
 
     /**

@@ -7,6 +7,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
@@ -14,6 +15,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
 import earth.health.R
+import earth.health.data.entity.Food
 import earth.health.data.view_models.DayViewModel
 import earth.health.data.view_models.FoodViewModel
 import earth.health.data.view_models.MealFoodCrossRefViewModel
@@ -45,13 +47,17 @@ fun AddSelectedFoodToMealScreen(
         TextField(value = quantity, onValueChange = { quantity = it })
         Button(onClick = {
             addAction()
-            val mealDay = dayViewModel.getOne(meal = mealWithFoods.meal).value
+            val mealDay = dayViewModel.readOneByMeal(meal = mealWithFoods.meal)
             mealFoodCrossRefViewModel.insert(
                 mealWithFoods = mealWithFoods,
                 day = mealDay,
                 food = food,
                 quantity = quantity.toDouble()
             )
+            val tempList = mutableStateListOf<Food>()
+            tempList.addAll(mealWithFoods.foods)
+            tempList.add(food)
+            mealWithFoods.foods = tempList
         }) {
             Text(text = stringResource(id = R.string.add))
         }
