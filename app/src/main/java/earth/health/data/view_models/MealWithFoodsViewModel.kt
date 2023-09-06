@@ -38,4 +38,6 @@ class MealWithFoodsViewModel(application: Application): AndroidViewModel(applica
             mealWithFoodsList.add(MealWithFoods(meal, mutableStateListOf()))
         }
     }
+
+    fun isEmpty() = mealWithFoodsList.isEmpty()
 }

@@ -50,6 +50,9 @@ fun Router() {
             /**
              * All Meals Screens
              */
+            if(mealWithFoodsViewModel.isEmpty()) {
+                mealWithFoodsViewModel.reloadAll()
+            }
             MealHomeScreen(mealWithFoodsViewModel = mealWithFoodsViewModel) { meal ->
                 navController.navigate(Destination.MEALS.link + "/${meal.id}")
             }
