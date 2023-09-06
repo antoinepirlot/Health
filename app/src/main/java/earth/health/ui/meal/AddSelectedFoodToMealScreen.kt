@@ -16,6 +16,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
 import earth.health.R
 import earth.health.data.entity.Food
+import earth.health.data.utils.addElement
 import earth.health.data.view_models.DayViewModel
 import earth.health.data.view_models.FoodViewModel
 import earth.health.data.view_models.MealFoodCrossRefViewModel
@@ -54,10 +55,7 @@ fun AddSelectedFoodToMealScreen(
                 food = food,
                 quantity = quantity.toDouble()
             )
-            val tempList = mutableStateListOf<Food>()
-            tempList.addAll(mealWithFoods.foods)
-            tempList.add(food)
-            mealWithFoods.foods = tempList
+            mealWithFoods.foods = addElement(mealWithFoods.foods, food)
         }) {
             Text(text = stringResource(id = R.string.add))
         }
