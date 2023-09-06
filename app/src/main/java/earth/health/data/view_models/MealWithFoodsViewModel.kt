@@ -1,9 +1,13 @@
 package earth.health.data.view_models
 
 import android.app.Application
+import android.widget.Toast
 import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
+import earth.health.R
 import earth.health.data.HealthDatabase
 import earth.health.data.entity.Food
 import earth.health.data.entity.Meal
@@ -68,7 +72,7 @@ class MealWithFoodsViewModel(application: Application) : AndroidViewModel(applic
                         return@launch
                     }
                     mealFoodCrossRefDAO.remove(mealId = mealId, foodId = food.id)
-                    removeElement(list = mealWithFoodsFromList.foods, element = food)
+                    mealWithFoodsFromList.foods = removeElement(list = mealWithFoodsFromList.foods, element = food)
                 }
             }
         }
