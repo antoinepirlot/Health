@@ -1,7 +1,6 @@
 package earth.health.data.view_models
 
 import android.app.Application
-import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.AndroidViewModel
@@ -10,7 +9,6 @@ import earth.health.data.HealthDatabase
 import earth.health.data.entity.Day
 import earth.health.data.entity.Meal
 import earth.health.data.entity.Meals
-import earth.health.data.entity.getBlankDay
 import kotlinx.coroutines.launch
 import java.time.LocalDate
 
@@ -37,7 +35,6 @@ class DayViewModel(application: Application): AndroidViewModel(application) {
      * Create a new day and add it to the days list
      */
     fun startNewDay() {
-        val dayToReturn = mutableStateOf(getBlankDay())
         viewModelScope.launch {
             if (days.size > (0).toLong() && getLastDay().date.isEqual(LocalDate.now())) {
                 return@launch
