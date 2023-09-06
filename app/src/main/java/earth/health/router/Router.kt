@@ -8,6 +8,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import earth.health.data.entity.Day
 import earth.health.data.view_models.DayViewModel
 import earth.health.data.view_models.FoodViewModel
 import earth.health.data.view_models.MealFoodCrossRefViewModel
@@ -70,7 +71,9 @@ fun Router() {
                 },
                 textAction = { food ->
                     navController.navigate(Destination.FOODS.link + "/${food.id}")
-                }
+                },
+                mealFoodCrossRefViewModel = mealFoodCrossRefViewModel,
+                day = dayViewModel.getLastDay()
             )
         }
         composable(Destination.MEALS.link + "/{meal_id}/{food_id}") { navBackStackEntry ->

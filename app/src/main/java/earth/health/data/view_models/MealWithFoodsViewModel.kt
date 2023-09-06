@@ -61,20 +61,4 @@ class MealWithFoodsViewModel(application: Application) : AndroidViewModel(applic
         }
         return false
     }
-
-    fun removeFoodFromMeal(mealWithFoods: MealWithFoods, food: Food) {
-        viewModelScope.launch {
-            val mealId = mealWithFoods.meal.id
-            for (mealWithFoodsFromList in mealWithFoodsList) {
-                if (mealWithFoodsFromList.meal.id == mealId) {
-                    val foodIndex = mealWithFoodsFromList.foods.indexOf(food)
-                    if (foodIndex < 0) {
-                        return@launch
-                    }
-                    mealFoodCrossRefDAO.remove(mealId = mealId, foodId = food.id)
-                    mealWithFoodsFromList.foods = removeElement(list = mealWithFoodsFromList.foods, element = food)
-                }
-            }
-        }
-    }
 }

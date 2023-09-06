@@ -1,5 +1,6 @@
 package earth.health.ui.meal
 
+import android.app.Application
 import android.widget.Toast
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -11,9 +12,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import earth.health.R
+import earth.health.data.entity.Day
 import earth.health.data.entity.Food
+import earth.health.data.entity.getBlankDay
+import earth.health.data.view_models.MealFoodCrossRefViewModel
 import earth.health.data.view_models.MealWithFoodsViewModel
 import earth.health.ui.food.FoodListScreen
 
@@ -22,6 +27,8 @@ fun MealScreen(
     modifier: Modifier = Modifier,
     mealId: Long,
     mealWithFoodsViewModel: MealWithFoodsViewModel,
+    mealFoodCrossRefViewModel: MealFoodCrossRefViewModel,
+    day: Day,
     addAction: () -> Unit,
     textAction: (Food) -> Unit
 ) {
@@ -43,8 +50,8 @@ fun MealScreen(
                 foodList = mealWithFoods.foods,
                 actionClickOnFood = textAction,
                 actionDeleteFood = { food ->
-                    mealWithFoodsViewModel
-                        .removeFoodFromMeal(mealWithFoods = mealWithFoods, food = food)
+                    mealFoodCrossRefViewModel
+                        .removeFoodFromMeal(mealWithFoods = mealWithFoods, food = food, day = day)
                     toast.show()
                 })
         }
@@ -61,5 +68,7 @@ fun MealScreenWithoutFoodPreview() {
         mealId = 0,
         mealWithFoodsViewModel = viewModel(),
         addAction = {},
-        textAction = {})
+        textAction = {},
+        mealFoodCrossRefViewModel = MealFoodCrossRefViewModel(Application()),
+        day = getBlankDay())
 }

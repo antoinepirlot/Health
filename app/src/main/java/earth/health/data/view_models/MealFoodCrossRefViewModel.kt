@@ -12,6 +12,7 @@ import earth.health.data.entity.Meal
 import earth.health.data.entity.MealFoodCrossRef
 import earth.health.data.entity.relations.MealWithFoods
 import earth.health.data.utils.getTotalKcal
+import earth.health.data.utils.removeElement
 import kotlinx.coroutines.launch
 
 class MealFoodCrossRefViewModel(application: Application): AndroidViewModel(application) {
@@ -55,6 +56,15 @@ class MealFoodCrossRefViewModel(application: Application): AndroidViewModel(appl
     fun remove(meal: Meal, food: Food) {
         viewModelScope.launch {
             mealFoodCrossRefDao.remove(mealId = meal.id, foodId = food.id)
+        }
+    }
+
+    fun removeFoodFromMeal(mealWithFoods: MealWithFoods, food: Food, day: Day) {
+        viewModelScope.launch {
+            val mealId = mealWithFoods.meal.id
+            mealFoodCrossRefDao.remove(mealId = mealId, foodId = food.id)
+            updateKcal(mealWithFoods = mealWithFoods, day = day)
+            mealWithFoods.foods = removeElement(list = mealWithFoods.foods, element = food)
         }
     }
 }
