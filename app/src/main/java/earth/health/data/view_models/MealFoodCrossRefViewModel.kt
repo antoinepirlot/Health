@@ -51,4 +51,10 @@ class MealFoodCrossRefViewModel(application: Application): AndroidViewModel(appl
             day.totalKcal += dayTotalKcalToUpdate
         }
     }
+
+    fun remove(meal: Meal, food: Food) {
+        viewModelScope.launch {
+            mealFoodCrossRefDao.remove(mealId = meal.id, foodId = food.id)
+        }
+    }
 }

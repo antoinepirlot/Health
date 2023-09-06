@@ -102,14 +102,16 @@ fun Router() {
                     foodList = foodViewModel.foodList,
                     actionOpenFood = { food ->
                         navController.navigate(Destination.MEALS.link + "/${mealId}/${food.id}")
-                    }
+                    },
+                    mealWithFoodsViewModel = mealWithFoodsViewModel
                 )
             } else {
                 AllFoodsScreen(
                     foodList = foodViewModel.foodList,
                     actionOpenFood = {food ->
                         navController.navigate(Destination.FOODS.link + "/${food.id}")
-                    }
+                    },
+                    mealWithFoodsViewModel = mealWithFoodsViewModel
                 )
             }
         }

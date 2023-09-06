@@ -1,5 +1,6 @@
 package earth.health.ui.food
 
+import android.app.Application
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Text
@@ -8,17 +9,17 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.lifecycle.viewmodel.compose.viewModel
 import earth.health.R
 import earth.health.data.entity.Food
 import earth.health.data.entity.getDefaultFood
-import earth.health.data.view_models.FoodViewModel
+import earth.health.data.view_models.MealWithFoodsViewModel
 
 @Composable
 fun AllFoodsScreen(
     modifier: Modifier = Modifier,
     foodList: List<Food>,
-    actionOpenFood: (Food) -> Unit
+    actionOpenFood: (Food) -> Unit,
+    mealWithFoodsViewModel: MealWithFoodsViewModel
 ) {
     Column(
         modifier = modifier.fillMaxSize(),
@@ -30,7 +31,10 @@ fun AllFoodsScreen(
             Text(text = stringResource(id = R.string.food_list))
             FoodListScreen(
                 foodList = foodList,
-                actionClickOnFood = actionOpenFood
+                actionClickOnFood = actionOpenFood,
+                actionDeleteFood = { food ->
+                    mealWithFoodsViewModel.foodIsUsed(food = food)
+                }
             )
         }
     }
@@ -39,5 +43,9 @@ fun AllFoodsScreen(
 @Preview
 @Composable
 fun AllFoodScreenPreview() {
-    AllFoodsScreen(foodList = getDefaultFood(), actionOpenFood = {})
+    AllFoodsScreen(
+        foodList = getDefaultFood(),
+        actionOpenFood = {},
+        mealWithFoodsViewModel = MealWithFoodsViewModel(application = Application())
+    )
 }

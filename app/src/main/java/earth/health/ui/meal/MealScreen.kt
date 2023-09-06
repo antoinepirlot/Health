@@ -32,7 +32,13 @@ fun MealScreen(
         if (mealWithFoods.foods.isEmpty()) {
             Text(text = stringResource(id = R.string.nothing))
         } else {
-            FoodListScreen(foodList = mealWithFoods.foods, actionClickOnFood = textAction)
+            FoodListScreen(
+                foodList = mealWithFoods.foods,
+                actionClickOnFood = textAction,
+                actionDeleteFood = { food ->
+                    mealWithFoodsViewModel
+                        .removeFoodFromMeal(mealWithFoods = mealWithFoods, food = food)
+                })
         }
         Button(onClick = addAction) {
             Text(text = stringResource(id = R.string.add))
