@@ -25,23 +25,7 @@ class DayViewModel(application: Application): AndroidViewModel(application) {
         viewModelScope.launch {
             val dbDays = dayDAO.getAll()
             days.addAll(dbDays)
-            if (dbDays.isNotEmpty() && dayDAO.getLastDay().date.isEqual(LocalDate.now())) {
-                isLoaded.value = true
-                return@launch
-            }
-            val newDay = Day()
-            days.add(newDay)
-            newDay.id = dayDAO.nextId()
-            dayDAO.upsert(newDay)
-            val meals = listOf(
-                Meal(name = Meals.BREAKFAST, dayId = newDay.id),
-                Meal(name = Meals.LUNCH, dayId = newDay.id),
-                Meal(name = Meals.DINNER, dayId = newDay.id),
-                Meal(name = Meals.EXTRAS, dayId = newDay.id),
-            )
-            for (meal in meals) {
-                dayDAO.insertMeal(meal)
-            }
+            startNewDay()
             isLoaded.value = true
         }
      }
@@ -52,15 +36,15 @@ class DayViewModel(application: Application): AndroidViewModel(application) {
     /**
      * Create a new day and add it to the days list
      */
-    fun startNewDay(): MutableState<Day> {
+    fun startNewDay() {
         val dayToReturn = mutableStateOf(getBlankDay())
         viewModelScope.launch {
-            if (dayDAO.count() > (0).toLong() && dayDAO.getLastDay().date.isEqual(LocalDate.now())) {
+            if (days.size > (0).toLong() && getLastDay().date.isEqual(LocalDate.now())) {
                 return@launch
             }
             val newDay = Day()
-            newDay.id = dayDAO.nextId()
-            dayToReturn.value = newDay
+            newDay.id = nextId()
+            days.add(newDay)
             dayDAO.upsert(newDay)
             val meals = listOf(
                 Meal(name = Meals.BREAKFAST, dayId = newDay.id),
@@ -72,8 +56,9 @@ class DayViewModel(application: Application): AndroidViewModel(application) {
                 dayDAO.insertMeal(meal)
             }
         }
-        return dayToReturn
     }
 
     fun getLastDay(): Day = days.last()
+
+    private fun nextId() : Long = (days.size + 1).toLong()
 }
