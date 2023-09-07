@@ -56,7 +56,8 @@ fun AddSelectedFoodToMealScreen(
                 food = food,
                 quantity = quantity.toDouble()
             )
-            mealWithFoods.foods = addElement(mealWithFoods.foods, food)
+            if (!mealWithFoods.foods.contains(food))
+                mealWithFoods.foods = addElement(mealWithFoods.foods, food)
         }) {
             Text(text = stringResource(id = R.string.add))
         }
