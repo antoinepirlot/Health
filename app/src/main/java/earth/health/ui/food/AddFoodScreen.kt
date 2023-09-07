@@ -10,7 +10,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
 import earth.health.R
 import earth.health.data.view_models.FoodViewModel
-import earth.health.ui.utils.AddFoodForm
+import earth.health.ui.components.AddFoodForm
 
 @Composable
 fun AddFoodScreen(

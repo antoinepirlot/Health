@@ -18,7 +18,7 @@ import earth.health.data.view_models.MealFoodCrossRefViewModel
 import earth.health.data.view_models.MealViewModel
 import earth.health.router.Router
 import earth.health.ui.theme.HealthTheme
-import earth.health.ui.utils.HealthTopAppBar
+import earth.health.ui.components.HealthTopAppBar
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

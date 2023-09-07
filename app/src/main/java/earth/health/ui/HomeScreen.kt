@@ -12,14 +12,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
-import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import earth.health.R
 import earth.health.data.view_models.DayViewModel
 import earth.health.ui.theme.HealthTheme
 import earth.health.router.Destination
-import earth.health.ui.utils.Card
+import earth.health.ui.components.Card
 
 @Composable
 fun HomeScreen(

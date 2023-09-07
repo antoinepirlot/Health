@@ -12,7 +12,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import earth.health.data.view_models.MealViewModel
 import earth.health.router.Destination
-import earth.health.ui.utils.Card
+import earth.health.ui.components.Card
 
 @Composable
 fun MealHomeScreen(
