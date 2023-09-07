@@ -21,6 +21,7 @@ import earth.health.data.view_models.DayViewModel
 import earth.health.data.view_models.FoodViewModel
 import earth.health.data.view_models.MealFoodCrossRefViewModel
 import earth.health.data.view_models.MealViewModel
+import earth.health.ui.utils.goBackXTimes
 
 @Composable
 fun AddSelectedFoodToMealScreen(
@@ -47,8 +48,7 @@ fun AddSelectedFoodToMealScreen(
         Text(text = stringResource(id = R.string.add_selected_food_to_meal_screen))
         TextField(value = quantity, onValueChange = { quantity = it })
         Button(onClick = {
-            navController.popBackStack()
-            navController.popBackStack() //back to the meal screen
+            goBackXTimes(navController = navController, numberOfBack = 2) //back to the meal screen
             val mealDay = dayViewModel.readOneByMeal(meal = mealWithFoods.meal)
             mealFoodCrossRefViewModel.insert(
                 mealWithFoods = mealWithFoods,
