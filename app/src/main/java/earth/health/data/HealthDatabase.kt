@@ -42,6 +42,7 @@ abstract class HealthDatabase : RoomDatabase() {
         }
 
         fun exportDatabase(context: Context) {
+            //TODO
             val dbFile = context.getDatabasePath(DATABASE_NAME)
             val bkpFile = File(dbFile.path + "-bkp")
 
