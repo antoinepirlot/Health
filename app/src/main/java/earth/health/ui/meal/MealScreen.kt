@@ -14,6 +14,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import earth.health.R
 import earth.health.data.entity.Day
@@ -26,7 +27,7 @@ import earth.health.ui.food.FoodListScreen
 @Composable
 fun MealScreen(
     modifier: Modifier = Modifier,
-    navController: NavController,
+    navController: NavHostController,
     mealId: Long,
     mealWithFoodsViewModel: MealWithFoodsViewModel,
     mealFoodCrossRefViewModel: MealFoodCrossRefViewModel,

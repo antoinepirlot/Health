@@ -13,6 +13,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import earth.health.R
 import earth.health.data.view_models.DayViewModel
@@ -23,7 +24,7 @@ import earth.health.ui.utils.Card
 @Composable
 fun HomeScreen(
     modifier: Modifier = Modifier,
-    navController: NavController,
+    navController: NavHostController,
     dayViewModel: DayViewModel
 ) {
     val isLoaded by rememberSaveable {

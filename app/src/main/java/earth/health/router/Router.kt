@@ -2,6 +2,8 @@ package earth.health.router
 
 import androidx.compose.runtime.Composable
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavController
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -19,12 +21,13 @@ import earth.health.ui.meal.MealScreen
 import earth.health.ui.weight.WeightHomeScreen
 
 @Composable
-fun Router() {
+fun Router(
+    dayViewModel: DayViewModel,
+    mealWithFoodsViewModel: MealWithFoodsViewModel,
+    mealFoodCrossRefViewModel: MealFoodCrossRefViewModel,
+    foodViewModel: FoodViewModel,
+) {
     val navController = rememberNavController()
-    val dayViewModel = viewModel<DayViewModel>()
-    val mealWithFoodsViewModel = viewModel<MealWithFoodsViewModel>()
-    val mealFoodCrossRefViewModel = viewModel<MealFoodCrossRefViewModel>()
-    val foodViewModel = viewModel<FoodViewModel>()
 
     NavHost(navController = navController, startDestination = Destination.HOME.link) {
         composable(Destination.HOME.link) {
@@ -42,8 +45,8 @@ fun Router() {
                 mealWithFoodsViewModel.reloadAll()
             }
             MealHomeScreen(
+                navController = navController,
                 mealWithFoodsViewModel = mealWithFoodsViewModel,
-                navController = navController
             )
         }
 
@@ -53,8 +56,8 @@ fun Router() {
              */
             val mealId = navBackStackEntry.arguments!!.getString("id")!!.toLong()
             MealScreen(
-                mealId = mealId,
                 navController = navController,
+                mealId = mealId,
                 mealWithFoodsViewModel = mealWithFoodsViewModel,
                 mealFoodCrossRefViewModel = mealFoodCrossRefViewModel,
                 day = dayViewModel.getLastDay()

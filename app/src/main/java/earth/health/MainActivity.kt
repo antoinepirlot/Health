@@ -8,6 +8,12 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.compose.rememberNavController
+import earth.health.data.view_models.DayViewModel
+import earth.health.data.view_models.FoodViewModel
+import earth.health.data.view_models.MealFoodCrossRefViewModel
+import earth.health.data.view_models.MealWithFoodsViewModel
 import earth.health.router.Router
 import earth.health.ui.theme.HealthTheme
 
@@ -16,8 +22,18 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             HealthTheme {
+                val dayViewModel = viewModel<DayViewModel>()
+                val mealWithFoodsViewModel = viewModel<MealWithFoodsViewModel>()
+                val mealFoodCrossRefViewModel = viewModel<MealFoodCrossRefViewModel>()
+                val foodViewModel = viewModel<FoodViewModel>()
+
                 Surface(Modifier.fillMaxSize()) {
-                    Router()
+                    Router(
+                        dayViewModel = dayViewModel,
+                        mealWithFoodsViewModel = mealWithFoodsViewModel,
+                        mealFoodCrossRefViewModel = mealFoodCrossRefViewModel,
+                        foodViewModel = foodViewModel,
+                    )
                 }
             }
         }
