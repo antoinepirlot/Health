@@ -60,13 +60,8 @@ fun Router() {
             val mealId = navBackStackEntry.arguments!!.getString("id")!!.toLong()
             MealScreen(
                 mealId = mealId,
+                navController = navController,
                 mealWithFoodsViewModel = mealWithFoodsViewModel,
-                addAction = {
-                    navController.navigate(Destination.FOODS.link + "/meal/${mealId}")
-                },
-                textAction = { food ->
-                    navController.navigate(Destination.FOODS.link + "/${food.id}")
-                },
                 mealFoodCrossRefViewModel = mealFoodCrossRefViewModel,
                 day = dayViewModel.getLastDay()
             )

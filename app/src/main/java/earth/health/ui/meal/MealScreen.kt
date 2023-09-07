@@ -14,25 +14,28 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import earth.health.R
 import earth.health.data.entity.Day
 import earth.health.data.entity.Food
 import earth.health.data.entity.getBlankDay
 import earth.health.data.view_models.MealFoodCrossRefViewModel
 import earth.health.data.view_models.MealWithFoodsViewModel
+import earth.health.router.Destination
 import earth.health.ui.food.FoodListScreen
 
 @Composable
 fun MealScreen(
     modifier: Modifier = Modifier,
+    navController: NavController,
     mealId: Long,
     mealWithFoodsViewModel: MealWithFoodsViewModel,
     mealFoodCrossRefViewModel: MealFoodCrossRefViewModel,
-    day: Day,
-    addAction: () -> Unit,
-    textAction: (Food) -> Unit
+    day: Day
 ) {
     val mealWithFoods = mealWithFoodsViewModel.readMealWithFoods(mealId = mealId)
+
     Column(
         modifier = modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally
@@ -48,14 +51,18 @@ fun MealScreen(
             )
             FoodListScreen(
                 foodList = mealWithFoods.foods,
-                actionClickOnFood = textAction,
+                actionClickOnFood = { food ->
+                    navController.navigate(Destination.FOODS.link + "/${food.id}")
+                },
                 actionDeleteFood = { food ->
                     mealFoodCrossRefViewModel
                         .removeFoodFromMeal(mealWithFoods = mealWithFoods, food = food, day = day)
                     toast.show()
                 })
         }
-        Button(onClick = addAction) {
+        Button(onClick = {
+            navController.navigate(Destination.FOODS.link + "/meal/${mealId}")
+        }) {
             Text(text = stringResource(id = R.string.add))
         }
     }
@@ -65,10 +72,9 @@ fun MealScreen(
 @Composable
 fun MealScreenWithoutFoodPreview() {
     MealScreen(
+        navController = rememberNavController(),
         mealId = 0,
         mealWithFoodsViewModel = viewModel(),
-        addAction = {},
-        textAction = {},
         mealFoodCrossRefViewModel = MealFoodCrossRefViewModel(Application()),
         day = getBlankDay())
 }
