@@ -2,6 +2,7 @@ package earth.health.data.view_models
 
 import android.app.Application
 import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import earth.health.data.HealthDatabase
@@ -13,9 +14,10 @@ import kotlinx.coroutines.launch
 
 class MealViewModel(application: Application) : AndroidViewModel(application) {
     val mealWithFoodsList = mutableStateListOf<MealWithFoods>()
+    val selectedMeal = mutableStateOf<Meal?>(null)
+    val selectedMealFoodList = mutableStateListOf<Food>()
 
     private val mealDAO = HealthDatabase.getDatabase(application).mealDAO()
-    private val mealFoodCrossRefDAO = HealthDatabase.getDatabase(application).mealFoodCrossRefDao()
 
     init {
         viewModelScope.launch {
@@ -52,5 +54,14 @@ class MealViewModel(application: Application) : AndroidViewModel(application) {
             }
         }
         return false
+    }
+
+    /**
+     * Store selected meal for mutable states
+     */
+    fun selectMeal(mealWithFoods: MealWithFoods) {
+        selectedMeal.value = mealWithFoods.meal
+        selectedMealFoodList.clear()
+        selectedMealFoodList.addAll(mealWithFoods.foods)
     }
 }

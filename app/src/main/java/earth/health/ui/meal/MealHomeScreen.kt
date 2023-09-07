@@ -32,6 +32,7 @@ fun MealHomeScreen(
                 text = "${meal.totalKcal} kcal",
                 mainAction = {
                     navController.navigate(Destination.MEALS.link + "/${meal.id}")
+                    mealViewModel.selectMeal(mealWithFoods)
                 },
                 //TODO
                 fastAction = {}

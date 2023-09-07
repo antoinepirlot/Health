@@ -7,6 +7,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -33,13 +35,15 @@ fun MealScreen(
     day: Day
 ) {
     val mealWithFoods = mealViewModel.readMealWithFoods(mealId = mealId)
+    val selectedMeal by remember { mealViewModel.selectedMeal }
+    val selectedMealFoodList = mealViewModel.selectedMealFoodList
 
     Column(
         modifier = modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text(text = stringResource(id = mealWithFoods.meal.name.mealNameId))
-        if (mealWithFoods.foods.isEmpty()) {
+        Text(text = stringResource(id = selectedMeal!!.name.mealNameId))
+        if (selectedMealFoodList.isEmpty()) {
             Text(text = stringResource(id = R.string.nothing))
         } else {
             val toast = Toast.makeText(
@@ -48,13 +52,14 @@ fun MealScreen(
                 Toast.LENGTH_LONG
             )
             FoodListScreen(
-                foodList = mealWithFoods.foods,
+                foodList = selectedMealFoodList,
                 actionClickOnFood = { food ->
                     navController.navigate(Destination.FOODS.link + "/${food.id}")
                 },
                 actionDeleteFood = { food ->
                     mealFoodCrossRefViewModel
                         .remove(mealWithFoods = mealWithFoods, food = food, day = day)
+                    selectedMealFoodList.remove(food)
                     toast.show()
                 })
         }
