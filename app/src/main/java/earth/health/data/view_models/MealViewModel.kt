@@ -21,7 +21,7 @@ class MealViewModel(application: Application) : AndroidViewModel(application) {
 
     init {
         viewModelScope.launch {
-            mealWithFoodsList.addAll(mealDAO.getAll())
+            mealWithFoodsList.addAll(mealDAO.getAllWithFoods())
         }
     }
 
@@ -30,7 +30,7 @@ class MealViewModel(application: Application) : AndroidViewModel(application) {
     fun reloadAll() {
         viewModelScope.launch {
             mealWithFoodsList.clear()
-            mealWithFoodsList.addAll(mealDAO.getAll())
+            mealWithFoodsList.addAll(mealDAO.getAllWithFoods())
         }
     }
 
