@@ -13,14 +13,13 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
-import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import earth.health.R
 import earth.health.data.entity.Day
 import earth.health.data.entity.getBlankDay
 import earth.health.data.view_models.MealFoodCrossRefViewModel
-import earth.health.data.view_models.MealWithFoodsViewModel
+import earth.health.data.view_models.MealViewModel
 import earth.health.router.Destination
 import earth.health.ui.food.FoodListScreen
 
@@ -29,11 +28,11 @@ fun MealScreen(
     modifier: Modifier = Modifier,
     navController: NavHostController,
     mealId: Long,
-    mealWithFoodsViewModel: MealWithFoodsViewModel,
+    mealViewModel: MealViewModel,
     mealFoodCrossRefViewModel: MealFoodCrossRefViewModel,
     day: Day
 ) {
-    val mealWithFoods = mealWithFoodsViewModel.readMealWithFoods(mealId = mealId)
+    val mealWithFoods = mealViewModel.readMealWithFoods(mealId = mealId)
 
     Column(
         modifier = modifier.fillMaxSize(),
@@ -73,7 +72,7 @@ fun MealScreenWithoutFoodPreview() {
     MealScreen(
         navController = rememberNavController(),
         mealId = 0,
-        mealWithFoodsViewModel = viewModel(),
+        mealViewModel = viewModel(),
         mealFoodCrossRefViewModel = MealFoodCrossRefViewModel(Application()),
         day = getBlankDay())
 }

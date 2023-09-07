@@ -14,7 +14,7 @@ import androidx.navigation.compose.rememberNavController
 import earth.health.R
 import earth.health.data.entity.Food
 import earth.health.data.view_models.FoodViewModel
-import earth.health.data.view_models.MealWithFoodsViewModel
+import earth.health.data.view_models.MealViewModel
 import earth.health.router.Destination
 
 @Composable
@@ -24,7 +24,7 @@ fun AllFoodsScreen(
     mealId: Long,
     foodViewModel: FoodViewModel,
     foodList: List<Food> = foodViewModel.foodList,
-    mealWithFoodsViewModel: MealWithFoodsViewModel
+    mealViewModel: MealViewModel
 ) {
     Column(
         modifier = modifier.fillMaxSize(),
@@ -44,7 +44,7 @@ fun AllFoodsScreen(
                     }
                 },
                 actionDeleteFood = { food ->
-                    mealWithFoodsViewModel.foodIsUsed(food = food)
+                    mealViewModel.foodIsUsed(food = food)
                 }
             )
         }
@@ -58,6 +58,6 @@ fun AllFoodScreenPreview() {
         navController = rememberNavController(),
         mealId = -1,
         foodViewModel = FoodViewModel(Application()),
-        mealWithFoodsViewModel = MealWithFoodsViewModel(application = Application())
+        mealViewModel = MealViewModel(application = Application())
     )
 }

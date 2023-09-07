@@ -13,7 +13,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
-import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import earth.health.R
@@ -21,7 +20,7 @@ import earth.health.data.utils.addElement
 import earth.health.data.view_models.DayViewModel
 import earth.health.data.view_models.FoodViewModel
 import earth.health.data.view_models.MealFoodCrossRefViewModel
-import earth.health.data.view_models.MealWithFoodsViewModel
+import earth.health.data.view_models.MealViewModel
 
 @Composable
 fun AddSelectedFoodToMealScreen(
@@ -29,13 +28,13 @@ fun AddSelectedFoodToMealScreen(
     navController: NavHostController,
     dayViewModel: DayViewModel,
     foodViewModel: FoodViewModel,
-    mealWithFoodsViewModel: MealWithFoodsViewModel,
+    mealViewModel: MealViewModel,
     mealFoodCrossRefViewModel: MealFoodCrossRefViewModel,
     foodId: Long,
     mealId: Long
 ) {
     val food = foodViewModel.readFood(foodId)
-    val mealWithFoods = mealWithFoodsViewModel.readMealWithFoods(mealId)
+    val mealWithFoods = mealViewModel.readMealWithFoods(mealId)
     var quantity by rememberSaveable {
         mealFoodCrossRefViewModel.getQuantity(
             meal = mealWithFoods.meal,
@@ -71,7 +70,7 @@ fun AddSelectedFoodToMealPreview() {
         navController = rememberNavController(),
         foodId = 1,
         mealId = 1,
-        mealWithFoodsViewModel = viewModel(),
+        mealViewModel = viewModel(),
         foodViewModel = viewModel(),
         mealFoodCrossRefViewModel = viewModel(),
         dayViewModel = viewModel(),

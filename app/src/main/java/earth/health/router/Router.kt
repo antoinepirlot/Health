@@ -7,7 +7,7 @@ import androidx.navigation.compose.rememberNavController
 import earth.health.data.view_models.DayViewModel
 import earth.health.data.view_models.FoodViewModel
 import earth.health.data.view_models.MealFoodCrossRefViewModel
-import earth.health.data.view_models.MealWithFoodsViewModel
+import earth.health.data.view_models.MealViewModel
 import earth.health.ui.HomeScreen
 import earth.health.ui.food.AddFoodScreen
 import earth.health.ui.food.AllFoodsScreen
@@ -20,7 +20,7 @@ import earth.health.ui.weight.WeightHomeScreen
 @Composable
 fun Router(
     dayViewModel: DayViewModel,
-    mealWithFoodsViewModel: MealWithFoodsViewModel,
+    mealViewModel: MealViewModel,
     mealFoodCrossRefViewModel: MealFoodCrossRefViewModel,
     foodViewModel: FoodViewModel,
 ) {
@@ -38,13 +38,13 @@ fun Router(
             /**
              * All Meals Screens
              */
-            if(mealWithFoodsViewModel.isEmpty()) {
+            if(mealViewModel.isEmpty()) {
                 // Needed for the very first launch to show meals
-                mealWithFoodsViewModel.reloadAll()
+                mealViewModel.reloadAll()
             }
             MealHomeScreen(
                 navController = navController,
-                mealWithFoodsViewModel = mealWithFoodsViewModel,
+                mealViewModel = mealViewModel,
             )
         }
 
@@ -56,7 +56,7 @@ fun Router(
             MealScreen(
                 navController = navController,
                 mealId = mealId,
-                mealWithFoodsViewModel = mealWithFoodsViewModel,
+                mealViewModel = mealViewModel,
                 mealFoodCrossRefViewModel = mealFoodCrossRefViewModel,
                 day = dayViewModel.getLastDay()
             )
@@ -73,7 +73,7 @@ fun Router(
                 foodId = foodId,
                 mealId = mealId,
                 foodViewModel = foodViewModel,
-                mealWithFoodsViewModel = mealWithFoodsViewModel,
+                mealViewModel = mealViewModel,
                 mealFoodCrossRefViewModel = mealFoodCrossRefViewModel,
                 dayViewModel = dayViewModel
             )
@@ -88,7 +88,7 @@ fun Router(
                 navController = navController,
                 mealId = mealId,
                 foodViewModel = foodViewModel,
-                mealWithFoodsViewModel = mealWithFoodsViewModel
+                mealViewModel = mealViewModel
             )
         }
 

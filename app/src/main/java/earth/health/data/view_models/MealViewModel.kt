@@ -11,7 +11,7 @@ import earth.health.data.entity.relations.MealWithFoods
 import kotlinx.coroutines.launch
 
 
-class MealWithFoodsViewModel(application: Application) : AndroidViewModel(application) {
+class MealViewModel(application: Application) : AndroidViewModel(application) {
     val mealWithFoodsList = mutableStateListOf<MealWithFoods>()
 
     private val mealDAO = HealthDatabase.getDatabase(application).mealDAO()

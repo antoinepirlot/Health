@@ -8,10 +8,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
-import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
-import earth.health.data.view_models.MealWithFoodsViewModel
+import earth.health.data.view_models.MealViewModel
 import earth.health.router.Destination
 import earth.health.ui.utils.Card
 
@@ -19,9 +18,9 @@ import earth.health.ui.utils.Card
 fun MealHomeScreen(
     modifier: Modifier = Modifier,
     navController: NavHostController,
-    mealWithFoodsViewModel: MealWithFoodsViewModel,
+    mealViewModel: MealViewModel,
 ) {
-    val mealWithFoodsList = mealWithFoodsViewModel.mealWithFoodsList
+    val mealWithFoodsList = mealViewModel.mealWithFoodsList
     Column(
         modifier = modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -44,5 +43,5 @@ fun MealHomeScreen(
 @Preview
 @Composable
 fun MealHomeScreenPreview() {
-    MealHomeScreen(mealWithFoodsViewModel = viewModel(), navController = rememberNavController())
+    MealHomeScreen(mealViewModel = viewModel(), navController = rememberNavController())
 }
