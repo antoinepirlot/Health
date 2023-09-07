@@ -1,6 +1,7 @@
 package earth.health.router
 
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -19,6 +20,7 @@ import earth.health.ui.weight.WeightHomeScreen
 
 @Composable
 fun Router(
+    modifier: Modifier = Modifier,
     dayViewModel: DayViewModel,
     mealViewModel: MealViewModel,
     mealFoodCrossRefViewModel: MealFoodCrossRefViewModel,
@@ -31,7 +33,11 @@ fun Router(
             /**
              * HOME PAGE
              */
-            HomeScreen(navController = navController, dayViewModel = dayViewModel)
+            HomeScreen(
+                modifier = modifier,
+                navController = navController,
+                dayViewModel = dayViewModel
+            )
         }
 
         composable(Destination.MEALS.link) {
@@ -44,6 +50,7 @@ fun Router(
                 mealViewModel.reloadAll()
             }
             MealHomeScreen(
+                modifier = modifier,
                 navController = navController,
                 mealViewModel = mealViewModel,
             )
@@ -55,6 +62,7 @@ fun Router(
              */
             val mealId = navBackStackEntry.arguments!!.getString("id")!!.toLong()
             MealScreen(
+                modifier = modifier,
                 navController = navController,
                 mealId = mealId,
                 mealViewModel = mealViewModel,
@@ -70,6 +78,7 @@ fun Router(
             val mealId = navBackStackEntry.arguments!!.getString("meal_id")!!.toLong()
             val foodId = navBackStackEntry.arguments!!.getString("food_id")!!.toLong()
             AddSelectedFoodToMealScreen(
+                modifier = modifier,
                 navController = navController,
                 foodId = foodId,
                 mealId = mealId,
@@ -86,6 +95,7 @@ fun Router(
              */
             val mealId = navBackStackEntry.arguments!!.getString("mealId")!!.toLong()
             AllFoodsScreen(
+                modifier = modifier,
                 navController = navController,
                 mealId = mealId,
                 foodViewModel = foodViewModel,
@@ -98,21 +108,31 @@ fun Router(
              * 1 FOOD SCREEN
              */
             val foodId = navBackStackEntry.arguments!!.getString("id")!!.toLong()
-            FoodScreen(foodViewModel = foodViewModel, foodId = foodId)
+            FoodScreen(
+                modifier = modifier,
+                foodViewModel = foodViewModel,
+                foodId = foodId
+            )
         }
 
         composable(Destination.WEIGHT.link) {
             /**
              * WEIGHT SCREEN
              */
-            WeightHomeScreen(navController)
+            WeightHomeScreen(
+                modifier = modifier,
+                navController
+            )
         }
 
         composable(Destination.ADD_FOOD_SCREEN.link) { navBackStackEntry ->
             /**
              * ADD FOOD SCREEN
              */
-            AddFoodScreen(foodViewModel = foodViewModel)
+            AddFoodScreen(
+                modifier = modifier,
+                foodViewModel = foodViewModel
+            )
         }
     }
 }
