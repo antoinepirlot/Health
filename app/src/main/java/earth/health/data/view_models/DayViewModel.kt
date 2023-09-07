@@ -16,6 +16,7 @@ class DayViewModel(application: Application): AndroidViewModel(application) {
 
     val days = mutableStateListOf<Day>()
     val isLoaded = mutableStateOf(false)
+    val selectedDay = mutableStateOf<Day?>(null)
 
     private val dayDAO = HealthDatabase.getDatabase(application).dayDao()
 
@@ -24,6 +25,7 @@ class DayViewModel(application: Application): AndroidViewModel(application) {
             val dbDays = dayDAO.getAll()
             days.addAll(dbDays)
             startNewDay()
+            selectedDay.value = getLastDay()
             isLoaded.value = true
         }
      }
