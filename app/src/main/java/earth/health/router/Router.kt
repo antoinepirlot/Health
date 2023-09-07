@@ -42,6 +42,7 @@ fun Router(
              * All Meals Screens
              */
             if(mealWithFoodsViewModel.isEmpty()) {
+                // Needed for the very first launch to show meals
                 mealWithFoodsViewModel.reloadAll()
             }
             MealHomeScreen(
