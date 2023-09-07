@@ -2,9 +2,9 @@ package earth.health.router
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import androidx.navigation.compose.rememberNavController
 import earth.health.data.view_models.DayViewModel
 import earth.health.data.view_models.FoodViewModel
 import earth.health.data.view_models.MealFoodCrossRefViewModel
@@ -21,13 +21,12 @@ import earth.health.ui.weight.WeightHomeScreen
 @Composable
 fun Router(
     modifier: Modifier = Modifier,
+    navController: NavHostController,
     dayViewModel: DayViewModel,
     mealViewModel: MealViewModel,
     mealFoodCrossRefViewModel: MealFoodCrossRefViewModel,
     foodViewModel: FoodViewModel,
 ) {
-    val navController = rememberNavController()
-
     NavHost(navController = navController, startDestination = Destination.HOME.link) {
         composable(Destination.HOME.link) {
             /**

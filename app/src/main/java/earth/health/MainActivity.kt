@@ -4,7 +4,6 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
@@ -12,6 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.compose.rememberNavController
 import earth.health.data.view_models.DayViewModel
 import earth.health.data.view_models.FoodViewModel
 import earth.health.data.view_models.MealFoodCrossRefViewModel
@@ -26,6 +26,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             HealthTheme {
                 val modifier = Modifier
+                val navController = rememberNavController()
 
                 val dayViewModel = viewModel<DayViewModel>()
                 val mealViewModel = viewModel<MealViewModel>()
@@ -36,11 +37,15 @@ class MainActivity : ComponentActivity() {
                     Scaffold (
                         modifier = modifier,
                         topBar = {
-                            HealthTopAppBar(modifier = modifier)
+                            HealthTopAppBar(
+                                modifier = modifier,
+                                navController = navController,
+                            )
                         },
                     ) { innerPadding ->
                         Router(
                             modifier = modifier.padding(innerPadding),
+                            navController = navController,
                             dayViewModel = dayViewModel,
                             mealViewModel = mealViewModel,
                             mealFoodCrossRefViewModel = mealFoodCrossRefViewModel,
