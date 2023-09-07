@@ -53,13 +53,7 @@ class MealFoodCrossRefViewModel(application: Application): AndroidViewModel(appl
         }
     }
 
-    fun remove(meal: Meal, food: Food) {
-        viewModelScope.launch {
-            mealFoodCrossRefDao.remove(mealId = meal.id, foodId = food.id)
-        }
-    }
-
-    fun removeFoodFromMeal(mealWithFoods: MealWithFoods, food: Food, day: Day) {
+    fun remove(mealWithFoods: MealWithFoods, food: Food, day: Day) {
         viewModelScope.launch {
             val mealId = mealWithFoods.meal.id
             mealFoodCrossRefDao.remove(mealId = mealId, foodId = food.id)

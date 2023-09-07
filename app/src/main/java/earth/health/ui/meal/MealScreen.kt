@@ -54,7 +54,7 @@ fun MealScreen(
                 },
                 actionDeleteFood = { food ->
                     mealFoodCrossRefViewModel
-                        .removeFoodFromMeal(mealWithFoods = mealWithFoods, food = food, day = day)
+                        .remove(mealWithFoods = mealWithFoods, food = food, day = day)
                     toast.show()
                 })
         }
