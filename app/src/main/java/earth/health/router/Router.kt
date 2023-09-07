@@ -38,6 +38,7 @@ fun Router(
             /**
              * All Meals Screens
              */
+            // TODO find a fix
             if(mealViewModel.isEmpty()) {
                 // Needed for the very first launch to show meals
                 mealViewModel.reloadAll()
