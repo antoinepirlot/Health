@@ -61,6 +61,7 @@ fun Router(
                 day = dayViewModel.getLastDay()
             )
         }
+
         composable(Destination.MEALS.link + "/{meal_id}/{food_id}") { navBackStackEntry ->
             /**
              * ADD FOOD TO MEAL
@@ -77,6 +78,7 @@ fun Router(
                 dayViewModel = dayViewModel
             )
         }
+
         composable(Destination.FOODS.link + "/meal/{mealId}") { navBackStackEntry ->
             /**
              * LIST OF FOOD SCREEN
@@ -89,6 +91,7 @@ fun Router(
                 mealWithFoodsViewModel = mealWithFoodsViewModel
             )
         }
+
         composable(Destination.FOODS.link + "/{id}") { navBackStackEntry ->
             /**
              * 1 FOOD SCREEN
@@ -96,12 +99,14 @@ fun Router(
             val foodId = navBackStackEntry.arguments!!.getString("id")!!.toLong()
             FoodScreen(foodViewModel = foodViewModel, foodId = foodId)
         }
+
         composable(Destination.WEIGHT.link) {
             /**
              * WEIGHT SCREEN
              */
             WeightHomeScreen(navController)
         }
+
         composable(Destination.ADD_FOOD_SCREEN.link) { navBackStackEntry ->
             /**
              * ADD FOOD SCREEN
