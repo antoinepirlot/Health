@@ -1,20 +1,15 @@
 package earth.health.router
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import earth.health.data.entity.Day
 import earth.health.data.view_models.DayViewModel
 import earth.health.data.view_models.FoodViewModel
 import earth.health.data.view_models.MealFoodCrossRefViewModel
 import earth.health.data.view_models.MealWithFoodsViewModel
 import earth.health.ui.HomeScreen
-import earth.health.ui.InitialiseHomeScreen
 import earth.health.ui.food.AddFoodScreen
 import earth.health.ui.food.AllFoodsScreen
 import earth.health.ui.food.FoodScreen
@@ -22,7 +17,6 @@ import earth.health.ui.meal.AddSelectedFoodToMealScreen
 import earth.health.ui.meal.MealHomeScreen
 import earth.health.ui.meal.MealScreen
 import earth.health.ui.weight.WeightHomeScreen
-import kotlinx.coroutines.awaitAll
 
 @Composable
 fun Router() {

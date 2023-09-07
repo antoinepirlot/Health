@@ -12,13 +12,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import earth.health.R
 import earth.health.data.entity.Day
-import earth.health.data.entity.Food
 import earth.health.data.entity.getBlankDay
 import earth.health.data.view_models.MealFoodCrossRefViewModel
 import earth.health.data.view_models.MealWithFoodsViewModel

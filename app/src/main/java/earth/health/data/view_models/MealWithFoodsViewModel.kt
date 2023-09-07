@@ -1,21 +1,14 @@
 package earth.health.data.view_models
 
 import android.app.Application
-import android.widget.Toast
 import androidx.compose.runtime.mutableStateListOf
-import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
-import earth.health.R
 import earth.health.data.HealthDatabase
 import earth.health.data.entity.Food
 import earth.health.data.entity.Meal
 import earth.health.data.entity.relations.MealWithFoods
-import earth.health.data.utils.addElement
-import earth.health.data.utils.removeElement
 import kotlinx.coroutines.launch
-import java.lang.IllegalArgumentException
 
 
 class MealWithFoodsViewModel(application: Application) : AndroidViewModel(application) {
@@ -34,7 +27,6 @@ class MealWithFoodsViewModel(application: Application) : AndroidViewModel(applic
 
     fun reloadAll() {
         viewModelScope.launch {
-            val dbMealList = mealDAO.getAll()
             mealWithFoodsList.clear()
             mealWithFoodsList.addAll(mealDAO.getAll())
         }

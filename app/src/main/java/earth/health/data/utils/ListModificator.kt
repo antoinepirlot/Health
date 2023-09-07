@@ -1,7 +1,6 @@
 package earth.health.data.utils
 
 import androidx.compose.runtime.mutableStateListOf
-import earth.health.data.entity.Food
 
 /**
  * Easy way to add one element to not mutable list
