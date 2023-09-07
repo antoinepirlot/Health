@@ -9,17 +9,21 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import earth.health.R
 import earth.health.data.entity.Food
 import earth.health.data.view_models.FoodViewModel
 import earth.health.data.view_models.MealWithFoodsViewModel
+import earth.health.router.Destination
 
 @Composable
 fun AllFoodsScreen(
     modifier: Modifier = Modifier,
+    navController: NavHostController,
+    mealId: Long,
     foodViewModel: FoodViewModel,
     foodList: List<Food> = foodViewModel.foodList,
-    actionOpenFood: (Food) -> Unit,
     mealWithFoodsViewModel: MealWithFoodsViewModel
 ) {
     Column(
@@ -32,7 +36,13 @@ fun AllFoodsScreen(
             Text(text = stringResource(id = R.string.food_list))
             FoodListScreen(
                 foodList = foodList,
-                actionClickOnFood = actionOpenFood,
+                actionClickOnFood = { food ->
+                    if (mealId > 0) { // It means adding food to meal
+                        navController.navigate(Destination.MEALS.link + "/${mealId}/${food.id}")
+                    } else {
+                        navController.navigate(Destination.FOODS.link + "/${food.id}")
+                    }
+                },
                 actionDeleteFood = { food ->
                     mealWithFoodsViewModel.foodIsUsed(food = food)
                 }
@@ -45,8 +55,9 @@ fun AllFoodsScreen(
 @Composable
 fun AllFoodScreenPreview() {
     AllFoodsScreen(
+        navController = rememberNavController(),
+        mealId = -1,
         foodViewModel = FoodViewModel(Application()),
-        actionOpenFood = {},
         mealWithFoodsViewModel = MealWithFoodsViewModel(application = Application())
     )
 }

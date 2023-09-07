@@ -1,9 +1,6 @@
 package earth.health.router
 
 import androidx.compose.runtime.Composable
-import androidx.lifecycle.viewmodel.compose.viewModel
-import androidx.navigation.NavController
-import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -85,23 +82,12 @@ fun Router(
              * LIST OF FOOD SCREEN
              */
             val mealId = navBackStackEntry.arguments!!.getString("mealId")!!.toLong()
-            if (mealId > 0) { // It means adding food to meal
-                AllFoodsScreen(
-                    foodViewModel = foodViewModel,
-                    actionOpenFood = { food ->
-                        navController.navigate(Destination.MEALS.link + "/${mealId}/${food.id}")
-                    },
-                    mealWithFoodsViewModel = mealWithFoodsViewModel
-                )
-            } else {
-                AllFoodsScreen(
-                    foodViewModel = foodViewModel,
-                    actionOpenFood = {food ->
-                        navController.navigate(Destination.FOODS.link + "/${food.id}")
-                    },
-                    mealWithFoodsViewModel = mealWithFoodsViewModel
-                )
-            }
+            AllFoodsScreen(
+                navController = navController,
+                mealId = mealId,
+                foodViewModel = foodViewModel,
+                mealWithFoodsViewModel = mealWithFoodsViewModel
+            )
         }
         composable(Destination.FOODS.link + "/{id}") { navBackStackEntry ->
             /**
