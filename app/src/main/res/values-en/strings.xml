@@ -23,4 +23,5 @@
     <string name="add_selected_food_to_meal_screen">Add this food to your meal</string>
     <string name="initialise_message">Starting for the first time</string>
     <string name="remove_food_from_meal_succeed">Food removed from meal. Changes may take some times to appear</string>
+    <string name="export_data">Export data</string>
 </resources>

@@ -14,6 +14,9 @@ import earth.health.data.entity.Day
 import earth.health.data.entity.Food
 import earth.health.data.entity.Meal
 import earth.health.data.entity.MealFoodCrossRef
+import java.io.File
+
+const val DATABASE_NAME = "HealthDatabase.health"
 
 @Database(entities = [Food::class, Meal::class, Day::class, MealFoodCrossRef::class], version = 1, exportSchema = false)
 @TypeConverters(Converters::class)
@@ -36,6 +39,17 @@ abstract class HealthDatabase : RoomDatabase() {
                 .build()
             INSTANCE = instance
             instance
+        }
+
+        fun exportDatabase(context: Context) {
+            val dbFile = context.getDatabasePath(DATABASE_NAME)
+            val bkpFile = File(dbFile.path + "-bkp")
+
+            if(bkpFile.exists()) bkpFile.delete()
+
+            dbFile.copyTo(bkpFile, true)
+
+            println(dbFile.path)
         }
     }
 }

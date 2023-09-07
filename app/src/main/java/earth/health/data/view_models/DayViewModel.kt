@@ -60,4 +60,8 @@ class DayViewModel(application: Application): AndroidViewModel(application) {
     fun getLastDay(): Day = days.last()
 
     private fun nextId() : Long = (days.size + 1).toLong()
+
+    suspend fun exportData(): List<Day> {
+        return dayDAO.getAll()
+    }
 }

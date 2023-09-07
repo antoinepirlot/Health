@@ -10,6 +10,7 @@ import earth.health.data.view_models.FoodViewModel
 import earth.health.data.view_models.MealFoodCrossRefViewModel
 import earth.health.data.view_models.MealViewModel
 import earth.health.ui.HomeScreen
+import earth.health.ui.data_manager.DataManagerScreen
 import earth.health.ui.food.AddFoodScreen
 import earth.health.ui.food.AllFoodsScreen
 import earth.health.ui.food.FoodScreen
@@ -132,6 +133,13 @@ fun Router(
                 modifier = modifier,
                 foodViewModel = foodViewModel
             )
+        }
+
+        composable(Destination.EXPORT_DATA.link) { navBackStackEntry ->
+            /**
+             * EXPORT DATA SCREEN
+             */
+            DataManagerScreen(modifier = modifier)
         }
     }
 }

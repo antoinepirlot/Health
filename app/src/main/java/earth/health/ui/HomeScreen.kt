@@ -54,6 +54,14 @@ fun HomeScreen(
                 mainAction = { navController.navigate(Destination.ADD_FOOD_SCREEN.link) },
                 fastAction = {}
             )
+            Card(
+                title = stringResource(id = R.string.export_data),
+                text = "",
+                mainAction = {
+                    navController.navigate(Destination.EXPORT_DATA.link)
+                },
+                fastAction = {}
+            )
         }
     }
 }

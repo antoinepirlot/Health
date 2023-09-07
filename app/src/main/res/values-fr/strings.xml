@@ -23,4 +23,5 @@
     <string name="add_selected_food_to_meal_screen">Ajoute cet aliment à ton repas</string>
     <string name="initialise_message">Commencer pour la première fois.</string>
     <string name="remove_food_from_meal_succeed">La nourriture à bien été supprimée. Les changements peuvent mettre du temps avant d\'apparaîtres.</string>
+    <string name="export_data">Exporter les données</string>
 </resources>
