@@ -6,7 +6,6 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -27,28 +26,35 @@ fun HomeScreen(
     navController: NavController,
     dayViewModel: DayViewModel
 ) {
-    val latestDay = dayViewModel.getLastDay()
-    val kcalText = latestDay.totalKcal.toString() + "/1920kcal"
-    Column(
-        modifier = modifier.fillMaxSize(),
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        Card(
-            title = stringResource(id = R.string.food),
-            text = kcalText,
-            mainAction = { navController.navigate(Destination.MEALS.link) },
-            fastAction = {})
-        Card(
-            title = stringResource(id = R.string.weight),
-            text = "80 kg",
-            mainAction = { navController.navigate(Destination.WEIGHT.link) },
-            fastAction = {})
-        Card(
-            title = stringResource(id = R.string.add_food_screen),
-            text = "",
-            mainAction = { navController.navigate(Destination.ADD_FOOD_SCREEN.link) },
-            fastAction = {}
-        )
+    val isLoaded by rememberSaveable {
+        dayViewModel.isLoaded
+    }
+    if (!isLoaded)
+        InitialiseHomeScreen {}
+    else {
+        val latestDay = dayViewModel.getLastDay()
+        val kcalText = latestDay.totalKcal.toString() + "/1920kcal"
+        Column(
+            modifier = modifier.fillMaxSize(),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Card(
+                title = stringResource(id = R.string.food),
+                text = kcalText,
+                mainAction = { navController.navigate(Destination.MEALS.link) },
+                fastAction = {})
+            Card(
+                title = stringResource(id = R.string.weight),
+                text = "80 kg",
+                mainAction = { navController.navigate(Destination.WEIGHT.link) },
+                fastAction = {})
+            Card(
+                title = stringResource(id = R.string.add_food_screen),
+                text = "",
+                mainAction = { navController.navigate(Destination.ADD_FOOD_SCREEN.link) },
+                fastAction = {}
+            )
+        }
     }
 }
 

@@ -8,12 +8,18 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
-import earth.health.data.entity.Meal
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import earth.health.data.view_models.MealWithFoodsViewModel
+import earth.health.router.Destination
 import earth.health.ui.utils.Card
 
 @Composable
-fun MealHomeScreen(modifier: Modifier = Modifier, mealWithFoodsViewModel: MealWithFoodsViewModel, goToMealAction: (Meal) -> Unit) {
+fun MealHomeScreen(
+    modifier: Modifier = Modifier,
+    mealWithFoodsViewModel: MealWithFoodsViewModel,
+    navController: NavController
+) {
     val mealWithFoodsList = mealWithFoodsViewModel.mealWithFoodsList
     Column(
         modifier = modifier.fillMaxSize(),
@@ -24,7 +30,10 @@ fun MealHomeScreen(modifier: Modifier = Modifier, mealWithFoodsViewModel: MealWi
             Card(
                 title = stringResource(id = meal.name.mealNameId),
                 text = "${meal.totalKcal} kcal",
-                mainAction = { goToMealAction(meal) },
+                mainAction = {
+                    navController.navigate(Destination.MEALS.link + "/${meal.id}")
+                },
+                //TODO
                 fastAction = {}
             )
         }
@@ -34,5 +43,5 @@ fun MealHomeScreen(modifier: Modifier = Modifier, mealWithFoodsViewModel: MealWi
 @Preview
 @Composable
 fun MealHomeScreenPreview() {
-    MealHomeScreen(mealWithFoodsViewModel = viewModel(), goToMealAction = {})
+    MealHomeScreen(mealWithFoodsViewModel = viewModel(), navController = rememberNavController())
 }

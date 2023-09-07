@@ -22,6 +22,7 @@ import earth.health.ui.meal.AddSelectedFoodToMealScreen
 import earth.health.ui.meal.MealHomeScreen
 import earth.health.ui.meal.MealScreen
 import earth.health.ui.weight.WeightHomeScreen
+import kotlinx.coroutines.awaitAll
 
 @Composable
 fun Router() {
@@ -36,17 +37,9 @@ fun Router() {
             /**
              * HOME PAGE
              */
-            val isLoaded by rememberSaveable {
-                dayViewModel.isLoaded
-            }
-            if (isLoaded) {
-                HomeScreen(navController = navController, dayViewModel = dayViewModel)
-            } else {
-                InitialiseHomeScreen {
-
-                }
-            }
+            HomeScreen(navController = navController, dayViewModel = dayViewModel)
         }
+
         composable(Destination.MEALS.link) {
             /**
              * All Meals Screens
@@ -54,10 +47,12 @@ fun Router() {
             if(mealWithFoodsViewModel.isEmpty()) {
                 mealWithFoodsViewModel.reloadAll()
             }
-            MealHomeScreen(mealWithFoodsViewModel = mealWithFoodsViewModel) { meal ->
-                navController.navigate(Destination.MEALS.link + "/${meal.id}")
-            }
+            MealHomeScreen(
+                mealWithFoodsViewModel = mealWithFoodsViewModel,
+                navController = navController
+            )
         }
+
         composable(Destination.MEALS.link + "/{id}") { navBackStackEntry ->
             /**
              * 1 Meal Screen
@@ -83,16 +78,13 @@ fun Router() {
             val mealId = navBackStackEntry.arguments!!.getString("meal_id")!!.toLong()
             val foodId = navBackStackEntry.arguments!!.getString("food_id")!!.toLong()
             AddSelectedFoodToMealScreen(
+                navController = navController,
                 foodId = foodId,
                 mealId = mealId,
                 foodViewModel = foodViewModel,
                 mealWithFoodsViewModel = mealWithFoodsViewModel,
                 mealFoodCrossRefViewModel = mealFoodCrossRefViewModel,
-                dayViewModel = dayViewModel,
-                addAction = {
-                    navController.popBackStack()
-                    navController.popBackStack() //back to the meal screen
-                }
+                dayViewModel = dayViewModel
             )
         }
         composable(Destination.FOODS.link + "/meal/{mealId}") { navBackStackEntry ->
@@ -102,7 +94,7 @@ fun Router() {
             val mealId = navBackStackEntry.arguments!!.getString("mealId")!!.toLong()
             if (mealId > 0) { // It means adding food to meal
                 AllFoodsScreen(
-                    foodList = foodViewModel.foodList,
+                    foodViewModel = foodViewModel,
                     actionOpenFood = { food ->
                         navController.navigate(Destination.MEALS.link + "/${mealId}/${food.id}")
                     },
@@ -110,7 +102,7 @@ fun Router() {
                 )
             } else {
                 AllFoodsScreen(
-                    foodList = foodViewModel.foodList,
+                    foodViewModel = foodViewModel,
                     actionOpenFood = {food ->
                         navController.navigate(Destination.FOODS.link + "/${food.id}")
                     },

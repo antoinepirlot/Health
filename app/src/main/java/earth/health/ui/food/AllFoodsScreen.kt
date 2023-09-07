@@ -12,12 +12,14 @@ import androidx.compose.ui.tooling.preview.Preview
 import earth.health.R
 import earth.health.data.entity.Food
 import earth.health.data.entity.getDefaultFood
+import earth.health.data.view_models.FoodViewModel
 import earth.health.data.view_models.MealWithFoodsViewModel
 
 @Composable
 fun AllFoodsScreen(
     modifier: Modifier = Modifier,
-    foodList: List<Food>,
+    foodViewModel: FoodViewModel,
+    foodList: List<Food> = foodViewModel.foodList,
     actionOpenFood: (Food) -> Unit,
     mealWithFoodsViewModel: MealWithFoodsViewModel
 ) {
@@ -44,7 +46,7 @@ fun AllFoodsScreen(
 @Composable
 fun AllFoodScreenPreview() {
     AllFoodsScreen(
-        foodList = getDefaultFood(),
+        foodViewModel = FoodViewModel(Application()),
         actionOpenFood = {},
         mealWithFoodsViewModel = MealWithFoodsViewModel(application = Application())
     )
