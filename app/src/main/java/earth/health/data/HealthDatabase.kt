@@ -1,7 +1,6 @@
 package earth.health.data
 
 import android.content.Context
-import android.widget.Toast
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
@@ -44,7 +43,6 @@ abstract class HealthDatabase : RoomDatabase() {
         }
 
         fun exportDatabase(context: Context) {
-            //TODO
             val dbFile = context.getDatabasePath(DATABASE_NAME)
             val bkpFile = File("$BACKUP_PATH$DATABASE_NAME")
             if(bkpFile.exists())
