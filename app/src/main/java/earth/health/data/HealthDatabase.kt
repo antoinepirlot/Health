@@ -1,6 +1,7 @@
 package earth.health.data
 
 import android.content.Context
+import android.widget.Toast
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
@@ -16,7 +17,8 @@ import earth.health.data.entity.Meal
 import earth.health.data.entity.MealFoodCrossRef
 import java.io.File
 
-const val DATABASE_NAME = "HealthDatabase.health"
+const val DATABASE_NAME = "health"
+const val BACKUP_PATH = "/storage/emulated/0/Documents/"
 
 @Database(entities = [Food::class, Meal::class, Day::class, MealFoodCrossRef::class], version = 1, exportSchema = false)
 @TypeConverters(Converters::class)
@@ -33,7 +35,7 @@ abstract class HealthDatabase : RoomDatabase() {
             val instance = Room.databaseBuilder(
                 context.applicationContext,
                 HealthDatabase::class.java,
-                "health"
+                DATABASE_NAME
             )
                 .addTypeConverter(Converters())
                 .build()
@@ -44,13 +46,10 @@ abstract class HealthDatabase : RoomDatabase() {
         fun exportDatabase(context: Context) {
             //TODO
             val dbFile = context.getDatabasePath(DATABASE_NAME)
-            val bkpFile = File(dbFile.path + "-bkp")
-
-            if(bkpFile.exists()) bkpFile.delete()
-
+            val bkpFile = File("$BACKUP_PATH$DATABASE_NAME")
+            if(bkpFile.exists())
+                bkpFile.delete()
             dbFile.copyTo(bkpFile, true)
-
-            println(dbFile.path)
         }
     }
 }
