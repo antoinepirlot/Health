@@ -24,4 +24,5 @@
     <string name="initialise_message">Commencer pour la première fois.</string>
     <string name="remove_food_from_meal_succeed">La nourriture à bien été supprimée. Les changements peuvent mettre du temps avant d\'apparaîtres.</string>
     <string name="export_data">Exporter les données</string>
+    <string name="export_passed">Exportation des données réussie.</string>
 </resources>

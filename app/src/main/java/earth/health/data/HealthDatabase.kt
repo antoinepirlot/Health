@@ -1,10 +1,12 @@
 package earth.health.data
 
 import android.content.Context
+import android.widget.Toast
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
+import earth.health.R
 import earth.health.data.dao.DayDAO
 import earth.health.data.dao.FoodDAO
 import earth.health.data.dao.MealDAO
@@ -43,11 +45,14 @@ abstract class HealthDatabase : RoomDatabase() {
         }
 
         fun exportDatabase(context: Context) {
+            val toast = Toast(context)
+            toast.setText(R.string.export_passed)
             val dbFile = context.getDatabasePath(DATABASE_NAME)
             val bkpFile = File("$BACKUP_PATH$DATABASE_NAME")
             if(bkpFile.exists())
                 bkpFile.delete()
             dbFile.copyTo(bkpFile, true)
+            toast.show()
         }
     }
 }
