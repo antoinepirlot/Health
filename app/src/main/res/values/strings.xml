@@ -17,11 +17,13 @@
     <string name="alimentary_fiber">Fibres</string>
     <string name="calcium">Calcium</string>
     <string name="add">Ajouter</string>
-    <string name="add_food_succeed">Ajout réussi</string>
+    <string name="add_food_succeed" translatable="false">Ajout réussi</string>
     <string name="food_list">Liste des aliments</string>
     <string name="add_selected_food_to_meal_screen">Ajoute cet aliment à ton repas</string>
     <string name="initialise_message">Commencer pour la première fois.</string>
     <string name="remove_food_from_meal_succeed">La nourriture à bien été supprimée. Les changements peuvent mettre du temps avant d\'apparaîtres.</string>
     <string name="export_data">Exporter les données</string>
     <string name="export_passed">Exportation des données réussie!</string>
+    <string name="import_passed">Importation des données réussie.</string>
+    <string name="import_data">Importer les données</string>
 </resources>

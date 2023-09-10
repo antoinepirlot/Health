@@ -17,6 +17,7 @@ import earth.health.data.entity.Food
 import earth.health.data.entity.Meal
 import earth.health.data.entity.MealFoodCrossRef
 import java.io.File
+import java.lang.IllegalStateException
 
 const val DATABASE_NAME = "health.db"
 const val DATABASE_PATH = "/data/user/0/earth.health/databases/"
@@ -53,6 +54,24 @@ abstract class HealthDatabase : RoomDatabase() {
             if(destination.exists())
                 destination.delete()
             dbFile.copyTo(destination, true)
+            toast.show()
+        }
+
+        fun importDatabase(context: Context, backupFilePath: String) {
+            val toast = Toast(context)
+            toast.setText(R.string.import_passed)
+
+
+            val dbToImport = File(backupFilePath)
+            if (dbToImport.isDirectory) {
+                throw IllegalStateException("\"$backupFilePath\" is a directory and not a file.")
+            }
+            val destination = context.getDatabasePath(DATABASE_NAME)
+            destination.delete()
+            if (destination.isDirectory) {
+                throw IllegalStateException("The destination is a directory and not a file.")
+            }
+            dbToImport.copyTo(destination, true)
             toast.show()
         }
     }
