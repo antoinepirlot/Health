@@ -18,7 +18,8 @@ import earth.health.data.entity.Meal
 import earth.health.data.entity.MealFoodCrossRef
 import java.io.File
 
-const val DATABASE_NAME = "health"
+const val DATABASE_NAME = "health.db"
+const val DATABASE_PATH = "/data/user/0/earth.health/databases/"
 const val BACKUP_PATH = "/storage/emulated/0/Documents/"
 
 @Database(entities = [Food::class, Meal::class, Day::class, MealFoodCrossRef::class], version = 1, exportSchema = false)
@@ -44,14 +45,14 @@ abstract class HealthDatabase : RoomDatabase() {
             instance
         }
 
-        fun exportDatabase(context: Context) {
+        fun exportDatabase(context: Context, path: String) {
             val toast = Toast(context)
             toast.setText(R.string.export_passed)
             val dbFile = context.getDatabasePath(DATABASE_NAME)
-            val bkpFile = File("$BACKUP_PATH$DATABASE_NAME")
-            if(bkpFile.exists())
-                bkpFile.delete()
-            dbFile.copyTo(bkpFile, true)
+            val destination = File(path)
+            if(destination.exists())
+                destination.delete()
+            dbFile.copyTo(destination, true)
             toast.show()
         }
     }
