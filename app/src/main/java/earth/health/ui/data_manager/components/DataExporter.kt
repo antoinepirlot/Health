@@ -19,7 +19,7 @@ fun DataExporter(
 ) {
     val context = LocalContext.current
     val documentPicker = rememberLauncherForActivityResult(
-        contract = ActivityResultContracts.CreateDocument("documents/*")
+        contract = ActivityResultContracts.CreateDocument("application/x-sql")
     ) {
         if (it == null) return@rememberLauncherForActivityResult
 
@@ -31,7 +31,7 @@ fun DataExporter(
     Button(
         modifier = modifier,
         onClick = {
-            documentPicker.launch("health.db")
+            documentPicker.launch("health")
         }
     ) {
         Text(

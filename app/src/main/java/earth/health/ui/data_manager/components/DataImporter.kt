@@ -11,26 +11,26 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import earth.health.R
 import earth.health.data.HealthDatabase
+import earth.health.ui.utils.showToast
 
 @Composable
 fun DataImporter(
     modifier: Modifier
 ) {
     val context = LocalContext.current
-    //todo add the ability to select file
-    val path = "/storage/emulated/0/Documents/health.db"
-    val pickPictureLauncher = rememberLauncherForActivityResult(
-        contract = ActivityResultContracts.GetContent(),
+    val documentPicker = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.OpenDocument(),
         onResult = {
-            if (it != null) {
-                HealthDatabase.importDatabase(context, it.path!!)
-            }
+            if (it == null) return@rememberLauncherForActivityResult
+
+            HealthDatabase.importDatabase(context = context, uri = it)
+            showToast(context, idMessage = R.string.import_passed)
         }
     )
     Button(
         modifier = modifier,
         onClick = {
-            pickPictureLauncher.launch("health.db")
+            documentPicker.launch(arrayOf("application/x-sql"))
         }
     ) {
         Text(

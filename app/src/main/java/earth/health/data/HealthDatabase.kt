@@ -17,7 +17,7 @@ import earth.health.data.entity.Food
 import earth.health.data.entity.Meal
 import earth.health.data.entity.MealFoodCrossRef
 
-const val DATABASE_NAME = "health.db"
+const val DATABASE_NAME = "health"
 
 @Database(entities = [Food::class, Meal::class, Day::class, MealFoodCrossRef::class], version = 1, exportSchema = false)
 @TypeConverters(Converters::class)
@@ -47,10 +47,11 @@ abstract class HealthDatabase : RoomDatabase() {
             return copyTo(context = context, from = databaseFile.toUri(), to = uri)
         }
 
-        fun importDatabase(context: Context, backupFilePath: String) {
-            val toast = Toast(context)
-            toast.setText(R.string.import_passed)
-
+        fun importDatabase(context: Context, uri: Uri): Boolean {
+            val databaseFile = context.getDatabasePath(DATABASE_NAME)
+            if (databaseFile.exists())
+                databaseFile.delete()
+            return copyTo(context = context, from = uri, to = databaseFile.toUri())
         }
 
         private fun copyTo(context:Context, from: Uri, to: Uri): Boolean {
