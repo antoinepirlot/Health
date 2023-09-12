@@ -7,7 +7,7 @@ import android.widget.Toast
  * Show toast on screen with a message or idMessage
  * @throws IllegalArgumentException if idMessage and message are both null
  */
-fun showToast(context: Context, idMessage: Int?,  message: String?) {
+fun showToast(context: Context, idMessage: Int? = null,  message: String? = null) {
     val toast = Toast(context)
     if (idMessage != null) {
         toast.setText(idMessage)
