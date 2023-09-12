@@ -2,13 +2,11 @@ package earth.health.data
 
 import android.content.Context
 import android.net.Uri
-import android.widget.Toast
 import androidx.core.net.toUri
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
-import earth.health.R
 import earth.health.data.dao.DayDAO
 import earth.health.data.dao.FoodDAO
 import earth.health.data.dao.MealDAO
@@ -18,8 +16,6 @@ import earth.health.data.entity.Day
 import earth.health.data.entity.Food
 import earth.health.data.entity.Meal
 import earth.health.data.entity.MealFoodCrossRef
-import java.io.File
-import java.lang.IllegalStateException
 
 const val DATABASE_NAME = "health.db"
 
@@ -48,11 +44,7 @@ abstract class HealthDatabase : RoomDatabase() {
 
         fun exportDatabase(context: Context, uri: Uri) {
             val databaseFile = context.getDatabasePath(DATABASE_NAME)
-            context.contentResolver.openInputStream(databaseFile.toUri())?.use { input ->
-                context.contentResolver.openOutputStream(uri)?.use { out ->
-                    input.copyTo(out = out)
-                }
-            }
+            copyTo(context = context, from = databaseFile.toUri(), to = uri)
         }
 
         fun importDatabase(context: Context, backupFilePath: String) {
@@ -64,13 +56,19 @@ abstract class HealthDatabase : RoomDatabase() {
             if (dbToImport.isDirectory) {
                 throw IllegalStateException("\"$backupFilePath\" is a directory and not a file.")
             }
-            val destination = context.getDatabasePath(DATABASE_NAME)
-            destination.delete()
-            if (destination.isDirectory) {
-                throw IllegalStateException("The destination is a directory and not a file.")
+        }
+
+        private fun copyTo(context:Context, from: Uri, to: Uri): Boolean {
+            return try {
+                context.contentResolver.openInputStream(from)?.use { input ->
+                    context.contentResolver.openOutputStream(to)?.use { out ->
+                        input.copyTo(out = out)
+                    }
+                }
+                true
+            } catch (_: Exception) {
+                false
             }
-            dbToImport.copyTo(destination, true)
-            toast.show()
         }
     }
 }
