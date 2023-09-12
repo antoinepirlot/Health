@@ -42,20 +42,15 @@ abstract class HealthDatabase : RoomDatabase() {
             instance
         }
 
-        fun exportDatabase(context: Context, uri: Uri) {
+        fun exportDatabase(context: Context, uri: Uri): Boolean {
             val databaseFile = context.getDatabasePath(DATABASE_NAME)
-            copyTo(context = context, from = databaseFile.toUri(), to = uri)
+            return copyTo(context = context, from = databaseFile.toUri(), to = uri)
         }
 
         fun importDatabase(context: Context, backupFilePath: String) {
             val toast = Toast(context)
             toast.setText(R.string.import_passed)
 
-
-            val dbToImport = File(backupFilePath)
-            if (dbToImport.isDirectory) {
-                throw IllegalStateException("\"$backupFilePath\" is a directory and not a file.")
-            }
         }
 
         private fun copyTo(context:Context, from: Uri, to: Uri): Boolean {

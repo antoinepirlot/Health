@@ -23,8 +23,10 @@ fun DataExporter(
     ) {
         if (it == null) return@rememberLauncherForActivityResult
 
-        HealthDatabase.exportDatabase(context = context, uri = it)
-        showToast(context = context, idMessage = R.string.export_passed)
+        if (HealthDatabase.exportDatabase(context = context, uri = it))
+            showToast(context = context, idMessage = R.string.export_passed)
+        else
+            showToast(context = context, idMessage = R.string.export_failed)
     }
     Button(
         modifier = modifier,
