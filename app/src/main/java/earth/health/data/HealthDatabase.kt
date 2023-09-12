@@ -48,7 +48,6 @@ abstract class HealthDatabase : RoomDatabase() {
 
         fun exportDatabase(context: Context, uri: Uri) {
             val databaseFile = context.getDatabasePath(DATABASE_NAME)
-            databaseFile.setReadable(true)
             context.contentResolver.openInputStream(databaseFile.toUri())?.use { input ->
                 context.contentResolver.openOutputStream(uri)?.use { out ->
                     input.copyTo(out = out)

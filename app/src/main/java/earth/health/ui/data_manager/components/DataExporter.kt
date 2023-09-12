@@ -19,7 +19,7 @@ fun DataExporter(
 ) {
     val context = LocalContext.current
     val documentPicker = rememberLauncherForActivityResult(
-        contract = ActivityResultContracts.CreateDocument("text/plain")
+        contract = ActivityResultContracts.CreateDocument("documents/*")
     ) {
         if (it == null) return@rememberLauncherForActivityResult
 
