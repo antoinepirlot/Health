@@ -1,7 +1,9 @@
 package earth.health.data
 
 import android.content.Context
+import android.net.Uri
 import android.widget.Toast
+import androidx.core.net.toUri
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
@@ -20,8 +22,6 @@ import java.io.File
 import java.lang.IllegalStateException
 
 const val DATABASE_NAME = "health.db"
-const val DATABASE_PATH = "/data/user/0/earth.health/databases/"
-const val BACKUP_PATH = "/storage/emulated/0/Documents/"
 
 @Database(entities = [Food::class, Meal::class, Day::class, MealFoodCrossRef::class], version = 1, exportSchema = false)
 @TypeConverters(Converters::class)
@@ -46,15 +46,14 @@ abstract class HealthDatabase : RoomDatabase() {
             instance
         }
 
-        fun exportDatabase(context: Context, path: String) {
-            val toast = Toast(context)
-            toast.setText(R.string.export_passed)
-            val dbFile = context.getDatabasePath(DATABASE_NAME)
-            val destination = File(path)
-            if(destination.exists())
-                destination.delete()
-            dbFile.copyTo(destination, true)
-            toast.show()
+        fun exportDatabase(context: Context, uri: Uri) {
+            val databaseFile = context.getDatabasePath(DATABASE_NAME)
+            databaseFile.setReadable(true)
+            context.contentResolver.openInputStream(databaseFile.toUri())?.use { input ->
+                context.contentResolver.openOutputStream(uri)?.use { out ->
+                    input.copyTo(out = out)
+                }
+            }
         }
 
         fun importDatabase(context: Context, backupFilePath: String) {

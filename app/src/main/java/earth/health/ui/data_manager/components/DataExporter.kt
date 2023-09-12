@@ -9,30 +9,27 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.core.net.toFile
-import androidx.lifecycle.viewmodel.compose.viewModel
 import earth.health.R
-import earth.health.data.DataExporterViewModel
 import earth.health.data.HealthDatabase
+import earth.health.ui.utils.showToast
 
 @Composable
 fun DataExporter(
     modifier: Modifier,
 ) {
-    val dataExporterViewModel = viewModel<DataExporterViewModel>()
     val context = LocalContext.current
-    val pickDocumentLauncher = rememberLauncherForActivityResult(
-        contract = ActivityResultContracts.CreateDocument("Documents/*"),
-        onResult = {
-            if (it != null) {
-                HealthDatabase.exportDatabase(context = context, path = it.path!!)
-            }
-        }
-    )
+    val documentPicker = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.CreateDocument("text/plain")
+    ) {
+        if (it == null) return@rememberLauncherForActivityResult
+
+        HealthDatabase.exportDatabase(context = context, uri = it)
+        showToast(context = context, idMessage = R.string.export_passed)
+    }
     Button(
         modifier = modifier,
         onClick = {
-            pickDocumentLauncher.launch("health.db")
+            documentPicker.launch("health.db")
         }
     ) {
         Text(
