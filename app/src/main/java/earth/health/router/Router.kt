@@ -44,6 +44,10 @@ import earth.health.ui.meal.MealHomeScreen
 import earth.health.ui.meal.MealScreen
 import earth.health.ui.weight.WeightHomeScreen
 
+/**
+ * @author Antoine Pirlot on 24/07/2023
+ */
+
 @Composable
 fun Router(
     modifier: Modifier = Modifier,

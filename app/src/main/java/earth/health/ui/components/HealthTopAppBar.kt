@@ -39,6 +39,10 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import earth.health.R
 
+/**
+ * @author Antoine Pirlot on 7/09/2023
+ */
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HealthTopAppBar(

@@ -36,6 +36,10 @@ import earth.health.data.entity.Meal
 import earth.health.data.entity.relations.MealWithFoods
 import kotlinx.coroutines.launch
 
+/**
+ * @author Antoine Pirlot on 25/07/2023
+ */
+
 
 class MealViewModel(application: Application) : AndroidViewModel(application) {
     val mealWithFoodsList = mutableStateListOf<MealWithFoods>()

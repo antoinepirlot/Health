@@ -42,6 +42,10 @@ import earth.health.data.entity.Food
 import earth.health.data.entity.Meal
 import earth.health.data.entity.MealFoodCrossRef
 
+/**
+ * @author Antoine Pirlot on 24/07/2023
+ */
+
 const val DATABASE_NAME = "health"
 
 @Database(entities = [Food::class, Meal::class, Day::class, MealFoodCrossRef::class], version = 1, exportSchema = false)

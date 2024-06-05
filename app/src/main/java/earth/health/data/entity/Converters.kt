@@ -31,6 +31,10 @@ import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import java.time.LocalDate
 
+/**
+ * @author Antoine Pirlot on 25/07/2023
+ */
+
 @ProvidedTypeConverter
 class Converters {
 

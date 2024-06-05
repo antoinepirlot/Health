@@ -37,6 +37,10 @@ import earth.health.R
 import earth.health.data.view_models.FoodViewModel
 import earth.health.ui.components.AddFoodForm
 
+/**
+ * @author Antoine Pirlot on 30/07/2023
+ */
+
 @Composable
 fun AddFoodScreen(
     modifier: Modifier = Modifier,

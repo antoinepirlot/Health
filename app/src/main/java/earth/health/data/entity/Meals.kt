@@ -27,6 +27,10 @@ package earth.health.data.entity
 
 import earth.health.R
 
+/**
+ * @author Antoine Pirlot on 26/07/2023
+ */
+
 enum class Meals(val mealNameId: Int) {
     BREAKFAST(R.string.breakfast),
     LUNCH(R.string.lunch),

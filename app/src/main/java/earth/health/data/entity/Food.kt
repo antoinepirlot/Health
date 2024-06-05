@@ -29,6 +29,10 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
+/**
+ * @author Antoine Pirlot on 24/07/2023
+ */
+
 @Entity(tableName = "foods")
 data class Food(
     @PrimaryKey(autoGenerate = true)

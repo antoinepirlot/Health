@@ -31,6 +31,10 @@ import androidx.room.Index
 import androidx.room.PrimaryKey
 import java.time.LocalDate
 
+/**
+ * @author Antoine Pirlot on 26/07/2023
+ */
+
 @Entity(tableName = "days", indices = [Index(value = ["date"], unique = true)])
 data class Day(
     @PrimaryKey(autoGenerate = true)

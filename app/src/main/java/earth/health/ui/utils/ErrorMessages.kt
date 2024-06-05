@@ -29,6 +29,10 @@ import android.content.Context
 import android.widget.Toast
 
 /**
+ * @author Antoine Pirlot on 12/09/2023
+ */
+
+/**
  * Show toast on screen with a message or idMessage
  * @throws IllegalArgumentException if idMessage and message are both null
  */

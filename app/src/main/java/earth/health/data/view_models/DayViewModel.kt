@@ -37,6 +37,10 @@ import earth.health.data.entity.Meals
 import kotlinx.coroutines.launch
 import java.time.LocalDate
 
+/**
+ * @author Antoine Pirlot on 26/07/2023
+ */
+
 class DayViewModel(application: Application): AndroidViewModel(application) {
 
     val days = mutableStateListOf<Day>()

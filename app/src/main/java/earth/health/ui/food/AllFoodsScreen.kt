@@ -42,6 +42,10 @@ import earth.health.data.view_models.FoodViewModel
 import earth.health.data.view_models.MealViewModel
 import earth.health.router.Destination
 
+/**
+ * @author Antoine Pirlot on 03/08/2023
+ */
+
 @Composable
 fun AllFoodsScreen(
     modifier: Modifier = Modifier,

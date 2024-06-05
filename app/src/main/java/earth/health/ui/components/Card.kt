@@ -38,6 +38,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import earth.health.ui.theme.HealthTheme
 
+/**
+ * @author Antoine Pirlot on 22/07/2023
+ */
+
 @Composable
 fun Card(modifier: Modifier = Modifier, title: String, text: String, mainAction: () -> Unit, fastAction: () -> Unit) {
     Button(

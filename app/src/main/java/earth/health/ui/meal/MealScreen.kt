@@ -50,6 +50,10 @@ import earth.health.data.view_models.MealViewModel
 import earth.health.router.Destination
 import earth.health.ui.food.FoodListScreen
 
+/**
+ * @author Antoine Pirlot on 24/07/2023
+ */
+
 @Composable
 fun MealScreen(
     modifier: Modifier = Modifier,

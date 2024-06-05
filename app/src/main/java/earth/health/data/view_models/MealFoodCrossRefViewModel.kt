@@ -40,6 +40,10 @@ import earth.health.data.utils.getTotalKcal
 import earth.health.data.utils.removeElement
 import kotlinx.coroutines.launch
 
+/**
+ * @author Antoine Pirlot on 05/08/2023
+ */
+
 class MealFoodCrossRefViewModel(application: Application): AndroidViewModel(application) {
     private val mealFoodCrossRefDao = HealthDatabase.getDatabase(application).mealFoodCrossRefDao()
 

@@ -45,6 +45,10 @@ import earth.health.ui.theme.HealthTheme
 import earth.health.router.Destination
 import earth.health.ui.components.Card
 
+/**
+ * @author Antoine Pirlot on 22/07/2023
+ */
+
 @Composable
 fun HomeScreen(
     modifier: Modifier = Modifier,

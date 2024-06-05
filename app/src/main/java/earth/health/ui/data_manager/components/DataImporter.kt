@@ -38,6 +38,10 @@ import earth.health.R
 import earth.health.data.HealthDatabase
 import earth.health.ui.utils.showToast
 
+/**
+ * @author Antoine Pirlot on 10/09/2023
+ */
+
 @Composable
 fun DataImporter(
     modifier: Modifier

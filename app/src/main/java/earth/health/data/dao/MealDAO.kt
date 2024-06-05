@@ -34,6 +34,10 @@ import androidx.room.Upsert
 import earth.health.data.entity.Meal
 import earth.health.data.entity.relations.MealWithFoods
 
+/**
+ * @author Antoine Pirlot on 25/07/2023
+ */
+
 @Dao
 interface MealDAO {
 

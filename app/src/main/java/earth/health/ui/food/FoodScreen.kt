@@ -34,6 +34,10 @@ import androidx.compose.ui.res.stringResource
 import earth.health.R
 import earth.health.data.view_models.FoodViewModel
 
+/**
+ * @author Antoine Pirlot on 30/07/2023
+ */
+
 @Composable
 fun FoodScreen(
     modifier: Modifier = Modifier,

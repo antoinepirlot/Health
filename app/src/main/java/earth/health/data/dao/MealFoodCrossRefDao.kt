@@ -30,6 +30,10 @@ import androidx.room.Query
 import androidx.room.Upsert
 import earth.health.data.entity.MealFoodCrossRef
 
+/**
+ * @author Antoine Pirlot on 05/08/2023
+ */
+
 @Dao
 interface MealFoodCrossRefDao {
 

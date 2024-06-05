@@ -29,6 +29,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
 
+/**
+ * @author Antoine Pirlot on 24/07/2023
+ */
+
 @Composable
 fun WeightHomeScreen(
     modifier: Modifier,

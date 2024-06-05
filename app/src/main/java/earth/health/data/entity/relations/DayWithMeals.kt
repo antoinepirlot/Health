@@ -31,6 +31,10 @@ import earth.health.data.entity.Day
 import earth.health.data.entity.Meal
 import earth.health.data.entity.getBlankDay
 
+/**
+ * @author Antoine Pirlot on 27/07/2023
+ */
+
 data class DayWithMeals (
     @Embedded
     val day: Day,

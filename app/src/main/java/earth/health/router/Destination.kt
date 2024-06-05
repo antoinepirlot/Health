@@ -25,6 +25,10 @@
 
 package earth.health.router
 
+/**
+ * @author Antoine Pirlot on 24/07/2023
+ */
+
 enum class Destination(val link: String) {
     HOME("/"),
     MEALS("/meals"),

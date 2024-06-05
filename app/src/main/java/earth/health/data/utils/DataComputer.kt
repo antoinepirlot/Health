@@ -29,6 +29,10 @@ import earth.health.data.entity.MealFoodCrossRef
 import earth.health.data.entity.relations.MealWithFoods
 
 /**
+ * @author Antoine Pirlot on 18/08/2023
+ */
+
+/**
  * Returns the total kcal of all food in foodList time by its quantity for each relation
  */
 fun getTotalKcal(mealWithFoods: MealWithFoods, mealFoodCrossRef: List<MealFoodCrossRef>): Int {

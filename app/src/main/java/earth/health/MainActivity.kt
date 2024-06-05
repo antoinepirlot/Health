@@ -45,6 +45,10 @@ import earth.health.router.Router
 import earth.health.ui.theme.HealthTheme
 import earth.health.ui.components.HealthTopAppBar
 
+/**
+ * @author Antoine Pirlot on 22/07/2023
+ */
+
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

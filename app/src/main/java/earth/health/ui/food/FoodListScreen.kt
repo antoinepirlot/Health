@@ -40,6 +40,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import earth.health.data.entity.Food
 
+/**
+ * @author Antoine Pirlot on 04/08/2023
+ */
+
 @Composable
 fun FoodListScreen(modifier: Modifier = Modifier, foodList: List<Food>, actionClickOnFood: (Food) -> Unit, actionDeleteFood: (Food) -> Unit) {
     LazyColumn {

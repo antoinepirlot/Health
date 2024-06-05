@@ -39,6 +39,10 @@ import earth.health.data.view_models.MealViewModel
 import earth.health.router.Destination
 import earth.health.ui.components.Card
 
+/**
+ * @author Antoine Pirlot on 24/07/2023
+ */
+
 @Composable
 fun MealHomeScreen(
     modifier: Modifier = Modifier,

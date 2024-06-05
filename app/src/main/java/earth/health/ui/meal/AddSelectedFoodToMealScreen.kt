@@ -48,6 +48,10 @@ import earth.health.data.view_models.MealFoodCrossRefViewModel
 import earth.health.data.view_models.MealViewModel
 import earth.health.ui.utils.goBackXTimes
 
+/**
+ * @author Antoine Pirlot on 04/08/2023
+ */
+
 @Composable
 fun AddSelectedFoodToMealScreen(
     modifier: Modifier = Modifier,

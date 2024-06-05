@@ -27,6 +27,10 @@ package earth.health.ui.utils
 
 import androidx.navigation.NavHostController
 
+/**
+ * @author Antoine Pirlot on 07/09/2023
+ */
+
 fun goBackXTimes(navController: NavHostController, numberOfBack: Int) {
     for (i in 1..numberOfBack) {
         navController.popBackStack()

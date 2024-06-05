@@ -47,6 +47,10 @@ import earth.health.R
 import earth.health.data.entity.Food
 import earth.health.data.view_models.FoodViewModel
 
+/**
+ * @author Antoine Pirlot on 02/08/2023
+ */
+
 @Composable
 fun AddFoodForm(
     modifier: Modifier = Modifier,

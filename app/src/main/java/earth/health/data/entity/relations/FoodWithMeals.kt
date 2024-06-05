@@ -33,6 +33,10 @@ import earth.health.data.entity.Meal
 import earth.health.data.entity.MealFoodCrossRef
 import earth.health.data.entity.getBlankFood
 
+/**
+ * @author Antoine Pirlot on 03/08/2023
+ */
+
 data class FoodWithMeals(
     @Embedded
     var food: Food,

@@ -28,6 +28,10 @@ package earth.health.data.utils
 import androidx.compose.runtime.mutableStateListOf
 
 /**
+ * @author Antoine Pirlot on 06/09/2023
+ */
+
+/**
  * Easy way to add one element to not mutable list
  */
 fun <T>addElement(list: List<T>, element: T): List<T> {

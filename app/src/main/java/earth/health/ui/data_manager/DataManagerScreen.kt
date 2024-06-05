@@ -33,6 +33,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import earth.health.ui.data_manager.components.DataExporter
 import earth.health.ui.data_manager.components.DataImporter
 
+/**
+ * @author Antoine Pirlot on 07/09/2023
+ */
+
 @Composable
 fun DataManagerScreen(
     modifier: Modifier,

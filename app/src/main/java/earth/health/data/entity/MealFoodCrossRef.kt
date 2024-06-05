@@ -28,6 +28,10 @@ package earth.health.data.entity
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 
+/**
+ * @author Antoine Pirlot on 30/07/2023
+ */
+
 @Entity(
     tableName = "meals_foods_cross_ref",
     primaryKeys = ["meal_id", "food_id"]

@@ -35,6 +35,10 @@ import earth.health.data.entity.Day
 import earth.health.data.entity.Meal
 import earth.health.data.entity.relations.DayWithMeals
 
+/**
+ * @author Antoine Pirlot on 26/07/2023
+ */
+
 @Dao
 interface DayDAO {
 
